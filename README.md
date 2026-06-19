@@ -54,6 +54,17 @@ adicionar um novo subject, copie uma pasta existente, altere o conteúdo do
 `index.html`, defina a cor em `styles.css` e use um identificador único em
 `script.js`.
 
+### Idiomas
+
+O conteúdo-fonte do site é escrito em português brasileiro. O arquivo
+`i18n.js` centraliza as traduções para inglês, adiciona o seletor `PT / EN` ao
+cabeçalho e mantém a preferência no `localStorage`.
+
+Ao adicionar ou alterar um texto visível, inclua a frase completa no objeto
+`english` de `i18n.js`. Conteúdo criado por JavaScript também é observado e
+traduzido automaticamente. Elementos `code` e `pre` são preservados para que
+exemplos de código não sejam modificados.
+
 Os repositórios de projetos continuam independentes. A página do subject deve
 apontar para o repositório correto e exibir seu comando `git clone`, sem copiar
 o código do projeto para este repositório de apresentação.

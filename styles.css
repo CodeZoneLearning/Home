@@ -195,6 +195,46 @@ p {
   right: 0;
 }
 
+.language-switcher {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line-dark);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .035);
+}
+
+.language-switcher button {
+  min-width: 32px;
+  padding: 7px 8px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #9298aa;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.language-switcher button:hover,
+.language-switcher button:focus-visible {
+  color: var(--white);
+}
+
+.language-switcher button:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+
+.language-switcher button.active {
+  background: var(--lime);
+  color: var(--ink);
+}
+
 .menu-toggle {
   display: none;
   width: 44px;
@@ -1592,6 +1632,14 @@ p {
 }
 
 @media (max-width: 1024px) {
+  .nav-shell {
+    gap: 18px;
+  }
+
+  .main-nav {
+    gap: 18px;
+  }
+
   .hero-layout {
     grid-template-columns: 1fr 0.9fr;
     gap: 40px;
@@ -1631,6 +1679,10 @@ p {
   .menu-toggle {
     display: block;
     margin-left: auto;
+  }
+
+  .language-switcher {
+    order: 3;
   }
 
   .menu-toggle[aria-expanded="true"] > span:nth-child(1) {
