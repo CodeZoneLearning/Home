@@ -1,0 +1,7 @@
+@import url("../../styles.css");
+@import url("../_shared/subject-page.css");
+
+:root {
+  --subject-accent: #d477ff;
+  --subject-accent-rgb: 212, 119, 255;
+}

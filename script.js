@@ -1,3 +1,8 @@
+if (window.location.protocol.startsWith('http') && window.location.pathname.endsWith('/index.html')) {
+  const cleanPath = window.location.pathname.slice(0, -'index.html'.length);
+  window.history.replaceState(null, '', `${cleanPath}${window.location.search}${window.location.hash}`);
+}
+
 const menuToggle = document.querySelector('.menu-toggle');
 const mainNav = document.querySelector('.main-nav');
 

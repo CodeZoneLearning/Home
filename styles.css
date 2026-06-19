@@ -1405,6 +1405,44 @@ p {
   text-transform: uppercase;
 }
 
+.catalog-open {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-light);
+  color: var(--blue);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  transition: color 180ms ease, padding-left 180ms ease;
+}
+
+.catalog-open span {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: var(--white);
+  transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.catalog-open:hover,
+.catalog-open:focus-visible {
+  padding-left: 7px;
+  color: var(--ink);
+  outline: none;
+}
+
+.catalog-open:hover span,
+.catalog-open:focus-visible span {
+  background: var(--lime);
+  color: var(--ink);
+  transform: translate(2px, -2px);
+}
+
 .subject-details {
   border-top: 1px solid var(--line-light);
 }
