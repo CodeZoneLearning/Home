@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore os subjects da Code Zone: Python, dados, machine learning, inteligência artificial e sistemas.">
+  <meta name="theme-color" content="#0d0f1a">
+  <title>Subjects | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="subjects-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="index.html" aria-label="Code Zone - Início">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span>Code Zone</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span class="sr-only">Abrir menu</span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+        <a href="index.html">Início</a>
+        <a class="active" href="subjects.html">Subjects</a>
+        <a href="index.html#metodo">Método</a>
+        <a href="index.html#comunidade">Comunidade</a>
+      </nav>
+      <a class="button button-small header-cta" href="#catalogo">Explorar trilhas <span aria-hidden="true">↓</span></a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="subjects-hero">
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <div class="container subjects-hero-layout">
+        <div class="reveal">
+          <p class="eyebrow"><span class="status-dot"></span> Knowledge map / v1.0</p>
+          <h1>Seu próximo<br><span class="text-lime">bloco</span> começa aqui.</h1>
+        </div>
+        <div class="subjects-intro reveal">
+          <p>Subjects são trilhas vivas de aprendizado. Escolha uma área, estude os fundamentos e avance construindo.</p>
+          <div class="path-legend"><span><i class="dot-core"></i> Core</span><span><i class="dot-data"></i> Data</span><span><i class="dot-ai"></i> AI</span><span><i class="dot-systems"></i> Systems</span></div>
+        </div>
+      </div>
+      <div class="container subjects-map" aria-hidden="true">
+        <span>START</span><i></i><span>LEARN</span><i></i><span>BUILD</span><i></i><span>APPLY</span><i></i><span>EVOLVE</span>
+      </div>
+    </section>
+
+    <section class="catalog-section" id="catalogo">
+      <div class="container">
+        <div class="catalog-toolbar reveal">
+          <div>
+            <p class="eyebrow eyebrow-dark">// SUBJECT DIRECTORY</p>
+            <h2>Explore por área</h2>
+          </div>
+          <div class="filter-group" role="group" aria-label="Filtrar subjects por área">
+            <button class="filter-button active" type="button" data-filter="all">Todos <span>08</span></button>
+            <button class="filter-button" type="button" data-filter="core">Core <span>02</span></button>
+            <button class="filter-button" type="button" data-filter="data">Data <span>02</span></button>
+            <button class="filter-button" type="button" data-filter="ai">AI <span>03</span></button>
+            <button class="filter-button" type="button" data-filter="systems">Systems <span>01</span></button>
+          </div>
+        </div>
+
+        <div class="catalog-grid">
+          <article class="catalog-card reveal" id="python" data-category="core">
+            <div class="catalog-card-head">
+              <div class="catalog-code">CZ_01 <span class="category-core">CORE</span></div>
+              <div class="subject-glyph glyph-python" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="catalog-card-body">
+              <h3>Python</h3>
+              <p>Construa uma base sólida de lógica, automação, orientação a objetos e boas práticas.</p>
+              <div class="subject-facts"><span>Iniciante</span><span>6 semanas</span><span>4 projetos</span></div>
+              <details class="subject-details">
+                <summary>Ver projetos e arquivos <span aria-hidden="true">+</span></summary>
+                <div class="resource-panel">
+                  <div class="resource-group"><h4>Projetos</h4><p><b>01</b> Organizador de arquivos</p><p><b>02</b> API de hábitos</p></div>
+                  <div class="resource-group"><h4>Arquivos</h4><a href="learning/python-fundamentos.md"><span>MD</span> Fundamentos e roteiro <b>↗</b></a><a href="learning/python-fundamentos.md#checklist"><span>LIST</span> Checklist de prática <b>↗</b></a></div>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <article class="catalog-card reveal" id="matematica" data-category="core">
+            <div class="catalog-card-head">
+              <div class="catalog-code">CZ_02 <span class="category-core">CORE</span></div>
+              <div class="subject-glyph glyph-math" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="catalog-card-body">
+              <h3>Matemática</h3>
+              <p>Entenda vetores, matrizes, probabilidade e cálculo pelo olhar de quem constrói sistemas.</p>
+              <div class="subject-facts"><span>Base</span><span>5 semanas</span><span>3 projetos</span></div>
+              <details class="subject-details">
+                <summary>Ver projetos e arquivos <span aria-hidden="true">+</span></summary>
+                <div class="resource-panel">
+                  <div class="resource-group"><h4>Projetos</h4><p><b>01</b> Transformações visuais</p><p><b>02</b> Simulador probabilístico</p></div>
+                  <div class="resource-group"><h4>Arquivos</h4><a href="learning/matematica-aplicada.md"><span>MD</span> Matemática aplicada <b>↗</b></a><a href="learning/matematica-aplicada.md#exercicios"><span>LIST</span> Exercícios essenciais <b>↗</b></a></div>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <article class="catalog-card reveal" id="data-science" data-category="data">
+            <div class="catalog-card-head">
+              <div class="catalog-code">CZ_03 <span class="category-data">DATA</span></div>
+              <div class="subject-glyph glyph-data" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="catalog-card-body">
+              <h3>Data Science</h3>
+              <p>Investigue, limpe e comunique dados com análises reproduzíveis e histórias honestas.</p>
+              <div class="subject-facts"><span>Iniciante</span><span>7 semanas</span><span>4 projetos</span></div>
+              <details class="subject-details">
+                <summary>Ver projetos e arquivos <span aria-hidden="true">+</span></summary>
+                <div class="resource-panel">
+                  <div class="resource-group"><h4>Projetos</h4><p><b>01</b> Mobilidade urbana</p><p><b>02</b> Dashboard de indicadores</p></div>
+                  <div class="resource-group"><h4>Arquivos</h4><a href="learning/data-science.md"><span>MD</span> Roadmap de análise <b>↗</b></a><a href="learning/data-science.md#projeto-guia"><span>BRIEF</span> Guia de projeto <b>↗</b></a></div>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <article class="catalog-card reveal" id="engenharia-dados" data-category="data">
+            <div class="catalog-card-head">
+              <div class="catalog-code">CZ_04 <span class="category-data">DATA</span></div>
+              <div class="subject-glyph glyph-pipeline" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="catalog-card-body">
+              <h3>Engenharia de Dados</h3>
+              <p>Projete pipelines confiáveis, modele informação e entregue dados prontos para uso.</p>
+              <div class="subject-facts"><span>Intermediário</span><span>8 semanas</span><span>3 projetos</span></div>
+              <details class="subject-details">
+                <summary>Ver projetos e arquivos <span aria-hidden="true">+</span></summary>
+                <div class="resource-panel">
+                  <div class="resource-group"><h4>Projetos</h4><p><b>01</b> Pipeline de eventos</p><p><b>02</b> Data quality monitor</p></div>
+                  <div class="resource-group"><h4>Arquivos</h4><a href="learning/engenharia-dados.md"><span>MD</span> Pipeline do zero <b>↗</b></a><a href="learning/engenharia-dados.md#arquitetura"><span>ARCH</span> Arquitetura base <b>↗</b></a></div>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <article class="catalog-card reveal" id="machine-learning" data-category="ai">
+            <div class="catalog-card-head">
+              <div class="catalog-code">CZ_05 <span class="category-ai">AI</span></div>
+              <div class="subject-glyph glyph-ml" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="catalog-card-body">
+              <h3>Machine Learning</h3>
+              <p>Treine, avalie e explique modelos sem perder de vista o problema e os dados.</p>
+              <div class="subject-facts"><span>Intermediário</span><span>9 semanas</span><span>4 projetos</span></div>
+              <details class="subject-details">
+                <summary>Ver projetos e arquivos <span aria-hidden="true">+</span></summary>
+                <div class="resource-panel">
+                  <div class="resource-group"><h4>Projetos</h4><p><b>01</b> Previsão de demanda</p><p><b>02</b> Detector de anomalias</p></div>
+                  <div class="resource-group"><h4>Arquivos</h4><a href="learning/machine-learning.md"><span>MD</span> Workflow de modelos <b>↗</b></a><a href="learning/machine-learning.md#avaliacao"><span>LIST</span> Checklist de avaliação <b>↗</b></a></div>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <article class="catalog-card reveal" id="genai" data-category="ai">
+            <div class="catalog-card-head">
+              <div class="catalog-code">CZ_06 <span class="category-ai">AI</span></div>
+              <div class="subject-glyph glyph-genai" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="catalog-card-body">
+              <h3>Generative AI</h3>
+              <p>Crie aplicações com LLMs, contexto, ferramentas e avaliações que vão além do prompt.</p>
+              <div class="subject-facts"><span>Intermediário</span><span>8 semanas</span><span>4 projetos</span></div>
+              <details class="subject-details">
+                <summary>Ver projetos e arquivos <span aria-hidden="true">+</span></summary>
+                <div class="resource-panel">
+                  <div class="resource-group"><h4>Projetos</h4><p><b>01</b> Assistente RAG</p><p><b>02</b> Agente com ferramentas</p></div>
+                  <div class="resource-group"><h4>Arquivos</h4><a href="learning/genai.md"><span>MD</span> Padrões de aplicações <b>↗</b></a><a href="learning/genai.md#avaliacao"><span>EVAL</span> Roteiro de avaliação <b>↗</b></a></div>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <article class="catalog-card reveal" id="graphrag" data-category="ai">
+            <div class="catalog-card-head">
+              <div class="catalog-code">CZ_07 <span class="category-ai">AI</span></div>
+              <div class="subject-glyph glyph-graph" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="catalog-card-body">
+              <h3>GraphRAG</h3>
+              <p>Conecte entidades, relações e recuperação semântica para responder questões complexas.</p>
+              <div class="subject-facts"><span>Avançado</span><span>6 semanas</span><span>2 projetos</span></div>
+              <details class="subject-details">
+                <summary>Ver projetos e arquivos <span aria-hidden="true">+</span></summary>
+                <div class="resource-panel">
+                  <div class="resource-group"><h4>Projetos</h4><p><b>01</b> Grafo de conhecimento</p><p><b>02</b> Pesquisa multi-hop</p></div>
+                  <div class="resource-group"><h4>Arquivos</h4><a href="learning/graphrag.md"><span>MD</span> Arquitetura GraphRAG <b>↗</b></a><a href="learning/graphrag.md#fluxo"><span>FLOW</span> Fluxo de recuperação <b>↗</b></a></div>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <article class="catalog-card reveal" id="apis" data-category="systems">
+            <div class="catalog-card-head">
+              <div class="catalog-code">CZ_08 <span class="category-systems">SYSTEMS</span></div>
+              <div class="subject-glyph glyph-api" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="catalog-card-body">
+              <h3>APIs & Systems</h3>
+              <p>Transforme lógica em serviços claros, observáveis e preparados para crescer.</p>
+              <div class="subject-facts"><span>Intermediário</span><span>7 semanas</span><span>3 projetos</span></div>
+              <details class="subject-details">
+                <summary>Ver projetos e arquivos <span aria-hidden="true">+</span></summary>
+                <div class="resource-panel">
+                  <div class="resource-group"><h4>Projetos</h4><p><b>01</b> API documentada</p><p><b>02</b> Serviço assíncrono</p></div>
+                  <div class="resource-group"><h4>Arquivos</h4><a href="learning/apis-sistemas.md"><span>MD</span> Design de APIs <b>↗</b></a><a href="learning/apis-sistemas.md#checklist"><span>LIST</span> Checklist de produção <b>↗</b></a></div>
+                </div>
+              </details>
+            </div>
+          </article>
+        </div>
+
+        <p class="empty-state" hidden>Nenhum subject encontrado nesta categoria.</p>
+      </div>
+    </section>
+
+    <section class="next-step-section">
+      <div class="container next-step-grid reveal">
+        <div><p class="eyebrow">// NÃO SABE POR ONDE COMEÇAR?</p><h2>Comece pelo problema,<br>não pela ferramenta.</h2></div>
+        <div><p>Use Python para criar sua base. Depois conecte dados, modelos e sistemas conforme o projeto pedir.</p><a class="button button-lime" href="#python">Abrir trilha recomendada <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><p>Learn. Build. Apply.</p></div>
+      <div class="footer-links"><span>EXPLORE</span><a href="subjects.html">Subjects</a><a href="index.html#projetos">Projetos</a><a href="index.html#metodo">Método</a></div>
+      <div class="footer-links"><span>CONNECT</span><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
+      <div class="footer-status"><span class="status-dot"></span><p>Sistema online<br>São Paulo, BR</p></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><span>KNOWLEDGE INTO SOLUTIONS.</span></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
