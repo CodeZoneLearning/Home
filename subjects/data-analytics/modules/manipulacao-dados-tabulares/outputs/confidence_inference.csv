@@ -1,0 +1,4 @@
+consistency_result,test_count,equipment_count,mean_confidence,std_confidence,standard_error,ci95_lower,ci95_upper
+CONSISTENT,36,6,0.9167,0.0324,0.0054,0.9061,0.9272
+MOSTLY_CONSISTENT,36,6,0.865,0.0479,0.008,0.8494,0.8806
+INCONSISTENT,36,6,0.6417,0.0717,0.0119,0.6182,0.6651

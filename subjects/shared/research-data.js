@@ -59,7 +59,7 @@ window.codeZoneResearch = {
       tags: ['linear algebra', 'ml']
     }
   ],
-  'data-science': [
+  'data-analytics': [
     {
       type: 'paper',
       title: 'Tidy Data',

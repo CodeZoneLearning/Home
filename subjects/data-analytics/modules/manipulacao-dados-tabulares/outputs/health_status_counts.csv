@@ -1,0 +1,5 @@
+health_status,test_count,status_label
+1,29,Healthy
+2,35,Attention
+3,25,Degraded
+4,19,Critical

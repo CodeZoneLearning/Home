@@ -39,7 +39,12 @@ subjects/
 |   |-- index.html
 |   |-- styles.css
 |   `-- script.js
-|-- data-science/
+|-- data-analytics/
+|   |-- index.html
+|   |-- styles.css
+|   |-- script.js
+|   `-- modules/
+|       `-- manipulacao-dados-tabulares/  # aula, CSV, Python e outputs
 |-- machine-learning/
 `-- ...
 ```

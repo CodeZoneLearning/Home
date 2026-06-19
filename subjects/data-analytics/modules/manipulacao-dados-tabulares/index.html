@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula prática de manipulação de dados tabulares com Pandas e testes de saúde de equipamentos.">
+  <title>Manipulação de dados tabulares | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="lesson-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button>
+      <nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Subjects</a><a href="../../../../research/">Research</a></nav>
+      <a class="button button-small header-cta" href="../../">Voltar ao subject <span>↖</span></a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="lesson-hero">
+      <div class="container">
+        <nav class="lesson-breadcrumb"><a href="../../../../subjects.html">Subjects</a><span>/</span><a href="../../">Data Analytics</a><span>/</span><span>Bloco 01</span></nav>
+        <div class="lesson-hero-grid">
+          <div>
+            <p class="eyebrow">CASE_01 · EQUIPMENT HEALTH</p>
+            <h1>Manipulação de<br><span>dados tabulares.</span></h1>
+            <p class="lesson-lead">Use Pandas para descobrir se classificações repetidas de um mesmo equipamento são confiáveis ou contraditórias.</p>
+            <div class="lesson-actions">
+              <a class="button" href="data/equipment_health_tests.csv" download>Baixar CSV <span>↓</span></a>
+              <a class="button button-outline" href="scripts/analyze_equipment_tests.py" download>Baixar Python <span>↓</span></a>
+            </div>
+          </div>
+          <aside class="dataset-terminal" aria-label="Resumo do conjunto de dados">
+            <div class="terminal-head"><span></span><span></span><span></span><code>dataset.profile</code></div>
+            <div class="terminal-body">
+              <p><span>rows</span><strong data-metric="tests">108</strong></p>
+              <p><span>equipment</span><strong data-metric="equipment">18</strong></p>
+              <p><span>tests_per_unit</span><strong data-metric="tests-per-unit">6</strong></p>
+              <p><span>health_classes</span><strong data-metric="classes">4</strong></p>
+              <div class="terminal-status"><i></i> source validated</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="lesson-progress"><div class="container"><span>01 · Contexto</span><span>02 · Exploração</span><span>03 · GroupBy</span><span>04 · Inferência</span></div></div>
+
+    <section class="lesson-section" id="contexto">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>01</span><small>CONTEXTO</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// A PERGUNTA</p>
+          <h2>O equipamento mudou ou o teste falhou?</h2>
+          <p class="section-lead">Cada equipamento foi testado seis vezes. Se todas as classificações apontam para a mesma classe, existe consenso. Se cada teste produz uma resposta diferente, o processo de medição ou o classificador precisa ser investigado.</p>
+          <div class="status-scale">
+            <article class="status-1"><span>1</span><div><strong>Healthy</strong><small>Operação normal</small></div></article>
+            <article class="status-2"><span>2</span><div><strong>Attention</strong><small>Monitorar sinais</small></div></article>
+            <article class="status-3"><span>3</span><div><strong>Degraded</strong><small>Planejar intervenção</small></div></article>
+            <article class="status-4"><span>4</span><div><strong>Critical</strong><small>Ação imediata</small></div></article>
+          </div>
+          <aside class="concept-note"><strong>Importante</strong><p>`confidence_score` é a confiança fictícia do classificador. Ela não prova que a classe está correta; apenas mostra o quanto o modelo afirma confiar na própria previsão.</p></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section lesson-section-alt" id="exploracao">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>02</span><small>EXPLORAÇÃO</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// CONHEÇA A TABELA</p>
+          <h2>Leia antes de transformar.</h2>
+          <p class="section-lead">Comece pelo esquema, tipos, ausentes, estatísticas descritivas e cardinalidade. Essa auditoria evita que um agrupamento elegante responda à pergunta errada.</p>
+
+          <div class="code-card">
+            <div class="code-card-head"><span>explore.py</span><button type="button" data-copy-code>Copiar</button></div>
+            <pre><code>import pandas as pd
+
+df = pd.read_csv(
+    "data/equipment_health_tests.csv",
+    parse_dates=["test_timestamp"]
+)
+
+print(df.info())
+print(df.describe(include="all"))
+print(df.nunique())
+print(df["health_status"].value_counts().sort_index())</code></pre>
+          </div>
+
+          <div class="data-preview">
+            <div class="data-preview-head"><div><span>RAW_DATA</span><strong>equipment_health_tests.csv</strong></div><a href="data/equipment_health_tests.csv" download>DOWNLOAD ↓</a></div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>test_id</th><th>equipment_id</th><th>site</th><th>type</th><th>temp °C</th><th>vibration</th><th>status</th><th>confidence</th></tr></thead>
+                <tbody data-preview-body><tr><td colspan="8">Carregando amostra do CSV...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="distribution-card">
+            <div><span class="eyebrow dark">VALUE_COUNTS()</span><h3>Distribuição das classes</h3></div>
+            <div class="distribution-bars">
+              <div class="distribution-row"><span>1 · Healthy</span><i><b data-status-bar="1"></b></i><strong data-status-count="1">—</strong></div>
+              <div class="distribution-row"><span>2 · Attention</span><i><b data-status-bar="2"></b></i><strong data-status-count="2">—</strong></div>
+              <div class="distribution-row"><span>3 · Degraded</span><i><b data-status-bar="3"></b></i><strong data-status-count="3">—</strong></div>
+              <div class="distribution-row"><span>4 · Critical</span><i><b data-status-bar="4"></b></i><strong data-status-count="4">—</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="groupby">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>03</span><small>GROUPBY</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// UMA LINHA POR EQUIPAMENTO</p>
+          <h2>Meça o grau de concordância.</h2>
+          <p class="section-lead">A granularidade muda de um teste por linha para um equipamento por linha. A moda representa a classe dominante e a taxa de concordância mede quantos testes sustentam essa classe.</p>
+
+          <div class="formula-strip"><div><small>CLASSE DOMINANTE</small><strong>mode(health_status)</strong></div><span>+</span><div><small>CONCORDÂNCIA</small><strong>contagem da moda / testes</strong></div></div>
+
+          <div class="code-card">
+            <div class="code-card-head"><span>groupby.py</span><button type="button" data-copy-code>Copiar</button></div>
+            <pre><code>summary = df.groupby("equipment_id").agg(
+    tests_count=("test_id", "count"),
+    unique_statuses=("health_status", "nunique"),
+    dominant_status=("health_status", lambda x: x.mode().min()),
+    mean_confidence=("confidence_score", "mean")
+)
+
+dominant_count = df.groupby("equipment_id")["health_status"] \
+    .apply(lambda x: x.value_counts().max())
+
+summary["agreement_rate"] = dominant_count / summary["tests_count"]</code></pre>
+          </div>
+
+          <div class="result-panel">
+            <div class="result-panel-head">
+              <div><span>LIVE_OUTPUT</span><h3>Consistência por equipamento</h3></div>
+              <div class="result-filters" aria-label="Filtrar resultados">
+                <button class="active" type="button" data-result-filter="ALL">Todos</button>
+                <button type="button" data-result-filter="CONSISTENT">Consistentes</button>
+                <button type="button" data-result-filter="MOSTLY_CONSISTENT">Maioria</button>
+                <button type="button" data-result-filter="INCONSISTENT">Inconsistentes</button>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Equipamento</th><th>Testes</th><th>Classes únicas</th><th>Classe dominante</th><th>Concordância</th><th>Resultado</th></tr></thead>
+                <tbody data-result-body><tr><td colspan="6">Calculando resultados...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section lesson-section-dark" id="inferencia">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>04</span><small>INFERÊNCIA</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow">// INCERTEZA EXPLÍCITA</p>
+          <h2>Compare médias com intervalos.</h2>
+          <p class="section-lead">Agrupar a confiança por resultado permite investigar um padrão: testes contraditórios também apresentam menor confiança? O intervalo de 95% mostra a precisão da média estimada em cada grupo.</p>
+          <div class="inference-grid" data-inference-grid><p>Carregando relatório estatístico...</p></div>
+          <div class="inference-formula"><code>IC 95% = média ± 1,96 × erro padrão</code><p>Aproximação normal didática. Uma validação industrial precisaria de amostra representativa, referência real de falha e análise temporal.</p></div>
+          <div class="conclusion-card">
+            <span>LEITURA DO CASO</span>
+            <h3>Divergência e baixa confiança aparecem juntas nesta base.</h3>
+            <p>Os equipamentos consistentes têm confiança média próxima de 0,92. Nos inconsistentes, ela cai para aproximadamente 0,64. Isso é um sinal para investigação, não prova de causalidade.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-finish">
+      <div class="container finish-grid">
+        <div><span>CHECKPOINT_01</span><h2>Você chegou a uma conclusão reproduzível.</h2><p>O CSV permanece bruto, o script registra as regras e cinco relatórios guardam os resultados.</p></div>
+        <div class="finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Data Analytics ↗</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

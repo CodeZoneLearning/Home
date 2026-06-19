@@ -1,0 +1,11 @@
+column,unique_values,missing_values
+test_id,108,0
+equipment_id,18,0
+test_timestamp,108,0
+site,3,0
+equipment_type,3,0
+operating_hours,108,0
+temperature_c,60,0
+vibration_mm_s,54,0
+health_status,4,0
+confidence_score,56,0

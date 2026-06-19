@@ -2,7 +2,7 @@ const researchSource = window.codeZoneResearch || {};
 const subjectLabels = {
   python: 'Python',
   matematica: 'Matemática',
-  'data-science': 'Data Science',
+  'data-analytics': 'Data Analytics',
   'engenharia-dados': 'Engenharia de Dados',
   'machine-learning': 'Machine Learning',
   genai: 'Generative AI',
