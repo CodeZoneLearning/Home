@@ -34,7 +34,7 @@ Cada subject funciona como uma página independente:
 
 ```text
 subjects/
-|-- _shared/                 # componentes visuais e comportamentos comuns
+|-- shared/                  # componentes visuais e comportamentos comuns
 |-- python/
 |   |-- index.html
 |   |-- styles.css
@@ -56,7 +56,7 @@ o código do projeto para este repositório de apresentação.
 ### Adicionar referências de Research
 
 Papers, matérias e livros ficam centralizados em
-`subjects/_shared/research-data.js`. Para adicionar uma referência, inclua um
+`subjects/shared/research-data.js`. Para adicionar uma referência, inclua um
 objeto no array do subject correspondente:
 
 ```js
@@ -73,3 +73,7 @@ objeto no array do subject correspondente:
 
 Os cards, contadores e filtros são atualizados automaticamente. Não é
 necessário alterar o HTML ou o CSS das páginas.
+
+A biblioteca completa fica em `research/` e permite combinar busca, formato,
+subject e tags. As páginas dos subjects apontam para essa biblioteca com o
+filtro de subject já aplicado.

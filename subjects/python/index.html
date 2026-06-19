@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../shared/subject-page.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="subject-detail-page">
@@ -15,7 +17,7 @@
   <header class="site-header"><div class="container nav-shell">
     <a class="brand" href="../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button>
-    <nav class="main-nav" id="main-nav"><a href="../../">Início</a><a class="active" href="../../subjects.html">Subjects</a><a href="../../#metodo">Método</a><a href="../../#comunidade">Comunidade</a></nav>
+    <nav class="main-nav" id="main-nav"><a href="../../">Início</a><a class="active" href="../../subjects.html">Subjects</a><a href="../../research/">Research</a><a href="../../#metodo">Método</a><a href="../../#comunidade">Comunidade</a></nav>
     <a class="button button-small header-cta" href="#trilha">Abrir trilha <span>↓</span></a>
   </div></header>
 
@@ -32,7 +34,7 @@
     </div></section>
 
     <div class="container subject-layout">
-      <aside class="subject-side-nav"><span>ON_THIS_PATH</span><a class="active" href="#visao">Visão geral</a><a href="#trilha">Roteiro</a><a href="#projetos">Projetos</a><a href="#recursos">Recursos</a><a href="#research">Research</a></aside>
+      <aside class="subject-side-nav"><span>ON_THIS_PATH</span><a class="active" href="#visao">Visão geral</a><a href="#trilha">Roteiro</a><a href="#projetos">Projetos</a><a href="#recursos">Recursos</a><a href="../../research/?subject=python">Research ↗</a></aside>
       <div class="subject-main">
         <section class="subject-section" id="visao"><p class="subject-section-label">// VISÃO GERAL</p><h2>Aprenda a pensar em código.</h2><p class="section-intro">A trilha prioriza lógica, organização e prática. O objetivo não é decorar sintaxe, mas decompor problemas e produzir programas que outras pessoas conseguem executar e evoluir.</p>
           <div class="outcome-grid"><article class="outcome-card"><span>01</span><h3>Modelar problemas</h3><p>Transforme regras do mundo real em dados, funções e fluxos claros.</p></article><article class="outcome-card"><span>02</span><h3>Automatizar tarefas</h3><p>Leia arquivos, trate dados e elimine trabalho manual repetitivo.</p></article><article class="outcome-card"><span>03</span><h3>Entregar software</h3><p>Organize módulos, erros, testes e documentação de execução.</p></article></div>
@@ -60,12 +62,11 @@
           <div class="resource-item"><span class="resource-type">TEST</span><div><h3>Testar comportamento</h3><p>Escreva testes para casos felizes, bordas e falhas esperadas.</p></div><span>03</span></div>
         </div></section>
 
-        <section class="subject-section" id="research" data-research-root></section>
         <section class="subject-next"><div><span>PRÓXIMO SUBJECT</span><h2>Data Science</h2></div><a class="button" href="../data-science/">Continuar trilha ↗</a></section>
       </div>
     </div>
   </main>
   <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="../../subjects.html">TODOS OS SUBJECTS ↗</a></div></footer>
-  <script src="../../script.js"></script><script src="../_shared/research-data.js"></script><script src="script.js"></script><script src="../_shared/subject-page.js"></script>
+  <script src="../../script.js"></script><script src="script.js"></script><script src="../shared/subject-page.js"></script>
 </body>
 </html>

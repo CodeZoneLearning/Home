@@ -660,6 +660,11 @@ p {
   box-shadow: var(--shadow);
 }
 
+.method-card-link {
+  display: block;
+  color: inherit;
+}
+
 .card-index {
   color: #9ba0ae;
   font-family: monospace;
