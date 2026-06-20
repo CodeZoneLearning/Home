@@ -36,7 +36,7 @@ const updateProgress = () => {
   });
 
   moduleChecks.forEach((check) => {
-    check.closest('.module-card')?.classList.toggle('is-complete', check.checked);
+    check.closest('.module-card, .application-card')?.classList.toggle('is-complete', check.checked);
   });
 
   if (progressTrack) {
@@ -62,7 +62,7 @@ const updateProgress = () => {
 const savedProgress = readProgress();
 moduleChecks.forEach((check) => {
   check.checked = savedProgress.includes(check.dataset.module);
-  const moduleTitle = check.closest('.module-card')?.querySelector('h3')?.textContent;
+  const moduleTitle = check.closest('.module-card, .application-card')?.querySelector('h3')?.textContent;
   check.setAttribute('aria-label', `Marcar ${moduleTitle || `bloco ${check.dataset.module}`} como concluído`);
   check.addEventListener('change', updateProgress);
 });

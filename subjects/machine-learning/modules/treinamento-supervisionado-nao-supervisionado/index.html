@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula sobre treinamento supervisionado e não supervisionado em Machine Learning.">
+  <title>Treinamento supervisionado e não supervisionado | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="ml-lesson-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button>
+      <nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Subjects</a><a href="../../../../research/">Research</a></nav>
+      <a class="button button-small header-cta" href="../../">Voltar ao subject <span>↖</span></a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="ml-lesson-hero">
+      <div class="container">
+        <nav class="lesson-breadcrumb"><a href="../../../../subjects.html">Subjects</a><span>/</span><a href="../../">Machine Learning</a><span>/</span><span>Bloco 01</span></nav>
+        <div class="ml-hero-grid">
+          <div>
+            <p class="lesson-eyebrow">ML_FOUNDATION · TRAINING PARADIGMS</p>
+            <h1>Quem ensina<br><span>o modelo?</span></h1>
+            <p class="ml-hero-lead">A diferença entre aprendizado supervisionado e não supervisionado começa em uma pergunta simples: existe uma resposta conhecida para orientar o treinamento?</p>
+            <div class="ml-hero-actions"><a class="button" href="#comparacao">Começar aula <span>↓</span></a><a class="outline-action" href="examples/training_paradigms.py" download>Baixar exemplos `.py` <span>↓</span></a></div>
+          </div>
+          <aside class="training-terminal" aria-label="Comparação dos paradigmas de treinamento">
+            <div class="terminal-top"><span></span><span></span><span></span><code>training.setup</code></div>
+            <div class="training-equation"><div><small>SUPERVISIONADO</small><strong>X + y</strong><p>dados + resposta</p></div><i></i><div><small>NÃO SUPERVISIONADO</small><strong>X</strong><p>somente dados</p></div></div>
+            <div class="terminal-foot"><span>OBJETIVO</span><code>generalize(new_data)</code></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="lesson-map"><div class="container"><a href="#comparacao">01 · Comparar</a><a href="#supervisionado">02 · Supervisionado</a><a href="#nao-supervisionado">03 · Não supervisionado</a><a href="#decidir">04 · Decidir</a><a href="#codigo">05 · Executar</a></div></div>
+
+    <section class="ml-section" id="comparacao">
+      <div class="container lesson-layout">
+        <aside class="section-marker"><span>01</span><small>COMPARAR</small></aside>
+        <div class="lesson-body">
+          <p class="lesson-eyebrow dark">// A INFORMAÇÃO MUDA O PROBLEMA</p>
+          <h2>Features entram.<br>A pergunta define a saída.</h2>
+          <p class="lesson-intro">Todo treinamento começa com exemplos representados por variáveis de entrada, as <strong>features</strong>. O que separa os paradigmas é a existência de um <strong>target</strong> conhecido durante o aprendizado.</p>
+
+          <div class="xy-grid">
+            <article class="xy-card"><span>X</span><div><small>FEATURES · ENTRADAS</small><h3>O que sabemos sobre cada exemplo?</h3><p>Temperatura, vibração, pressão, tempo de operação e qualquer variável disponível no momento da decisão.</p></div></article>
+            <article class="xy-card target-card"><span>y</span><div><small>TARGET · RESPOSTA</small><h3>O que queremos que o modelo aprenda?</h3><p>Uma classe, um valor contínuo ou outra resposta observada que possa orientar os ajustes do modelo.</p></div></article>
+          </div>
+
+          <div class="paradigm-table">
+            <div class="table-row table-head"><span>Paradigma</span><span>Recebe no treino</span><span>Aprende a</span><span>Exemplos</span></div>
+            <div class="table-row"><strong>Supervisionado</strong><span><code>X</code> e <code>y</code></span><span>aproximar uma resposta conhecida</span><span>classificação e regressão</span></div>
+            <div class="table-row"><strong>Não supervisionado</strong><span>somente <code>X</code></span><span>encontrar estrutura nos dados</span><span>clusters e representações</span></div>
+          </div>
+
+          <aside class="definition-callout"><span>REGRA MENTAL</span><p>Se existe uma resposta histórica confiável que você deseja prever, comece investigando aprendizado supervisionado. Se o objetivo é descobrir organização sem respostas prontas, investigue aprendizado não supervisionado.</p></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="ml-section section-soft" id="supervisionado">
+      <div class="container lesson-layout">
+        <aside class="section-marker"><span>02</span><small>COM TARGET</small></aside>
+        <div class="lesson-body">
+          <p class="lesson-eyebrow dark">// APRENDIZADO SUPERVISIONADO</p>
+          <h2>O erro orienta<br>o ajuste.</h2>
+          <p class="lesson-intro">Durante o treino, o modelo produz uma previsão, compara com a resposta real e usa o erro para ajustar seus parâmetros. O objetivo não é memorizar o treino: é manter qualidade em exemplos que nunca foram vistos.</p>
+
+          <div class="training-flow" aria-label="Fluxo do treinamento supervisionado">
+            <article><span>01</span><strong>Dados rotulados</strong><p>Pares de features e target: <code>(X, y)</code>.</p></article><i>→</i>
+            <article><span>02</span><strong>Treinamento</strong><p>O algoritmo ajusta parâmetros para reduzir o erro.</p></article><i>→</i>
+            <article><span>03</span><strong>Validação</strong><p>Escolhas são comparadas fora do conjunto de ajuste.</p></article><i>→</i>
+            <article><span>04</span><strong>Teste</strong><p>Estimativa final de generalização em dados reservados.</p></article>
+          </div>
+
+          <div class="task-pair">
+            <article><div class="task-label">SAÍDA DISCRETA</div><h3>Classificação</h3><p>Prevê uma categoria conhecida.</p><dl><div><dt>Entrada</dt><dd>sensores do equipamento</dd></div><div><dt>Target</dt><dd>health status 1–4</dd></div><div><dt>Modelo</dt><dd>Logistic Regression</dd></div></dl></article>
+            <article><div class="task-label">SAÍDA CONTÍNUA</div><h3>Regressão</h3><p>Estima um valor numérico.</p><dl><div><dt>Entrada</dt><dd>histórico e sensores</dd></div><div><dt>Target</dt><dd>horas de vida restantes</dd></div><div><dt>Modelo</dt><dd>Random Forest Regressor</dd></div></dl></article>
+          </div>
+
+          <aside class="warning-callout"><strong>Separar antes de treinar</strong><p>O conjunto de teste não participa da escolha do modelo. Consultá-lo repetidamente transforma o teste em parte do treinamento e produz uma avaliação otimista.</p></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="ml-section section-dark" id="nao-supervisionado">
+      <div class="container lesson-layout">
+        <aside class="section-marker"><span>03</span><small>SEM TARGET</small></aside>
+        <div class="lesson-body">
+          <p class="lesson-eyebrow">// APRENDIZADO NÃO SUPERVISIONADO</p>
+          <h2>Sem gabarito,<br>mas com objetivo.</h2>
+          <p class="lesson-intro">Não ter target não significa analisar sem critério. O algoritmo procura uma estrutura definida pelo método e pelas features escolhidas: similaridade, densidade, componentes ou pontos fora do padrão.</p>
+
+          <div class="unsupervised-uses">
+            <article><span>01</span><h3>Clusterização</h3><p>Agrupa exemplos semelhantes segundo uma representação e uma medida de distância.</p></article>
+            <article><span>02</span><h3>Redução de dimensão</h3><p>Comprime variáveis preservando parte relevante da estrutura ou variância.</p></article>
+            <article><span>03</span><h3>Detecção de anomalias</h3><p>Identifica observações raras ou distantes do comportamento esperado.</p></article>
+          </div>
+
+          <div class="training-lab">
+            <div class="lab-copy">
+              <span>INTERACTIVE_LAB</span><h3>Os mesmos pontos, duas informações.</h3><p>No modo supervisionado, as cores representam classes fornecidas no target. No modo não supervisionado, o algoritmo recebe apenas posições e propõe grupos por similaridade.</p>
+              <div class="lab-controls" role="group" aria-label="Selecionar paradigma para a visualização"><button class="active" type="button" data-plot-mode="supervised">Com target `y`</button><button type="button" data-plot-mode="unsupervised">Sem target</button></div>
+              <div class="lab-status" aria-live="polite"><i></i><span data-lab-status>Classes conhecidas orientam o treinamento.</span></div>
+            </div>
+            <div class="scatter-shell"><div class="scatter-axis axis-y">vibração</div><div class="scatter-plot" data-scatter-plot aria-label="Gráfico de pontos com três grupos"></div><div class="scatter-axis axis-x">temperatura</div><div class="scatter-legend"><span><i class="legend-a"></i>A</span><span><i class="legend-b"></i>B</span><span><i class="legend-c"></i>C</span></div></div>
+          </div>
+
+          <aside class="dark-callout"><strong>Clusters não são classes automaticamente.</strong><p>O grupo 2 não significa “equipamento crítico” até que alguém investigue suas características e valide essa interpretação com conhecimento do domínio.</p></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="ml-section" id="decidir">
+      <div class="container lesson-layout">
+        <aside class="section-marker"><span>04</span><small>DECIDIR</small></aside>
+        <div class="lesson-body">
+          <p class="lesson-eyebrow dark">// ESCOLHA O PARADIGMA</p>
+          <h2>Comece pela evidência disponível.</h2>
+          <p class="lesson-intro">Leia cada cenário e escolha o paradigma inicial mais coerente. O enunciado não pede um algoritmo; pede que você identifique se existe uma resposta observada.</p>
+
+          <div class="scenario-list">
+            <article class="scenario-card" data-scenario-answer="supervised"><div><span>SCENARIO_01</span><h3>Prever fraude com transações já investigadas e marcadas como fraude ou legítimas.</h3></div><div class="scenario-actions"><button type="button" data-scenario-choice="supervised">Supervisionado</button><button type="button" data-scenario-choice="unsupervised">Não supervisionado</button></div><p class="scenario-feedback" aria-live="polite"></p></article>
+            <article class="scenario-card" data-scenario-answer="unsupervised"><div><span>SCENARIO_02</span><h3>Descobrir perfis de operação em sensores sem categorias históricas confiáveis.</h3></div><div class="scenario-actions"><button type="button" data-scenario-choice="supervised">Supervisionado</button><button type="button" data-scenario-choice="unsupervised">Não supervisionado</button></div><p class="scenario-feedback" aria-live="polite"></p></article>
+            <article class="scenario-card" data-scenario-answer="supervised"><div><span>SCENARIO_03</span><h3>Estimar horas restantes usando equipamentos anteriores com vida útil observada.</h3></div><div class="scenario-actions"><button type="button" data-scenario-choice="supervised">Supervisionado</button><button type="button" data-scenario-choice="unsupervised">Não supervisionado</button></div><p class="scenario-feedback" aria-live="polite"></p></article>
+          </div>
+          <div class="scenario-score"><span>CHECKPOINT</span><strong><b data-score-correct>0</b>/3</strong><p data-score-message>Responda aos três cenários.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ml-section section-code" id="codigo">
+      <div class="container lesson-layout">
+        <aside class="section-marker"><span>05</span><small>EXECUTAR</small></aside>
+        <div class="lesson-body">
+          <p class="lesson-eyebrow">// TRÊS PROBLEMAS, TRÊS SAÍDAS</p>
+          <h2>Compare o contrato<br>de treinamento.</h2>
+          <p class="lesson-intro">Observe principalmente o método `fit`: classificação e regressão recebem `X_train, y_train`; clusterização recebe apenas `X`.</p>
+
+          <div class="code-workbench">
+            <div class="code-tabs" role="tablist" aria-label="Exemplos de código"><button class="active" type="button" role="tab" aria-selected="true" data-code-tab="classification">Classificação</button><button type="button" role="tab" aria-selected="false" data-code-tab="regression">Regressão</button><button type="button" role="tab" aria-selected="false" data-code-tab="clustering">Clusterização</button></div>
+            <div class="code-toolbar"><span data-code-file>classification.py</span><button type="button" data-copy-active-code>Copiar código</button></div>
+            <pre><code data-code-panel="classification">model = make_pipeline(
+    StandardScaler(),
+    LogisticRegression(max_iter=1_000)
+)
+
+# Supervised: features and known classes
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)</code><code data-code-panel="regression" hidden>model = RandomForestRegressor(
+    n_estimators=180,
+    min_samples_leaf=3,
+    random_state=42
+)
+
+# Supervised: features and known continuous target
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+mae = mean_absolute_error(y_test, y_pred)</code><code data-code-panel="clustering" hidden>model = KMeans(
+    n_clusters=3,
+    n_init=10,
+    random_state=42
+)
+
+# Unsupervised: features only
+clusters = model.fit_predict(X)
+silhouette = silhouette_score(X, clusters)</code></pre>
+          </div>
+
+          <div class="download-card"><div><span>FULL_EXAMPLE · SCIKIT-LEARN</span><h3>Execute os três paradigmas.</h3><p>O arquivo gera dados sintéticos, separa treino e teste e imprime Accuracy, MAE e Silhouette.</p></div><a class="button" href="examples/training_paradigms.py" download>Baixar `training_paradigms.py` <span>↓</span></a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-finish">
+      <div class="container finish-grid"><div><span>CHECKPOINT_01</span><h2>Você sabe identificar quem orienta o aprendizado.</h2><p>O próximo passo será entender como famílias de modelos representam relações diferentes.</p></div><div class="finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Machine Learning ↗</a></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>
