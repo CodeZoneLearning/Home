@@ -1,0 +1,97 @@
+{
+  "dataset": {
+    "train_rows": 490,
+    "validation_rows": 210,
+    "features": 2,
+    "shape": "nonlinear_moons"
+  },
+  "families": [
+    {
+      "name": "Logistic Regression",
+      "family": "linear",
+      "scaling": true,
+      "nonlinear": false,
+      "interpretability": "high",
+      "train_accuracy": 0.8653,
+      "validation_accuracy": 0.8524,
+      "validation_f1": 0.8545,
+      "generalization_gap": 0.0129
+    },
+    {
+      "name": "K-Nearest Neighbors",
+      "family": "distance",
+      "scaling": true,
+      "nonlinear": true,
+      "interpretability": "medium",
+      "train_accuracy": 0.9041,
+      "validation_accuracy": 0.9143,
+      "validation_f1": 0.9151,
+      "generalization_gap": -0.0102
+    },
+    {
+      "name": "Decision Tree",
+      "family": "tree",
+      "scaling": false,
+      "nonlinear": true,
+      "interpretability": "high",
+      "train_accuracy": 0.902,
+      "validation_accuracy": 0.9048,
+      "validation_f1": 0.9029,
+      "generalization_gap": -0.0027
+    },
+    {
+      "name": "Random Forest",
+      "family": "ensemble",
+      "scaling": false,
+      "nonlinear": true,
+      "interpretability": "medium",
+      "train_accuracy": 0.9347,
+      "validation_accuracy": 0.9238,
+      "validation_f1": 0.9238,
+      "generalization_gap": 0.0109
+    },
+    {
+      "name": "RBF Support Vector Machine",
+      "family": "kernel",
+      "scaling": true,
+      "nonlinear": true,
+      "interpretability": "low",
+      "train_accuracy": 0.898,
+      "validation_accuracy": 0.919,
+      "validation_f1": 0.9194,
+      "generalization_gap": -0.0211
+    }
+  ],
+  "tree_complexity": [
+    {
+      "max_depth": 1,
+      "leaves": 2,
+      "train_accuracy": 0.8265,
+      "validation_accuracy": 0.8286
+    },
+    {
+      "max_depth": 2,
+      "leaves": 4,
+      "train_accuracy": 0.902,
+      "validation_accuracy": 0.9048
+    },
+    {
+      "max_depth": 4,
+      "leaves": 12,
+      "train_accuracy": 0.9041,
+      "validation_accuracy": 0.8952
+    },
+    {
+      "max_depth": 8,
+      "leaves": 36,
+      "train_accuracy": 0.9633,
+      "validation_accuracy": 0.9
+    },
+    {
+      "max_depth": "unlimited",
+      "leaves": 56,
+      "train_accuracy": 1.0,
+      "validation_accuracy": 0.8762
+    }
+  ]
+}

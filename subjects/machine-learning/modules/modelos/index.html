@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula sobre famílias, parâmetros, complexidade e seleção de modelos de Machine Learning.">
+  <title>Modelos de Machine Learning | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css">
+  <link rel="stylesheet" href="../../../shared/video-embed.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="models-lesson-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Subjects</a><a href="../../../../research/">Research</a></nav><a class="button button-small header-cta" href="../../">Voltar ao subject <span>↖</span></a></div></header>
+
+  <main id="conteudo">
+    <section class="models-hero">
+      <div class="container">
+        <nav class="lesson-breadcrumb"><a href="../../../../subjects.html">Subjects</a><span>/</span><a href="../../">Machine Learning</a><span>/</span><span>Bloco 02</span></nav>
+        <div class="models-hero-grid">
+          <div><p class="model-eyebrow">ML_FOUNDATION · MODELS</p><h1>Hipóteses que<br><span>aprendem com dados.</span></h1><p class="models-hero-lead">Um modelo é uma representação limitada do problema. Escolher bem significa entender o que ele consegue expressar, quais hipóteses assume e como sua complexidade afeta a generalização.</p><div class="hero-actions"><a class="button" href="#anatomia">Começar aula <span>↓</span></a><a class="download-link" href="examples/compare_models.py" download>Baixar comparação `.py` <span>↓</span></a></div></div>
+          <aside class="model-blueprint" aria-label="Anatomia de um modelo"><div class="blueprint-head"><span>MODEL_BLUEPRINT</span><code>f(X; θ) → ŷ</code></div><div class="blueprint-body"><article><span>01</span><div><strong>Representação</strong><p>quais relações podem ser expressas</p></div></article><i>+</i><article><span>02</span><div><strong>Objetivo</strong><p>qual erro orienta o ajuste</p></div></article><i>+</i><article><span>03</span><div><strong>Otimização</strong><p>como os parâmetros são encontrados</p></div></article></div></aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="models-map"><div class="container"><a href="#anatomia">01 · Anatomia</a><a href="#familias">02 · Famílias</a><a href="#complexidade">03 · Complexidade</a><a href="#comparacao">04 · Comparar</a><a href="#escolher">05 · Escolher</a></div></div>
+
+    <section class="models-section" id="anatomia">
+      <div class="container models-layout"><aside class="section-marker"><span>01</span><small>ANATOMIA</small></aside><div class="models-content">
+        <p class="model-eyebrow dark">// MODELO NÃO É O ALGORITMO INTEIRO</p><h2>Uma função ajustada a partir de exemplos.</h2><p class="section-intro">O algoritmo de treinamento procura parâmetros para uma representação. O artefato resultante é o modelo: uma função que recebe novas features e produz uma previsão.</p>
+        <div class="anatomy-flow"><article><span>DATA</span><strong>X, y</strong><p>Exemplos disponíveis para aprender e avaliar.</p></article><i>→</i><article><span>TRAINING</span><strong>algoritmo</strong><p>Procedimento que ajusta os parâmetros.</p></article><i>→</i><article><span>MODEL</span><strong>f(X; θ)</strong><p>Representação ajustada e pronta para inferência.</p></article><i>→</i><article><span>PREDICTION</span><strong>ŷ</strong><p>Resposta produzida para um novo exemplo.</p></article></div>
+        <div class="parameter-grid"><article><span>θ</span><div><small>PARÂMETROS</small><h3>Aprendidos durante o treino</h3><p>Coeficientes de uma regressão, cortes de uma árvore ou pesos de uma rede neural.</p><code>model.fit(X_train, y_train)</code></div></article><article><span>λ</span><div><small>HIPERPARÂMETROS</small><h3>Definidos antes ou durante a busca</h3><p>Profundidade, regularização, número de vizinhos, árvores ou camadas.</p><code>max_depth=4</code></div></article></div>
+        <aside class="model-callout"><span>SEPARAÇÃO IMPORTANTE</span><p>Treinamento ajusta parâmetros. Seleção de modelo compara representações e hiperparâmetros usando validação. O conjunto de teste fica reservado para a estimativa final.</p></aside>
+      </div></div>
+    </section>
+
+    <section class="models-section section-video" id="video">
+      <div class="container models-layout"><aside class="section-marker"><span>▶</span><small>VÍDEO</small></aside><div class="models-content">
+        <p class="model-eyebrow">// AULA EM VÍDEO</p><h2>Explique a intuição antes do código.</h2><p class="section-intro">Este espaço já está preparado para o futuro canal Code Zone. Depois de publicar no YouTube, basta adicionar o ID do vídeo no atributo `data-youtube-id` desta página.</p>
+        <!-- Replace the empty ID after publishing the lesson on YouTube. -->
+        <article class="video-embed" data-youtube-video data-youtube-id="" data-video-title="Como escolher uma família de modelos" data-video-title-en="How to choose a model family">
+          <div class="video-embed-stage" data-video-stage><div class="video-embed-cover"><span>VIDEO_02 · MODELOS</span><h3>Como uma família de modelos representa o problema?</h3><p>Roteiro sugerido: fronteira linear, vizinhança, regras de árvore, ensembles e o equilíbrio entre viés e variância.</p><button class="video-play-button" type="button" data-video-play>Assistir aula</button></div></div>
+          <div class="video-embed-meta"><span data-video-status>Vídeo planejado para o canal Code Zone.</span><a href="../../../shared/VIDEO_GUIDE.md">Como publicar este vídeo ↗</a></div>
+        </article>
+      </div></div>
+    </section>
+
+    <section class="models-section section-soft" id="familias">
+      <div class="container models-layout"><aside class="section-marker"><span>02</span><small>FAMÍLIAS</small></aside><div class="models-content">
+        <p class="model-eyebrow dark">// REPRESENTAÇÕES DIFERENTES</p><h2>Cada família enxerga relações diferentes.</h2><p class="section-intro">Não existe modelo melhor fora de contexto. Cada família combina capacidade, hipóteses, custo computacional e facilidade de explicação.</p>
+        <div class="family-grid">
+          <article><span>LINEAR</span><div class="family-visual linear-visual"><i></i><b></b></div><h3>Modelos lineares</h3><p>Combinam features por pesos. São baselines fortes, rápidos e explicáveis quando a relação é aproximadamente linear.</p><dl><div><dt>Exemplos</dt><dd>Linear / Logistic Regression</dd></div><div><dt>Cuidado</dt><dd>interações e não linearidade</dd></div></dl></article>
+          <article><span>DISTANCE</span><div class="family-visual distance-visual"><i></i><i></i><i></i><i></i><i></i></div><h3>Vizinhança</h3><p>Prediz usando exemplos próximos. A escala e a definição de distância passam a fazer parte do modelo.</p><dl><div><dt>Exemplo</dt><dd>K-Nearest Neighbors</dd></div><div><dt>Cuidado</dt><dd>escala e alta dimensão</dd></div></dl></article>
+          <article><span>TREE</span><div class="family-visual tree-visual"><i></i><i></i><i></i><i></i><i></i></div><h3>Árvores</h3><p>Particionam o espaço com regras. Capturam não linearidade e interações sem exigir padronização.</p><dl><div><dt>Exemplo</dt><dd>Decision Tree</dd></div><div><dt>Cuidado</dt><dd>instabilidade e overfitting</dd></div></dl></article>
+          <article><span>ENSEMBLE</span><div class="family-visual ensemble-visual"><i></i><i></i><i></i><i></i></div><h3>Ensembles</h3><p>Combinam vários modelos para reduzir variância ou corrigir erros sequencialmente.</p><dl><div><dt>Exemplos</dt><dd>Random Forest / Boosting</dd></div><div><dt>Cuidado</dt><dd>complexidade e latência</dd></div></dl></article>
+          <article><span>KERNEL</span><div class="family-visual kernel-visual"><i></i></div><h3>Margem e kernels</h3><p>Procuram fronteiras com boa separação e podem representar relações não lineares por kernels.</p><dl><div><dt>Exemplo</dt><dd>Support Vector Machine</dd></div><div><dt>Cuidado</dt><dd>escala e custo em bases grandes</dd></div></dl></article>
+          <article><span>NEURAL</span><div class="family-visual neural-visual"><i></i><i></i><i></i><i></i><i></i><i></i></div><h3>Redes neurais</h3><p>Empilham transformações para aprender representações complexas em grandes volumes de dados.</p><dl><div><dt>Exemplos</dt><dd>MLP / CNN / Transformer</dd></div><div><dt>Cuidado</dt><dd>dados, custo e opacidade</dd></div></dl></article>
+        </div>
+      </div></div>
+    </section>
+
+    <section class="models-section section-dark" id="complexidade">
+      <div class="container models-layout"><aside class="section-marker"><span>03</span><small>CAPACIDADE</small></aside><div class="models-content">
+        <p class="model-eyebrow">// VIÉS E VARIÂNCIA</p><h2>Complexidade suficiente, não máxima.</h2><p class="section-intro">Pouca capacidade impede o modelo de capturar o sinal. Capacidade excessiva permite memorizar ruído. O ponto útil aparece quando o desempenho fora do treino é melhor.</p>
+        <div class="fit-spectrum"><article><span>UNDERFITTING</span><strong>alto viés</strong><p>Treino e validação ruins. A representação é simples demais.</p></article><i>→</i><article><span>GENERALIZAÇÃO</span><strong>equilíbrio</strong><p>O modelo captura sinal e mantém desempenho fora do treino.</p></article><i>→</i><article><span>OVERFITTING</span><strong>alta variância</strong><p>Treino excelente, validação pior e gap crescente.</p></article></div>
+        <div class="complexity-lab">
+          <div class="lab-copy"><span>COMPLEXITY_LAB · DECISION TREE</span><h3>Aumente a profundidade.</h3><p>O mesmo conjunto e o mesmo split. Observe quantas folhas surgem e como treino e validação se afastam.</p><div class="depth-controls" role="group" aria-label="Selecionar profundidade da árvore" data-depth-controls></div></div>
+          <div class="complexity-results"><div class="complexity-status"><span data-fit-label>EQUILÍBRIO</span><strong>max_depth = <b data-depth-value>2</b></strong><small><b data-leaf-count>4</b> folhas</small></div><div class="score-bar"><span>TRAIN</span><i><b data-score-bar="train"></b></i><strong data-score-value="train">90,2%</strong></div><div class="score-bar"><span>VALIDATION</span><i><b data-score-bar="validation"></b></i><strong data-score-value="validation">90,5%</strong></div><div class="gap-reading"><span>GENERALIZATION GAP</span><strong data-gap-value>-0,3 pp</strong><p data-complexity-analysis aria-live="polite">A árvore captura a estrutura sem abrir regras demais.</p></div></div>
+        </div>
+        <aside class="dark-callout"><strong>Regularização limita a liberdade do modelo.</strong><p>Profundidade máxima, número mínimo de exemplos por folha, penalidades nos coeficientes e dropout são formas diferentes de controlar capacidade.</p></aside>
+      </div></div>
+    </section>
+
+    <section class="models-section" id="comparacao">
+      <div class="container models-layout"><aside class="section-marker"><span>04</span><small>COMPARAR</small></aside><div class="models-content">
+        <p class="model-eyebrow dark">// MESMOS DADOS, HIPÓTESES DIFERENTES</p><h2>Desempenho é apenas uma dimensão.</h2><p class="section-intro">Cinco famílias recebem o mesmo conjunto em formato de luas. Além da validação, compare padronização, capacidade não linear, interpretabilidade e gap.</p>
+        <div class="model-table-shell"><div class="model-table-head"><div><span>LIVE_OUTPUT</span><h3>Comparação de famílias</h3></div><p>700 exemplos · 2 features · 30% validação</p></div><div class="model-table"><div class="model-row model-row-head"><span>Modelo</span><span>Família</span><span>Scaling</span><span>Não linear</span><span>Interpretação</span><span>Validação</span><span>Gap</span></div><div data-model-results><div class="model-row"><strong>Random Forest</strong><span>ensemble</span><span>não</span><span>sim</span><span>média</span><span>92,4%</span><span>1,1 pp</span></div></div></div></div>
+        <div class="comparison-reading"><span>LEITURA_01</span><div><h3>A fronteira linear fica abaixo, mas continua útil.</h3><p>Logistic Regression entrega um baseline simples e explicável. Random Forest tem a maior validação neste conjunto, mas SVM e KNN chegam perto com hipóteses e custos diferentes.</p></div></div>
+      </div></div>
+    </section>
+
+    <section class="models-section section-decision" id="escolher">
+      <div class="container models-layout"><aside class="section-marker"><span>05</span><small>ESCOLHER</small></aside><div class="models-content">
+        <p class="model-eyebrow">// RESTRIÇÕES ANTES DO RANKING</p><h2>O melhor modelo cabe no sistema.</h2><p class="section-intro">Uma diferença pequena na métrica pode não compensar mais latência, dependências, dificuldade de explicação ou custo de manutenção.</p>
+        <div class="selection-grid"><article><span>01</span><h3>Comece por um baseline</h3><p>Use uma regra simples ou modelo linear para medir o ganho real de complexidade.</p></article><article><span>02</span><h3>Liste hipóteses</h3><p>Escala, linearidade, independência, distância e estabilidade não são detalhes.</p></article><article><span>03</span><h3>Valide fora do treino</h3><p>Use splits coerentes com tempo, grupos e momento da decisão.</p></article><article><span>04</span><h3>Inclua operação</h3><p>Latência, memória, explicabilidade, frequência de retreino e fallback.</p></article><article><span>05</span><h3>Analise erros</h3><p>Compare segmentos e casos concretos, não apenas a média global.</p></article><article><span>06</span><h3>Prefira a menor complexidade suficiente</h3><p>Complexidade precisa comprar ganho mensurável para o produto.</p></article></div>
+        <div class="download-card"><div><span>REPRODUCIBLE_COMPARISON</span><h3>Execute as cinco famílias.</h3><p>O script gera o JSON usado na tabela e no laboratório de profundidade.</p></div><a class="button" href="examples/compare_models.py" download>Baixar `compare_models.py` <span>↓</span></a></div>
+      </div></div>
+    </section>
+
+    <section class="lesson-finish"><div class="container finish-grid"><div><span>CHECKPOINT_02</span><h2>Você sabe comparar representações, não apenas scores.</h2><p>O próximo passo é avaliar os modelos com métricas alinhadas ao custo dos erros.</p></div><div class="finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Machine Learning ↗</a></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script><script src="../../../shared/video-embed.js"></script>
+</body>
+</html>
