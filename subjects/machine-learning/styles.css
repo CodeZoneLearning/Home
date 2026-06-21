@@ -40,6 +40,12 @@
   background: linear-gradient(112deg, rgba(var(--subject-accent-rgb), .17), #fff 58%);
 }
 
+.module-card-ready {
+  min-height: 166px;
+  border-color: rgba(var(--subject-accent-rgb), .62);
+  background: linear-gradient(112deg, rgba(var(--subject-accent-rgb), .09), #fff 62%);
+}
+
 .module-content {
   min-width: 0;
 }

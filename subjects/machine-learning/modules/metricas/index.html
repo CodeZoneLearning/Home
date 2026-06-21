@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula prática sobre métricas de classificação, regressão e clusterização em Machine Learning.">
+  <title>Métricas de Machine Learning | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="metrics-lesson-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button>
+      <nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Subjects</a><a href="../../../../research/">Research</a></nav>
+      <a class="button button-small header-cta" href="../../">Voltar ao subject <span>↖</span></a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="metrics-hero">
+      <div class="container">
+        <nav class="lesson-breadcrumb"><a href="../../../../subjects.html">Subjects</a><span>/</span><a href="../../">Machine Learning</a><span>/</span><span>Bloco 03</span></nav>
+        <div class="metrics-hero-grid">
+          <div>
+            <p class="metric-eyebrow">ML_FOUNDATION · METRICS</p>
+            <h1>Um número não<br><span>conta a história.</span></h1>
+            <p class="metrics-hero-lead">Uma métrica resume um comportamento específico. Interpretá-la exige saber qual erro ela valoriza, qual distribuição produziu o resultado e qual decisão será tomada.</p>
+            <div class="hero-actions"><a class="button" href="#contrato">Começar aula <span>↓</span></a><a class="download-link" href="examples/analyze_metrics.py" download>Baixar análise `.py` <span>↓</span></a></div>
+          </div>
+          <aside class="metric-console" aria-label="Princípios para escolher uma métrica">
+            <div class="console-head"><span></span><span></span><span></span><code>metric.contract</code></div>
+            <div class="console-body">
+              <p><span>01</span><strong>Qual é a tarefa?</strong><small>classe, valor ou estrutura</small></p>
+              <p><span>02</span><strong>Qual erro custa mais?</strong><small>falso positivo ou falso negativo</small></p>
+              <p><span>03</span><strong>Qual é a referência?</strong><small>baseline, período e segmento</small></p>
+              <p><span>04</span><strong>Qual decisão muda?</strong><small>threshold e ação operacional</small></p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="metrics-map"><div class="container"><a href="#contrato">01 · Contrato</a><a href="#classificacao">02 · Classificação</a><a href="#regressao">03 · Regressão</a><a href="#clusterizacao">04 · Clustering</a><a href="#decisao">05 · Decisão</a></div></div>
+
+    <section class="metrics-section" id="contrato">
+      <div class="container metrics-layout">
+        <aside class="section-marker"><span>01</span><small>CONTRATO</small></aside>
+        <div class="metrics-content">
+          <p class="metric-eyebrow dark">// ANTES DA FÓRMULA</p>
+          <h2>A métrica precisa representar o problema.</h2>
+          <p class="section-intro">Um mesmo modelo pode parecer excelente ou inadequado dependendo do resumo escolhido. Antes de calcular, declare a tarefa, a população, o horizonte e o custo associado a cada tipo de erro.</p>
+
+          <div class="metric-contract-grid">
+            <article><span>01</span><h3>Tarefa</h3><p>Classificação, regressão e clusterização produzem saídas diferentes e exigem famílias distintas de métricas.</p></article>
+            <article><span>02</span><h3>Distribuição</h3><p>Desbalanceamento, outliers e mudança temporal alteram a leitura do mesmo número.</p></article>
+            <article><span>03</span><h3>Custo</h3><p>O impacto de deixar uma falha passar pode ser muito diferente do custo de gerar um alerta falso.</p></article>
+            <article><span>04</span><h3>Baseline</h3><p>Uma métrica isolada não diz se o modelo supera uma regra simples ou a solução atual.</p></article>
+          </div>
+
+          <aside class="principle-callout"><span>PRINCÍPIO</span><p>Métrica é parte de um argumento: “neste conjunto, neste período e neste threshold, o modelo apresentou este comportamento”. Remover o contexto transforma precisão numérica em falsa certeza.</p></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics-section section-soft" id="classificacao">
+      <div class="container metrics-layout">
+        <aside class="section-marker"><span>02</span><small>CLASSIFICAÇÃO</small></aside>
+        <div class="metrics-content">
+          <p class="metric-eyebrow dark">// ERROS TÊM DIREÇÕES DIFERENTES</p>
+          <h2>Comece pela matriz de confusão.</h2>
+          <p class="section-intro">O exemplo contém 1.000 testes de equipamento e apenas 45 falhas reais. Com threshold `0,50`, o modelo produz a matriz abaixo. Todas as métricas desta seção são leituras diferentes dessas quatro contagens.</p>
+
+          <div class="classification-case">
+            <div class="confusion-shell">
+              <div class="matrix-axis matrix-y">REAL</div>
+              <div class="confusion-matrix" aria-label="Matriz de confusão">
+                <div class="matrix-corner"></div><div class="matrix-label">Prevê falha</div><div class="matrix-label">Prevê normal</div>
+                <div class="matrix-label">Falha</div><article class="cell-tp"><small>TRUE POSITIVE</small><strong data-confusion="true_positive">36</strong><span>falhas detectadas</span></article><article class="cell-fn"><small>FALSE NEGATIVE</small><strong data-confusion="false_negative">9</strong><span>falhas ignoradas</span></article>
+                <div class="matrix-label">Normal</div><article class="cell-fp"><small>FALSE POSITIVE</small><strong data-confusion="false_positive">24</strong><span>alertas falsos</span></article><article class="cell-tn"><small>TRUE NEGATIVE</small><strong data-confusion="true_negative">931</strong><span>normais corretos</span></article>
+              </div>
+              <div class="matrix-axis matrix-x">PREVISÃO</div>
+            </div>
+            <aside class="case-reading"><span>LEITURA_01</span><strong>96,7%</strong><h3>Accuracy parece excelente.</h3><p>Mas 40% dos alertas positivos são falsos e 20% das falhas passam sem alerta. Em uma base com 95,5% de casos normais, Accuracy é dominada pela classe majoritária.</p></aside>
+          </div>
+
+          <div class="classification-metrics">
+            <article><div><span>ACCURACY</span><strong data-classification-metric="accuracy">96,7%</strong></div><code>(TP + TN) / total</code><h3>Acerto global</h3><p><b>Use quando:</b> classes e custos são relativamente equilibrados.</p><p><b>Cuidado:</b> pode esconder desempenho ruim na classe rara.</p></article>
+            <article><div><span>PRECISION</span><strong data-classification-metric="precision">60,0%</strong></div><code>TP / (TP + FP)</code><h3>Qualidade dos alertas</h3><p><b>Use quando:</b> agir sobre um falso positivo é caro.</p><p><b>Cuidado:</b> pode subir apenas porque o modelo quase nunca alerta.</p></article>
+            <article><div><span>RECALL</span><strong data-classification-metric="recall">80,0%</strong></div><code>TP / (TP + FN)</code><h3>Cobertura dos positivos</h3><p><b>Use quando:</b> deixar um positivo passar é o maior risco.</p><p><b>Cuidado:</b> recall alto pode gerar muitos falsos positivos.</p></article>
+            <article><div><span>SPECIFICITY</span><strong data-classification-metric="specificity">97,5%</strong></div><code>TN / (TN + FP)</code><h3>Cobertura dos negativos</h3><p><b>Use quando:</b> reconhecer corretamente a classe negativa também importa.</p><p><b>Cuidado:</b> deve ser lida junto ao Recall em bases assimétricas.</p></article>
+            <article><div><span>BALANCED ACCURACY</span><strong data-classification-metric="balanced_accuracy">88,7%</strong></div><code>(Recall + Specificity) / 2</code><h3>Equilíbrio entre classes</h3><p><b>Use quando:</b> as classes são desbalanceadas e ambas precisam de cobertura.</p><p><b>Cuidado:</b> atribui o mesmo peso às classes, mesmo quando os custos são diferentes.</p></article>
+            <article><div><span>F1 SCORE</span><strong data-classification-metric="f1">68,6%</strong></div><code>2 × P × R / (P + R)</code><h3>Equilíbrio harmônico</h3><p><b>Use quando:</b> Precision e Recall precisam de um resumo único.</p><p><b>Cuidado:</b> ignora True Negatives e assume peso semelhante entre P e R.</p></article>
+          </div>
+
+          <div class="threshold-lab">
+            <div class="threshold-copy"><span>THRESHOLD_LAB</span><h3>O threshold redistribui os erros.</h3><p>Abaixar o limite tende a encontrar mais falhas e gerar mais alertas falsos. Aumentá-lo faz o contrário. O modelo não mudou; a regra de decisão mudou.</p><label for="threshold-control">Threshold <strong data-threshold-value>0,50</strong></label><input id="threshold-control" type="range" min="0.3" max="0.7" step="0.2" value="0.5" data-threshold-control></div>
+            <div class="threshold-results"><article><span>PRECISION</span><strong data-threshold-metric="precision">60,0%</strong></article><article><span>RECALL</span><strong data-threshold-metric="recall">80,0%</strong></article><article><span>F1</span><strong data-threshold-metric="f1">68,6%</strong></article><p data-threshold-analysis aria-live="polite">Equilíbrio intermediário entre cobertura e qualidade dos alertas.</p></div>
+          </div>
+
+          <div class="ranking-grid">
+            <article><div><span>ROC-AUC</span><strong data-ranking-metric="roc_auc">0,921</strong></div><h3>Ordenação em todos os thresholds</h3><p>Mede a capacidade de ranquear positivos acima de negativos. Pode parecer otimista quando a classe positiva é muito rara.</p></article>
+            <article><div><span>PR-AUC</span><strong data-ranking-metric="pr_auc">0,687</strong></div><h3>Precision × Recall</h3><p>Foca a classe positiva e costuma ser mais informativa em eventos raros. Compare sempre com a prevalência positiva.</p></article>
+            <article><div><span>LOG LOSS</span><strong data-ranking-metric="log_loss">0,306</strong></div><h3>Qualidade das probabilidades</h3><p>Penaliza previsões confiantes e erradas. Exige probabilidades, não apenas classes finais.</p></article>
+            <article><div><span>BRIER SCORE</span><strong data-ranking-metric="brier_score">0,083</strong></div><h3>Erro quadrático probabilístico</h3><p>Avalia calibração e resolução. Quanto menor, melhor, mas a prevalência influencia a referência.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics-section section-dark" id="regressao">
+      <div class="container metrics-layout">
+        <aside class="section-marker"><span>03</span><small>REGRESSÃO</small></aside>
+        <div class="metrics-content">
+          <p class="metric-eyebrow">// QUANTO ERRAMOS?</p>
+          <h2>A unidade do erro muda a interpretação.</h2>
+          <p class="section-intro">O caso estima horas restantes de vida útil. Um erro absoluto de 20 significa 20 horas; um erro quadrático amplifica desvios grandes; R² compara o modelo com a média; MAPE transforma o erro em proporção.</p>
+
+          <div class="regression-metrics">
+            <article><span>MAE</span><strong data-regression-metric="mae">18,0</strong><code>mean(|y - ŷ|)</code><h3>Erro típico na unidade original</h3><p>É fácil de explicar e menos sensível a outliers que RMSE. Trata cada unidade de erro linearmente.</p></article>
+            <article><span>RMSE</span><strong data-regression-metric="rmse">20,1</strong><code>√mean((y - ŷ)²)</code><h3>Penaliza erros grandes</h3><p>Útil quando grandes desvios são desproporcionalmente graves. Pode ser dominado por poucos casos extremos.</p></article>
+            <article><span>R²</span><strong data-regression-metric="r2">0,983</strong><code>1 - SSres / SStot</code><h3>Ganho sobre prever a média</h3><p>Não mede erro em horas e pode ser negativo em dados novos. Um R² alto não garante erro operacional aceitável.</p></article>
+            <article><span>MAPE</span><strong data-regression-metric="mape">6,1%</strong><code>mean(|erro / y|)</code><h3>Erro percentual médio</h3><p>Facilita comparação de escalas, mas explode perto de zero e favorece erros em valores altos.</p></article>
+          </div>
+
+          <div class="outlier-lab">
+            <div><span>OUTLIER_LAB</span><h3>Um caso extremo muda o resumo.</h3><p>Compare as mesmas dez observações. No segundo cenário, apenas a última previsão muda de 650 para 980 horas.</p><div class="outlier-controls" role="group" aria-label="Alternar cenário de regressão"><button class="active" type="button" data-regression-variant="regular">Sem outlier</button><button type="button" data-regression-variant="with_outlier">Com outlier</button></div></div>
+            <div class="outlier-results"><div><span>MAE</span><i><b data-regression-bar="mae"></b></i><strong data-outlier-value="mae">18,0</strong></div><div><span>RMSE</span><i><b data-regression-bar="rmse"></b></i><strong data-outlier-value="rmse">20,1</strong></div><div><span>R²</span><i><b data-regression-bar="r2"></b></i><strong data-outlier-value="r2">0,983</strong></div><p data-regression-analysis aria-live="polite">MAE e RMSE estão próximos: os erros têm magnitudes relativamente homogêneas.</p></div>
+          </div>
+
+          <aside class="dark-warning"><strong>MAPE exige denominador válido.</strong><p>Targets iguais ou próximos de zero tornam o percentual indefinido ou instável. Nesses casos, prefira MAE/RMSE, use uma versão escalada com critério ou reporte métricas por faixa.</p></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics-section" id="clusterizacao">
+      <div class="container metrics-layout">
+        <aside class="section-marker"><span>04</span><small>CLUSTERING</small></aside>
+        <div class="metrics-content">
+          <p class="metric-eyebrow dark">// SEM TARGET, SEM GABARITO</p>
+          <h2>Coesão não garante significado.</h2>
+          <p class="section-intro">Métricas internas avaliam a geometria dos grupos com base nas mesmas features usadas para formá-los. Elas ajudam a comparar configurações, mas não provam que os clusters sejam úteis, estáveis ou acionáveis.</p>
+
+          <div class="cluster-metric-grid">
+            <article><div><span>SILHOUETTE</span><strong>↑</strong></div><h3>Coesão e separação</h3><p>Varia aproximadamente de -1 a 1. Valores maiores indicam pontos mais próximos do próprio cluster que dos vizinhos.</p><small>CUIDADO · favorece estruturas convexas e bem separadas.</small></article>
+            <article><div><span>DAVIES-BOULDIN</span><strong>↓</strong></div><h3>Dispersão versus distância</h3><p>Compara a dispersão interna com a separação entre clusters. Valores menores são melhores.</p><small>CUIDADO · depende da escala e da noção de centróide.</small></article>
+            <article><div><span>CALINSKI-HARABASZ</span><strong>↑</strong></div><h3>Variância entre e dentro</h3><p>Razão entre dispersão dos centróides e dispersão interna. Valores maiores indicam grupos mais definidos.</p><small>CUIDADO · tende a crescer com estruturas densas e certos valores de k.</small></article>
+          </div>
+
+          <div class="cluster-comparison">
+            <div class="cluster-comparison-head"><div><span>MODEL_SELECTION</span><h3>Compare candidatos, não apenas o vencedor.</h3></div><p>Mesmos 360 exemplos sintéticos, K-Means e features iguais.</p></div>
+            <div class="cluster-table"><div class="cluster-row cluster-head"><span>k</span><span>Silhouette ↑</span><span>Davies-Bouldin ↓</span><span>Calinski-Harabasz ↑</span><span>Leitura</span></div><div data-cluster-results><div class="cluster-row"><strong>3</strong><span>0,824</span><span>0,266</span><span>4.713</span><span>melhor candidato</span></div></div></div>
+          </div>
+
+          <aside class="cluster-reading"><span>LEITURA_02</span><div><h3>`k=3` domina os índices internos.</h3><p>Isso justifica investigar três grupos, não nomeá-los automaticamente. O próximo passo é verificar estabilidade, perfis das features e utilidade para uma decisão real.</p></div></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics-section section-decision" id="decisao">
+      <div class="container metrics-layout">
+        <aside class="section-marker"><span>05</span><small>DECISÃO</small></aside>
+        <div class="metrics-content">
+          <p class="metric-eyebrow">// PARTA DO CUSTO DO ERRO</p>
+          <h2>Qual comportamento precisa ser protegido?</h2>
+          <p class="section-intro">A escolha não começa na fórmula. Começa no impacto de uma decisão errada e na forma como o modelo será usado.</p>
+
+          <div class="decision-list">
+            <article><span>01</span><div><h3>Perder uma falha real é crítico.</h3><p>Priorize Recall e acompanhe Precision, volume de alertas e capacidade operacional.</p></div><strong>RECALL</strong></article>
+            <article><span>02</span><div><h3>Investigar um alerta falso é muito caro.</h3><p>Priorize Precision e confirme que o Recall mínimo continua aceitável.</p></div><strong>PRECISION</strong></article>
+            <article><span>03</span><div><h3>O erro numérico tem custo aproximadamente linear.</h3><p>Use MAE para comunicar o desvio típico na unidade original.</p></div><strong>MAE</strong></article>
+            <article><span>04</span><div><h3>Erros extremos causam impacto desproporcional.</h3><p>Use RMSE ao lado de MAE e investigue a distribuição dos resíduos.</p></div><strong>RMSE</strong></article>
+            <article><span>05</span><div><h3>O evento positivo é raro e queremos ranquear casos.</h3><p>Prefira PR-AUC e compare com a prevalência da classe positiva.</p></div><strong>PR-AUC</strong></article>
+          </div>
+
+          <div class="evaluation-checklist"><span>EVALUATION_CHECKLIST</span><h3>Antes de aprovar um resultado</h3><div><p><b>01</b> Compare com baseline e solução atual.</p><p><b>02</b> Calcule por classe, segmento e período.</p><p><b>03</b> Reporte incerteza ou variação entre folds.</p><p><b>04</b> Escolha threshold fora do conjunto de teste.</p><p><b>05</b> Verifique drift e custo depois da publicação.</p><p><b>06</b> Nunca conclua usando uma métrica isolada.</p></div></div>
+
+          <div class="download-card"><div><span>REPRODUCIBLE_ANALYSIS</span><h3>Execute todos os exemplos.</h3><p>O script gera o JSON desta página e permite conferir cada cálculo.</p></div><a class="button" href="examples/analyze_metrics.py" download>Baixar `analyze_metrics.py` <span>↓</span></a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-finish"><div class="container finish-grid"><div><span>CHECKPOINT_03</span><h2>Você sabe perguntar o que existe por trás do score.</h2><p>Uma avaliação útil conecta fórmula, distribuição, threshold e custo operacional.</p></div><div class="finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Machine Learning ↗</a></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>
