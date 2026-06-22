@@ -1,3 +1,4 @@
+(() => {
 const researchSource = window.codeZoneResearch || {};
 const subjectLabels = {
   python: 'Python',
@@ -198,3 +199,4 @@ resetButton.addEventListener('click', () => {
 
 document.querySelector('[data-total-references]').textContent = researchItems.length;
 render();
+})();
