@@ -1,0 +1,3 @@
+window.codeZoneSubject = {
+  id: 'mlops'
+};
