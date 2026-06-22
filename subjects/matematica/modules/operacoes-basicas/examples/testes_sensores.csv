@@ -1,0 +1,4 @@
+test_id,temperature,vibration,pressure
+T-001,0.42,0.31,0.18
+T-002,0.48,0.35,0.22
+T-003,0.87,0.81,0.76

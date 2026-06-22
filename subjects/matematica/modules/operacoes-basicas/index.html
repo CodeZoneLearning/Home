@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula prática de operações aritméticas, vetoriais e matriciais com exemplos de equipamentos.">
+  <title>Operações básicas, vetores e matrizes | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="math-lesson-page operations-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Subjects</a><a href="../../../../research/">Research</a></nav><a class="button button-small header-cta" href="../../">Voltar ao subject <span>↖</span></a></div></header>
+  <main id="conteudo">
+    <section class="math-hero"><div class="container"><nav class="math-breadcrumb"><a href="../../../../subjects.html">Subjects</a><span>/</span><a href="../../">Matemática</a><span>/</span><span>Bloco 01</span></nav><div class="math-hero-grid">
+      <div><p class="math-eyebrow">MATH_FOUNDATION · OPERATIONS</p><h1>Da conta<br><span>à estrutura.</span></h1><p class="math-hero-lead">Comece calculando uma disponibilidade. Depois represente vários sensores com vetores e vários testes com matrizes, sem perder o significado de cada número.</p><div class="math-hero-actions"><a class="button" href="#numeros">Começar aula <span>↓</span></a><a class="math-outline-action" href="examples/operacoes_sensores.py" download>Baixar laboratório `.py` <span>↓</span></a></div></div>
+      <aside class="equation-board" aria-label="Progressão de um escalar para vetor e matriz"><div class="equation-board-head"><span>REPRESENTATION_SCALE</span><i></i></div><div class="equation-stage"><span>ESCALAR</span><strong>92,5%</strong><small>uma medida</small></div><div class="equation-stage"><span>VETOR</span><strong>[0,42 0,31 0,18]</strong><small>um teste</small></div><div class="equation-stage"><span>MATRIZ</span><strong>3 × 3</strong><small>vários testes</small></div></aside>
+    </div></div></section>
+
+    <div class="math-map"><div class="container"><a href="#numeros">01 · Números</a><a href="#proporcoes">02 · Proporções</a><a href="#vetores">03 · Vetores</a><a href="#matrizes">04 · Matrizes</a><a href="#laboratorio">05 · Laboratório</a></div></div>
+
+    <section class="math-section" id="numeros"><div class="container math-layout"><aside class="math-marker"><span>01</span><small>NÚMEROS</small></aside><div class="math-body"><p class="math-eyebrow">// OPERAÇÃO + UNIDADE + PERGUNTA</p><h2>Uma conta só é útil quando representa algo.</h2><p class="math-intro">Somar, subtrair, multiplicar e dividir produzem relações diferentes. Antes de calcular, nomeie a pergunta e mantenha unidades compatíveis.</p>
+      <div class="operation-grid"><article><span>SOMA</span><strong>34 + 28 = 62</strong><h3>Acumular testes</h3><p>34 testes no turno A mais 28 no turno B resultam em 62 testes.</p></article><article><span>SUBTRAÇÃO</span><strong>480 − 36 = 444</strong><h3>Encontrar o restante</h3><p>De 480 minutos planejados, 36 parados deixam 444 minutos operando.</p></article><article><span>MULTIPLICAÇÃO</span><strong>12 × 7,5 = 90</strong><h3>Escalar uma taxa</h3><p>12 testes por hora durante 7,5 horas representam capacidade para 90 testes.</p></article><article><span>DIVISÃO</span><strong>62 ÷ 2 = 31</strong><h3>Distribuir ou calcular taxa</h3><p>62 testes em dois turnos dão média de 31 por turno.</p></article></div>
+      <aside class="math-definition"><strong>ORDEM DAS OPERAÇÕES</strong><p>Parênteses tornam a intenção explícita. Em `(480 - 36) / 480`, calculamos primeiro o tempo operando e depois sua proporção sobre o planejado.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-soft" id="proporcoes"><div class="container math-layout"><aside class="math-marker"><span>02</span><small>PROPORÇÕES</small></aside><div class="math-body"><p class="math-eyebrow">// PARTE EM RELAÇÃO AO TODO</p><h2>Porcentagem é uma razão com escala 100.</h2><p class="math-intro">Disponibilidade não é “444”; é a relação entre 444 minutos em operação e 480 minutos planejados. A unidade desaparece porque dividimos minutos por minutos.</p>
+      <div class="availability-lab"><div class="availability-controls"><span>AVAILABILITY_LAB</span><label>Tempo planejado <output data-planned-output>480 min</output><input type="range" min="120" max="720" step="30" value="480" data-planned></label><label>Tempo parado <output data-downtime-output>36 min</output><input type="range" min="0" max="120" step="6" value="36" data-downtime></label></div><div class="availability-result"><div><span>TEMPO OPERANDO</span><strong data-uptime>444 min</strong></div><div><span>DISPONIBILIDADE</span><strong data-availability>92,5%</strong></div><code data-availability-formula>(480 − 36) ÷ 480 × 100</code></div></div>
+      <div class="ratio-cards"><article><span>RAZÃO</span><h3>3 falhas / 60 testes</h3><strong>0,05</strong><p>Cinco centésimos dos testes falharam.</p></article><article><span>PORCENTAGEM</span><h3>0,05 × 100</h3><strong>5%</strong><p>A mesma relação comunicada por 100 testes.</p></article><article><span>VARIAÇÃO</span><h3>(84 − 80) / 80</h3><strong>+5%</strong><p>Compare a diferença com o valor de referência, não apenas com 100.</p></article></div>
+      <aside class="math-warning"><strong>DENOMINADOR DEFINE A PERGUNTA</strong><p>Três falhas sobre 60 testes não respondem à mesma pergunta que três falhas sobre 12 equipamentos. Declare sempre qual é o todo.</p></aside>
+    </div></div></section>
+
+    <section class="math-section" id="vetores"><div class="container math-layout"><aside class="math-marker"><span>03</span><small>VETORES</small></aside><div class="math-body"><p class="math-eyebrow">// UMA LISTA ORDENADA DE MEDIDAS</p><h2>Um vetor representa várias características juntas.</h2><p class="math-intro">Depois de normalizar cada sensor para uma escala comparável, um teste pode ser representado por `x = [temperatura, vibração, pressão]`.</p>
+      <div class="vector-anatomy"><div><span>TEST_VECTOR</span><div class="vector-values"><strong>0,42</strong><strong>0,31</strong><strong>0,18</strong></div><div class="vector-labels"><span>temperatura</span><span>vibração</span><span>pressão</span></div></div><aside><span>DIMENSÃO</span><strong>3</strong><p>Três posições, com ordem e significado definidos.</p></aside></div>
+      <div class="vector-operations"><article><span>ADIÇÃO</span><h3>Correção componente a componente</h3><div class="vector-equation">[0,42 0,31 0,18] + [0,02 −0,01 0]</div><strong>= [0,44 0,30 0,18]</strong></article><article><span>ESCALAR</span><h3>Aplique o mesmo fator</h3><div class="vector-equation">2 × [0,42 0,31 0,18]</div><strong>= [0,84 0,62 0,36]</strong></article><article><span>PRODUTO ESCALAR</span><h3>Combine com pesos</h3><div class="vector-equation">x · [0,25 0,45 0,30]</div><strong>= 0,2985</strong></article></div>
+      <aside class="math-definition"><strong>PRODUTO ESCALAR</strong><p>Multiplique posições correspondentes e some os resultados. Aqui, vibração recebe o maior peso; o resultado resume três sinais em um score.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-dark" id="matrizes"><div class="container math-layout"><aside class="math-marker"><span>04</span><small>MATRIZES</small></aside><div class="math-body"><p class="math-eyebrow">// LINHAS × COLUNAS</p><h2>Uma matriz organiza vários vetores.</h2><p class="math-intro">Cada linha representa um teste e cada coluna mantém o mesmo sensor. A forma `3 × 3` informa três testes por três características.</p>
+      <div class="matrix-lab"><div class="matrix-copy"><span>MATRIX_OPERATION_LAB</span><h3>Mude a operação.</h3><p>Os dados estão normalizados entre 0 e 1. Os pesos de risco são `[0,25 0,45 0,30]`.</p><div class="matrix-actions"><button class="active" type="button" data-matrix-mode="original">Original</button><button type="button" data-matrix-mode="transpose">Transposta</button><button type="button" data-matrix-mode="scores">Scores de risco</button></div></div><div><div class="matrix-output" data-matrix-output aria-live="polite"></div><p data-matrix-caption>3 testes × 3 sensores</p></div></div>
+      <div class="matrix-concepts"><article><span>ÍNDICE</span><strong>A[2, 1] = 0,81</strong><p>Linha 2, coluna 1: vibração do terceiro teste, contando do zero.</p></article><article><span>TRANSPOSIÇÃO</span><strong>3 × 3 → 3 × 3</strong><p>Linhas viram colunas. Em formas não quadradas, as dimensões também se invertem.</p></article><article><span>MATRIZ × VETOR</span><strong>A · w = scores</strong><p>Cada linha produz um produto escalar com os pesos.</p></article></div>
+      <aside class="math-dark-callout"><strong>DIMENSÕES PRECISAM ENCAIXAR</strong><p>Em uma matriz `m × n` multiplicada por um vetor de tamanho `n`, o resultado tem tamanho `m`. Aqui: três testes geram três scores.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-code" id="laboratorio"><div class="container math-layout"><aside class="math-marker"><span>05</span><small>LABORATÓRIO</small></aside><div class="math-body"><p class="math-eyebrow">// DA FÓRMULA AO CÓDIGO</p><h2>Confirme cada operação com Python.</h2><p class="math-intro">O laboratório usa apenas a biblioteca padrão: lê um CSV, calcula disponibilidade, soma vetores, transpõe a matriz e produz scores ponderados.</p>
+      <div class="math-code"><div class="math-code-head"><span>operacoes_sensores.py</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>weights = [0.25, 0.45, 0.30]
+
+def dot(left, right):
+    if len(left) != len(right):
+        raise ValueError("dimensions must match")
+    return sum(a * b for a, b in zip(left, right))
+
+risk_scores = [dot(test, weights) for test in matrix]</code></pre></div>
+      <div class="download-grid"><a href="examples/operacoes_sensores.py" download><span>PYTHON</span><strong>Baixar laboratório</strong><small>Operações e verificações</small></a><a href="examples/testes_sensores.csv" download><span>CSV</span><strong>Baixar dados</strong><small>Três testes normalizados</small></a></div>
+    </div></div></section>
+
+    <section class="math-finish"><div class="container math-finish-grid"><div><span>CHECKPOINT_01</span><h2>Você sabe aumentar a estrutura sem perder o significado.</h2><p>Escalares respondem uma medida; vetores reúnem características; matrizes organizam vários casos para aplicar a mesma operação.</p></div><div class="math-finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Matemática ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>

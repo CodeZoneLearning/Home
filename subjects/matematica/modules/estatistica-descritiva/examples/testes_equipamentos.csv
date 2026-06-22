@@ -1,0 +1,13 @@
+test_id,equipment_id,category,temperature,vibration,confidence,health_status
+T-001,P-001,pump,68.2,0.31,0.94,1
+T-002,P-001,pump,68.8,0.34,0.91,1
+T-003,P-002,pump,70.1,0.42,0.86,2
+T-004,P-002,pump,69.5,0.39,0.89,2
+T-005,C-001,compressor,72.3,0.58,0.82,2
+T-006,C-001,compressor,71.8,0.61,0.80,2
+T-007,P-003,pump,67.9,0.28,0.96,1
+T-008,P-003,pump,69.6,0.33,0.93,1
+T-009,C-002,compressor,74.1,0.76,0.72,3
+T-010,C-002,compressor,70.4,0.65,0.78,2
+T-011,C-003,compressor,68.7,0.47,0.88,2
+T-012,C-003,compressor,73.2,0.71,0.75,3
