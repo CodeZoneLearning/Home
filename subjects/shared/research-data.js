@@ -149,6 +149,15 @@ window.codeZoneResearch = {
   genai: [
     {
       type: 'paper',
+      title: 'Attention Is All You Need',
+      url: 'https://arxiv.org/abs/1706.03762',
+      description: 'Introduz a arquitetura Transformer, baseada em mecanismos de attention e sem recorrência, que se tornou fundamento de grande parte dos modelos generativos modernos.',
+      meta: 'Vaswani et al. · NeurIPS',
+      year: '2017',
+      tags: ['attention', 'transformers', 'foundations']
+    },
+    {
+      type: 'paper',
       title: 'Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks',
       url: 'https://arxiv.org/abs/2005.11401',
       description: 'Paper que consolidou a combinação de recuperação externa e geração neural.',

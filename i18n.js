@@ -166,6 +166,7 @@
     'Proposta para documentar desempenho, contexto, limitações e uso responsável de modelos.': 'A proposal for documenting performance, context, limitations, and responsible model use.',
     'Livro aberto com base estatística e aplicações práticas de machine learning.': 'Open book with statistical foundations and practical machine learning applications.',
     'Paper que consolidou a combinação de recuperação externa e geração neural.': 'The paper that established the combination of external retrieval and neural generation.',
+    'Introduz a arquitetura Transformer, baseada em mecanismos de attention e sem recorrência, que se tornou fundamento de grande parte dos modelos generativos modernos.': 'Introduces the Transformer architecture, based on attention mechanisms and without recurrence, which became a foundation for much of modern generative AI.',
     'Integra raciocínio textual e ações para resolver tarefas com ferramentas.': 'Combines textual reasoning and actions to solve tasks with tools.',
     'Abordagem visual e prática para embeddings, transformers e aplicações com LLMs.': 'A visual and practical approach to embeddings, transformers, and LLM applications.',
     'GraphRAG para sumarização orientada a perguntas sobre grandes coleções de texto.': 'GraphRAG for question-focused summarization over large text collections.',
