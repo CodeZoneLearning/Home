@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula prática sobre int, float, str, list, tuple, dict, docstrings e matrizes em Python.">
+  <title>Tipos de dados em Python | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="py-lesson-page data-types-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Subjects</a><a href="../../../../research/">Research</a></nav><a class="button button-small header-cta" href="../../">Voltar ao subject <span>↖</span></a></div></header>
+
+  <main id="conteudo">
+    <section class="py-hero"><div class="container"><nav class="lesson-breadcrumb"><a href="../../../../subjects.html">Subjects</a><span>/</span><a href="../../">Python</a><span>/</span><span>Bloco 01</span></nav><div class="py-hero-grid">
+      <div><p class="py-eyebrow">PY_FOUNDATION · DATA MODEL</p><h1>Valores têm<br><span>comportamento.</span></h1><p class="py-hero-lead">Tipos definem quais valores podem ser representados, quais operações fazem sentido e como os dados se comportam quando o programa muda.</p><div class="hero-actions"><a class="button" href="#modelo">Começar aula <span>↓</span></a><a class="outline-action" href="examples/data_types_lab.py" download>Baixar laboratório `.py` <span>↓</span></a></div></div>
+      <aside class="runtime-card" aria-label="Inspeção de um valor em tempo de execução"><div class="runtime-head"><span>PYTHON_RUNTIME</span><i></i></div><pre><code>value = {"status": 2}
+
+type(value)
+<span>&lt;class 'dict'&gt;</span>
+
+isinstance(value, dict)
+<span>True</span></code></pre><div class="runtime-foot"><span>VALUE</span><span>TYPE</span><span>BEHAVIOR</span></div></aside>
+    </div></div></section>
+
+    <div class="py-map"><div class="container"><a href="#modelo">01 · Modelo</a><a href="#escalares">02 · Escalares</a><a href="#colecoes">03 · Coleções</a><a href="#docstring-matriz">04 · Precisão</a><a href="#executar">05 · Executar</a></div></div>
+
+    <section class="py-section" id="modelo"><div class="container py-layout"><aside class="section-marker"><span>01</span><small>MODELO</small></aside><div class="py-body"><p class="py-eyebrow">// OBJETO, TIPO E VALOR</p><h2>Python carrega o tipo junto com o objeto.</h2><p class="py-intro">Uma variável é um nome que referencia um objeto. O objeto tem identidade, tipo e valor. A variável pode passar a apontar para outro objeto, mas o tipo do objeto não muda.</p>
+      <div class="identity-flow"><article><span>NAME</span><strong>temperature</strong><p>Um nome no namespace atual.</p></article><i>→</i><article><span>OBJECT</span><strong>68.4</strong><p>Um valor existente na memória.</p></article><i>→</i><article><span>TYPE</span><strong>float</strong><p>Operações e comportamento disponíveis.</p></article></div>
+      <div class="concept-grid"><article class="concept-card"><span>TYPE()</span><h3>Descobrir o tipo exato</h3><p>Útil para inspeção e aprendizado. Em regras de negócio, normalmente prefira verificar comportamento ou usar `isinstance`.</p><code>type(68.4) is float</code></article><article class="concept-card"><span>ISINSTANCE()</span><h3>Verificar uma família de tipos</h3><p>Considera herança. Atenção: `bool` é uma subclasse de `int`, então regras numéricas podem precisar excluí-lo.</p><code>isinstance(True, int)  # True</code></article></div>
+      <aside class="definition-callout"><span>TIPAGEM DINÂMICA</span><p>O tipo pertence ao objeto em tempo de execução. Isso não significa ausência de regras: operações incompatíveis ainda produzem erros claros.</p></aside>
+    </div></div></section>
+
+    <section class="py-section section-soft" id="escalares"><div class="container py-layout"><aside class="section-marker"><span>02</span><small>ESCALARES</small></aside><div class="py-body"><p class="py-eyebrow">// UM VALOR POR OBJETO</p><h2>Números, texto, verdade e ausência.</h2><p class="py-intro">Escalares representam unidades de informação. Escolher entre eles define precisão, operações e significado.</p>
+      <div class="scalar-grid"><article><span>INT</span><strong>2</strong><h3>Inteiros</h3><p>Contagens, índices e classes discretas, sem parte decimal.</p><code>health_status = 2</code></article><article><span>FLOAT</span><strong>0.91</strong><h3>Ponto flutuante</h3><p>Medições e aproximações. Nem todo decimal é representado exatamente em binário.</p><code>confidence = 0.91</code></article><article><span>STR</span><strong>"P-14"</strong><h3>Strings</h3><p>Texto Unicode imutável. O tipo se chama `str`, não `string`.</p><code>equipment_id = "P-14"</code></article><article><span>BOOL / NONE</span><strong>True</strong><h3>Estado e ausência</h3><p>`bool` expressa condições; `None` representa intencionalmente nenhum valor.</p><code>active = True</code></article></div>
+      <aside class="warning-callout"><strong>FLOAT NÃO É DINHEIRO</strong><p>Para valores financeiros ou casas decimais exatas, considere `decimal.Decimal`. Para medições, documente tolerâncias ao comparar.</p></aside>
+    </div></div></section>
+
+    <section class="py-section" id="colecoes"><div class="container py-layout"><aside class="section-marker"><span>03</span><small>COLEÇÕES</small></aside><div class="py-body"><p class="py-eyebrow">// VÁRIOS VALORES, CONTRATOS DIFERENTES</p><h2>Ordem, chave e mutabilidade mudam a escolha.</h2><p class="py-intro">Listas, tuplas e dicionários podem conter objetos de qualquer tipo. A estrutura correta comunica como os dados serão usados.</p>
+      <div class="comparison-table"><div class="comparison-row header"><span>Tipo</span><span>Ordenado</span><span>Mutável</span><span>Use quando</span></div><div class="comparison-row"><strong>list</strong><span>sim</span><span>sim</span><span>itens mudam e a posição importa</span></div><div class="comparison-row"><strong>tuple</strong><span>sim</span><span>não</span><span>a sequência representa um registro fixo</span></div><div class="comparison-row"><strong>dict</strong><span>por inserção</span><span>sim</span><span>cada valor precisa de uma chave semântica</span></div><div class="comparison-row"><strong>set</strong><span>não</span><span>sim</span><span>unicidade e pertencimento são o foco</span></div></div>
+      <div class="type-explorer"><div class="explorer-copy"><span>INTERACTIVE_TYPE_LAB</span><h3>Inspecione a estrutura.</h3><p>Troque o valor e observe o contrato oferecido pelo tipo.</p><div class="type-buttons" data-type-buttons></div></div><div class="explorer-result"><div><span>VALUE</span><code data-type-literal>[2, 2, 3]</code></div><dl><div><dt>TYPE</dt><dd data-type-name>list</dd></div><div><dt>MUTABILITY</dt><dd data-type-mutability>mutável</dd></div><div><dt>BEST FOR</dt><dd data-type-use>sequência que muda</dd></div></dl><p data-type-note aria-live="polite">Aceita repetição e preserva a ordem.</p></div></div>
+    </div></div></section>
+
+    <section class="py-section section-dark" id="docstring-matriz"><div class="container py-layout"><aside class="section-marker"><span>04</span><small>PRECISÃO</small></aside><div class="py-body"><p class="py-eyebrow">// NOMES PARECIDOS, CONCEITOS DIFERENTES</p><h2>Docstring não é tipo.<br>Matriz também não.</h2><p class="py-intro">Uma docstring é uma `str` posicionada no início de um módulo, classe ou função e exposta em `__doc__`. Já uma matriz é um conceito matemático que precisa de uma representação.</p>
+      <div class="precision-grid"><article><span>DOCSTRING</span><h3>Documentação acessível pelo programa</h3><pre><code>def transpose(matrix):
+    """Return the transposed matrix."""
+    ...
+
+print(transpose.__doc__)</code></pre><p>Comentários explicam decisões para leitores do código. Docstrings documentam a interface de objetos Python.</p></article><article><span>MATRIX</span><h3>Lista de listas ou array especializado</h3><pre><code>matrix = [
+    [68.2, 4.1, 0.32],
+    [69.0, 4.4, 0.35],
+]</code></pre><p>Listas aninhadas servem para aprendizado e pequenos dados. Cálculo numérico real normalmente pede `numpy.ndarray`.</p></article></div>
+      <div class="matrix-lab"><div><span>MATRIX_LAB · 2 × 3</span><h3>Altere a leitura da matriz.</h3><p>Linhas representam testes; colunas representam temperatura, vibração e pressão.</p><div class="matrix-actions"><button class="active" type="button" data-matrix-mode="original">Original</button><button type="button" data-matrix-mode="transpose">Transposta</button><button type="button" data-matrix-mode="row-sums">Soma por linha</button></div></div><div><div class="matrix-output" data-matrix-output aria-live="polite"></div><p data-matrix-caption>2 testes × 3 sensores</p></div></div>
+      <aside class="dark-callout"><strong>RETANGULARIDADE É UMA REGRA</strong><p>Uma lista de listas pode ter linhas de tamanhos diferentes. Se o domínio exige matriz, valide essa invariável antes de calcular.</p></aside>
+    </div></div></section>
+
+    <section class="py-section section-code" id="executar"><div class="container py-layout"><aside class="section-marker"><span>05</span><small>EXECUTAR</small></aside><div class="py-body"><p class="py-eyebrow">// UM REGISTRO, VÁRIOS TIPOS</p><h2>Modele antes de transformar.</h2><p class="py-intro">O exemplo combina escalares, coleções, docstrings, introspecção e uma transposição validada sem dependências externas.</p><div class="code-workbench"><div class="code-toolbar"><span>data_types_lab.py</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>record = {
+    "equipment_id": "PUMP-014",      # str
+    "health_status": 2,               # int
+    "confidence": 0.91,               # float
+    "tags": ["pump", "line-a"],      # list
+    "position": (12.4, 8.7),          # tuple
+    "sensor_matrix": [                # list[list[float]]
+        [68.2, 4.1, 0.32],
+        [69.0, 4.4, 0.35],
+    ],
+}</code></pre></div><div class="download-card"><div><span>STANDARD_LIBRARY · PYTHON 3.10+</span><h3>Execute e modifique o registro.</h3><p>O script imprime tipos, transpõe a matriz e executa verificações simples.</p></div><a class="button" href="examples/data_types_lab.py" download>Baixar `data_types_lab.py` <span>↓</span></a></div></div></div></section>
+
+    <section class="lesson-finish"><div class="container finish-grid"><div><span>CHECKPOINT_01</span><h2>Você sabe escolher uma representação pelos comportamentos que precisa.</h2><p>O próximo bloco transforma essas estruturas em objetos que protegem regras do domínio.</p></div><div class="finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Python ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+[project]
+name = "equipment-health"
+version = "0.1.0"
+description = "Minimal environment example for the Code Zone Python path"
+requires-python = ">=3.10"
+dependencies = [
+    "rich>=13.9,<15",
+]
+
+[project.scripts]
+equipment-health = "equipment_health.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/equipment_health"]

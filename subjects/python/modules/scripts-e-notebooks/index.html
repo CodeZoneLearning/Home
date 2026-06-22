@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula prática para decidir entre scripts Python e notebooks Jupyter.">
+  <title>.py ou .ipynb? | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="py-lesson-page formats-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Subjects</a><a href="../../../../research/">Research</a></nav><a class="button button-small header-cta" href="../../">Voltar ao subject <span>↖</span></a></div></header>
+
+  <main id="conteudo">
+    <section class="py-hero"><div class="container"><nav class="lesson-breadcrumb"><a href="../../../../subjects.html">Subjects</a><span>/</span><a href="../../">Python</a><span>/</span><span>Bloco 03</span></nav><div class="py-hero-grid">
+      <div><p class="py-eyebrow">PY_WORKFLOW · FILE FORMATS</p><h1>Mesmo Python.<br><span>Fluxos diferentes.</span></h1><p class="py-hero-lead">Scripts e notebooks executam Python, mas organizam estado, narrativa, revisão e reutilização de maneiras diferentes. A escolha deve seguir a etapa do trabalho.</p><div class="hero-actions"><a class="button" href="#formatos">Começar aula <span>↓</span></a><a class="outline-action" href="examples/equipment_summary.ipynb" download>Baixar notebook <span>↓</span></a></div></div>
+      <aside class="format-terminal" aria-label="Comparação entre script Python e notebook Jupyter"><div class="format-tabs"><span class="active">analysis.py</span><span>analysis.ipynb</span></div><div class="format-code"><span>01</span><code>tests = load_tests()</code><span>02</span><code>summary = analyze(tests)</code><span>03</span><code>print(summary)</code></div><div class="format-status"><span>ONE ENTRYPOINT</span><strong>EXIT 0</strong></div></aside>
+    </div></div></section>
+
+    <div class="py-map"><div class="container"><a href="#formatos">01 · Formatos</a><a href="#execucao">02 · Execução</a><a href="#decisao">03 · Decisão</a><a href="#fluxo">04 · Fluxo</a><a href="#pratica">05 · Prática</a></div></div>
+
+    <section class="py-section" id="formatos"><div class="container py-layout"><aside class="section-marker"><span>01</span><small>FORMATOS</small></aside><div class="py-body"><p class="py-eyebrow">// CÓDIGO É O MESMO; O CONTÊINER MUDA</p><h2>Duas interfaces para trabalhar com Python.</h2><p class="py-intro">Um arquivo `.py` é texto-fonte executado pelo interpretador. Um `.ipynb` é um documento JSON com células de código, Markdown, metadados e, opcionalmente, saídas salvas.</p>
+      <div class="format-compare"><article><span>PYTHON SCRIPT · .PY</span><h3>Execução explícita</h3><p>Tem uma ordem de leitura natural, funciona bem com módulos, testes, automação e revisão por diff.</p><code>python equipment_summary.py</code><ul><li>Automação e pipelines</li><li>Bibliotecas e aplicações</li><li>Testes e integração contínua</li></ul></article><article><span>JUPYTER NOTEBOOK · .IPYNB</span><h3>Exploração por células</h3><p>Combina código, texto, gráficos e resultados para investigar dados e construir uma narrativa executável.</p><code>jupyter notebook</code><ul><li>Análise exploratória</li><li>Experimentos e visualização</li><li>Comunicação técnica</li></ul></article></div>
+      <aside class="definition-callout"><span>NÃO É UMA DISPUTA</span><p>Notebook não é “Python fácil” e script não é automaticamente produção. Qualidade depende de estado controlado, funções claras, testes e execução reproduzível.</p></aside>
+    </div></div></section>
+
+    <section class="py-section section-soft" id="execucao"><div class="container py-layout"><aside class="section-marker"><span>02</span><small>EXECUÇÃO</small></aside><div class="py-body"><p class="py-eyebrow">// O ESTADO MUDA O RESULTADO</p><h2>Processo linear ou kernel persistente.</h2><p class="py-intro">Ao iniciar um script, o processo normalmente começa sem as variáveis da execução anterior. No notebook, o kernel preserva objetos enquanto continua ativo, mesmo que as células sejam executadas fora da ordem visual.</p>
+      <div class="execution-grid"><article><span>.PY · FRESH PROCESS</span><div class="execution-flow"><i>START</i><i>01</i><i>02</i><i>03</i><i>EXIT</i></div><p>A ordem do arquivo é a ordem de execução. Entradas e efeitos ainda precisam ser controlados, mas o ponto de partida é explícito.</p></article><article><span>.IPYNB · LIVE KERNEL</span><div class="kernel-lab"><div class="kernel-head"><span>KERNEL_STATE</span><button type="button" data-kernel-reset>Reiniciar</button></div><div class="kernel-actions"><button type="button" data-cell="define">Executar célula 1</button><button type="button" data-cell="use">Executar célula 2</button></div><pre data-kernel-output aria-live="polite">score: &lt;não definido&gt;</pre></div><p>O número ao lado da célula indica a ordem real. “Restart &amp; Run All” é um teste mínimo de reprodutibilidade.</p></article></div>
+      <aside class="warning-callout"><strong>ESTADO OCULTO</strong><p>Se uma célula funciona apenas porque outra foi executada antes e depois foi editada, o notebook pode exibir resultados que o código atual não reproduz.</p></aside>
+    </div></div></section>
+
+    <section class="py-section" id="decisao"><div class="container py-layout"><aside class="section-marker"><span>03</span><small>DECIDIR</small></aside><div class="py-body"><p class="py-eyebrow">// ESCOLHA PELO TRABALHO</p><h2>Qual artefato precisa sobreviver?</h2><p class="py-intro">A pergunta não é “qual formato é melhor?”, mas “quem precisa executar, revisar, testar e manter este resultado?”.</p>
+      <div class="decision-lab"><div><span>FORMAT_DECISION_LAB</span><h3>Selecione o cenário.</h3><div class="scenario-buttons" data-scenarios></div></div><div class="decision-result"><span>RECOMENDAÇÃO</span><strong data-recommendation>.ipynb</strong><p data-reason>Explore perguntas e registre evidências antes de estabilizar uma interface.</p><div data-practices></div></div></div>
+      <div class="comparison-table"><div class="comparison-row header"><span>Critério</span><span>.py</span><span>.ipynb</span><span>Cuidado principal</span></div><div class="comparison-row"><strong>Ordem</strong><span>linear</span><span>interativa</span><span>estado fora da ordem</span></div><div class="comparison-row"><strong>Diff no Git</strong><span>direto</span><span>JSON ruidoso</span><span>saídas e metadados</span></div><div class="comparison-row"><strong>Testes</strong><span>natural</span><span>possível</span><span>extraia regras para funções</span></div><div class="comparison-row"><strong>Narrativa</strong><span>limitada</span><span>forte</span><span>não esconda premissas</span></div></div>
+    </div></div></section>
+
+    <section class="py-section section-dark" id="fluxo"><div class="container py-layout"><aside class="section-marker"><span>04</span><small>FLUXO</small></aside><div class="py-body"><p class="py-eyebrow">// EXPLORE, EXTRAIA, VALIDE</p><h2>O melhor projeto pode usar os dois.</h2><p class="py-intro">Use o notebook como bancada de investigação e mova lógica estável para módulos `.py`. O notebook passa a importar funções pequenas, enquanto testes verificam o comportamento fora do kernel.</p>
+      <div class="hybrid-flow"><article><span>01</span><strong>Explore</strong><p>Faça perguntas, visualize distribuições e registre hipóteses no notebook.</p></article><i>→</i><article><span>02</span><strong>Extraia</strong><p>Mova limpeza, cálculo e validação para funções em `src/` ou módulos `.py`.</p></article><i>→</i><article><span>03</span><strong>Teste</strong><p>Teste regras com entradas pequenas e resultados conhecidos.</p></article><i>→</i><article><span>04</span><strong>Comunique</strong><p>Reexecute o notebook desde um kernel limpo e mantenha somente saídas úteis.</p></article></div>
+      <aside class="dark-callout"><strong>REGRA DE FRONTEIRA</strong><p>Se outra pessoa ou sistema precisa chamar uma regra, ela provavelmente deve viver em uma função importável, não apenas em uma célula.</p></aside>
+    </div></div></section>
+
+    <section class="py-section section-code" id="pratica"><div class="container py-layout"><aside class="section-marker"><span>05</span><small>PRÁTICA</small></aside><div class="py-body"><p class="py-eyebrow">// MESMA ANÁLISE, DOIS PONTOS DE ENTRADA</p><h2>Compare os artefatos executando.</h2><p class="py-intro">O script contém a regra reutilizável e uma interface de terminal. O notebook importa a mesma função, explica a pergunta e explora os resultados por etapas.</p>
+      <div class="code-workbench"><div class="code-toolbar"><span>equipment_summary.py</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>def summarize(tests):
+    statuses = [test["status"] for test in tests]
+    mode = max(set(statuses), key=statuses.count)
+    return {
+        "tests": len(tests),
+        "inferred_status": mode,
+        "consistent": len(set(statuses)) == 1,
+    }</code></pre></div>
+      <div class="artifact-grid"><a href="examples/equipment_summary.py" download><span>.PY</span><strong>Baixar script</strong><small>Executável e importável</small></a><a href="examples/equipment_summary.ipynb" download><span>.IPYNB</span><strong>Baixar notebook</strong><small>Narrativa sem saídas salvas</small></a></div>
+    </div></div></section>
+
+    <section class="lesson-finish"><div class="container finish-grid"><div><span>CHECKPOINT_03</span><h2>Você sabe escolher o formato pelo ciclo de vida do trabalho.</h2><p>No próximo bloco, os mesmos arquivos ganham um ambiente isolado e reproduzível.</p></div><div class="finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Python ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>
