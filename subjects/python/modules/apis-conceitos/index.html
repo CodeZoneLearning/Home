@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula conceitual sobre APIs em Python: contratos, HTTP, recursos, schemas, status, erros e validação.">
+  <title>APIs como contrato | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="py-lesson-page api-concepts-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Subjects</a><a href="../../../../research/">Research</a></nav><a class="button button-small header-cta" href="../../">Voltar ao subject <span>↖</span></a></div></header>
+
+  <main id="conteudo">
+    <section class="py-hero"><div class="container"><nav class="lesson-breadcrumb"><a href="../../../../subjects.html">Subjects</a><span>/</span><a href="../../">Python</a><span>/</span><span>Bloco 05</span></nav><div class="py-hero-grid">
+      <div><p class="py-eyebrow">PY_SYSTEMS · API CONTRACTS</p><h1>API é contrato.<br><span>Python executa.</span></h1><p class="py-hero-lead">Uma API define como sistemas conversam: qual recurso existe, quais dados entram, quais respostas saem e como erros são comunicados. Antes de escolher FastAPI, Flask ou qualquer biblioteca, entenda o contrato.</p><div class="hero-actions"><a class="button" href="#contrato">Começar aula <span>↓</span></a><a class="outline-action" href="../../../../research/?subject=python&tag=api">Abrir referências <span>↗</span></a></div></div>
+      <aside class="api-terminal" aria-label="Exemplo de requisição HTTP"><div class="api-terminal-head"><span>REQUEST</span><strong>HTTP/1.1</strong></div><pre><code>GET /equipments/EQ-014/tests
+Accept: application/json
+
+200 OK
+{
+  "equipment_id": "EQ-014",
+  "health_status": 2
+}</code></pre></aside>
+    </div></div></section>
+
+    <div class="py-map"><div class="container"><a href="#contrato">01 · Contrato</a><a href="#http">02 · HTTP</a><a href="#design">03 · Design</a><a href="#python">04 · Python</a><a href="#cuidados">05 · Cuidados</a></div></div>
+
+    <section class="py-section" id="contrato"><div class="container py-layout"><aside class="section-marker"><span>01</span><small>CONTRATO</small></aside><div class="py-body"><p class="py-eyebrow">// FRONTEIRA ENTRE SISTEMAS</p><h2>API não é só endpoint. É uma promessa operacional.</h2><p class="py-intro">Quando alguém usa sua API, essa pessoa passa a depender de nomes, formatos, status e comportamento. Se o contrato muda sem cuidado, o sistema consumidor quebra mesmo que o seu código esteja “funcionando”.</p>
+      <div class="api-contract-grid"><article><span>ENTRADA</span><h3>O que pode ser enviado</h3><p>Parâmetros, corpo da requisição, headers, autenticação, tipos e campos obrigatórios.</p></article><article><span>PROCESSO</span><h3>O que a API faz</h3><p>Regra executada, validações aplicadas, limites, efeitos colaterais e idempotência.</p></article><article><span>SAÍDA</span><h3>O que será devolvido</h3><p>Status HTTP, payload, mensagens de erro, paginação, links e formato de datas.</p></article></div>
+      <aside class="definition-callout"><span>MENTALIDADE</span><p>Python pode consumir uma API, criar uma API ou orquestrar chamadas entre serviços. Em todos os casos, o ponto central é respeitar o contrato de dados.</p></aside>
+    </div></div></section>
+
+    <section class="py-section section-soft" id="http"><div class="container py-layout"><aside class="section-marker"><span>02</span><small>HTTP</small></aside><div class="py-body"><p class="py-eyebrow">// REQUISIÇÃO E RESPOSTA</p><h2>HTTP dá vocabulário para a conversa.</h2><p class="py-intro">A maioria das APIs web usa HTTP. Isso significa que métodos, URLs, headers, body e status code carregam significado. Usar esses elementos com clareza reduz documentação ambígua.</p>
+      <div class="http-grid"><article><span>METHOD</span><h3>Verbo</h3><p>`GET` lê, `POST` cria ou executa, `PUT/PATCH` atualizam e `DELETE` remove. O verbo comunica intenção.</p></article><article><span>RESOURCE</span><h3>Recurso</h3><p>URLs devem representar coisas do domínio, como `/equipments` e `/tests`, não nomes internos de funções.</p></article><article><span>STATUS</span><h3>Resultado</h3><p>`200`, `201`, `400`, `401`, `404` e `500` dizem rapidamente se a requisição funcionou e por quê.</p></article></div>
+      <div class="status-lab"><div><span>STATUS_LAB</span><h3>Selecione um cenário.</h3><div class="status-buttons" data-status-buttons></div></div><div class="status-result"><span>RESPOSTA ESPERADA</span><strong data-status-code>200 OK</strong><p data-status-text>A requisição foi aceita e a API devolveu o recurso solicitado.</p></div></div>
+    </div></div></section>
+
+    <section class="py-section" id="design"><div class="container py-layout"><aside class="section-marker"><span>03</span><small>DESIGN</small></aside><div class="py-body"><p class="py-eyebrow">// DADOS PRECISAM DE FORMA</p><h2>Schema reduz interpretação livre.</h2><p class="py-intro">Um bom contrato declara campos, tipos, exemplos, obrigatoriedade e erros. Isso permite validar cedo, gerar documentação e criar testes de contrato.</p>
+      <div class="comparison-table"><div class="comparison-row header"><span>Peça</span><span>Boa prática</span><span>Cuidado</span><span>Exemplo</span></div><div class="comparison-row"><strong>Schema</strong><span>tipos claros</span><span>campo opcional sem regra</span><span>`health_status: int`</span></div><div class="comparison-row"><strong>Erro</strong><span>mensagem acionável</span><span>stack trace exposto</span><span>`field required`</span></div><div class="comparison-row"><strong>Versão</strong><span>mudança planejada</span><span>quebrar consumidores</span><span>`/v1/equipments`</span></div><div class="comparison-row"><strong>Paginação</strong><span>limitar resposta</span><span>retornar tudo</span><span>`limit=50&cursor=...`</span></div></div>
+      <aside class="warning-callout"><strong>CONTRATO NÃO É COMENTÁRIO</strong><p>Documentação que não acompanha o comportamento real atrapalha. O ideal é gerar ou validar documentação a partir de schemas e testes.</p></aside>
+    </div></div></section>
+
+    <section class="py-section section-code" id="python"><div class="container py-layout"><aside class="section-marker"><span>04</span><small>PYTHON</small></aside><div class="py-body"><p class="py-eyebrow">// CLIENTE E SERVIDOR</p><h2>Python aparece dos dois lados do contrato.</h2><p class="py-intro">Como cliente, Python envia requisições e trata respostas. Como servidor, Python recebe dados, valida, executa regras e devolve um contrato previsível.</p>
+      <div class="python-api-grid"><article><span>CONSUMIR API</span><h3>Cliente</h3><pre><code>response = requests.get(url, timeout=10)
+response.raise_for_status()
+data = response.json()</code></pre><p>O cliente precisa lidar com timeout, status inesperado e campos ausentes.</p></article><article><span>CRIAR API</span><h3>Servidor</h3><pre><code>@app.get("/equipments/{equipment_id}")
+def read_equipment(equipment_id: str):
+    return {"equipment_id": equipment_id}</code></pre><p>O servidor precisa validar entrada, controlar erro e manter resposta estável.</p></article></div>
+      <aside class="dark-callout"><strong>REGRA DE ENGENHARIA</strong><p>Antes de escrever endpoint, escreva exemplos de request e response. Se o contrato não está claro em papel, o código vai esconder ambiguidade.</p></aside>
+    </div></div></section>
+
+    <section class="py-section" id="cuidados"><div class="container py-layout"><aside class="section-marker"><span>05</span><small>CUIDADOS</small></aside><div class="py-body"><p class="py-eyebrow">// O QUE QUEBRA EM PRODUÇÃO</p><h2>APIs falham nas fronteiras.</h2><p class="py-intro">A parte difícil não é criar uma rota que responde. É sustentar comportamento previsível quando dados chegam errados, rede falha, usuário não tem permissão ou consumidores dependem de versões antigas.</p>
+      <div class="checkpoint-list"><article class="checkpoint-card"><div><h3>Valide entrada antes da regra</h3><p>Retorne erro claro para campo ausente, tipo inválido ou valor fora do domínio.</p></div><strong>400</strong></article><article class="checkpoint-card"><div><h3>Proteja identidade e autorização</h3><p>Autenticação diz quem é a pessoa ou sistema. Autorização diz o que pode fazer.</p></div><strong>401/403</strong></article><article class="checkpoint-card"><div><h3>Defina timeouts e limites</h3><p>Sem limites, uma API lenta pode travar consumidores e multiplicar falhas.</p></div><strong>SLO</strong></article><article class="checkpoint-card"><div><h3>Não quebre contrato sem versão</h3><p>Campos removidos, formatos alterados e novos significados precisam de migração.</p></div><strong>V1/V2</strong></article></div>
+    </div></div></section>
+
+    <section class="lesson-finish"><div class="container finish-grid"><div><span>CHECKPOINT_05</span><h2>Você entende API como contrato antes de framework.</h2><p>Agora faz sentido estudar FastAPI, Flask ou clientes HTTP com uma pergunta melhor: qual contrato esse código precisa cumprir?</p></div><div class="finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Python ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>

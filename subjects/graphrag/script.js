@@ -1,3 +1,0 @@
-window.codeZoneSubject = {
-  id: 'graphrag'
-};

@@ -28,6 +28,33 @@ window.codeZoneResearch = {
       meta: 'Luciano Ramalho · O’Reilly',
       year: '2022',
       tags: ['advanced', 'language']
+    },
+    {
+      type: 'paper',
+      title: 'Architectural Styles and the Design of Network-based Software Architectures',
+      url: 'https://ics.uci.edu/~fielding/pubs/dissertation/top.htm',
+      description: 'A dissertação que apresenta REST dentro de um contexto arquitetural mais amplo.',
+      meta: 'Roy Thomas Fielding',
+      year: '2000',
+      tags: ['api', 'rest', 'architecture']
+    },
+    {
+      type: 'material',
+      title: 'RFC 9110 - HTTP Semantics',
+      url: 'https://www.rfc-editor.org/rfc/rfc9110',
+      description: 'Especificação de referência para métodos, status, representações e semântica HTTP.',
+      meta: 'IETF · RFC Editor',
+      year: '2022',
+      tags: ['api', 'http', 'standard']
+    },
+    {
+      type: 'material',
+      title: 'FastAPI Tutorial',
+      url: 'https://fastapi.tiangolo.com/tutorial/',
+      description: 'Guia prático para criar APIs em Python com tipagem, validação e documentação automática.',
+      meta: 'FastAPI Documentation',
+      year: 'Atualizado',
+      tags: ['api', 'python', 'fastapi']
     }
   ],
   matematica: [
@@ -86,35 +113,6 @@ window.codeZoneResearch = {
       meta: 'Claus O. Wilke',
       year: '2019',
       tags: ['visualization', 'communication']
-    }
-  ],
-  'engenharia-dados': [
-    {
-      type: 'paper',
-      title: 'The Dataflow Model',
-      url: 'https://www.vldb.org/pvldb/vol8/p1792-Akidau.pdf',
-      description: 'Modelo prático para processamento de dados batch e streaming em larga escala.',
-      meta: 'Akidau et al. · Google',
-      year: '2015',
-      tags: ['streaming', 'dataflow']
-    },
-    {
-      type: 'material',
-      title: 'Model Contracts',
-      url: 'https://docs.getdbt.com/docs/mesh/govern/model-contracts',
-      description: 'Material oficial sobre contratos de schema e garantias para consumidores.',
-      meta: 'dbt Documentation',
-      year: 'Atualizado',
-      tags: ['contracts', 'quality']
-    },
-    {
-      type: 'book',
-      title: 'Designing Data-Intensive Applications',
-      url: 'https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/',
-      description: 'Fundamentos de armazenamento, processamento, consistência e sistemas distribuídos.',
-      meta: 'Martin Kleppmann · O’Reilly',
-      year: '2017',
-      tags: ['architecture', 'distributed systems']
     }
   ],
   'machine-learning': [
@@ -184,62 +182,33 @@ window.codeZoneResearch = {
       tags: ['llm', 'applications']
     }
   ],
-  graphrag: [
+  mlops: [
     {
       type: 'paper',
-      title: 'From Local to Global: A Graph RAG Approach',
-      url: 'https://arxiv.org/abs/2404.16130',
-      description: 'GraphRAG para sumarização orientada a perguntas sobre grandes coleções de texto.',
-      meta: 'Edge et al. · Microsoft Research',
-      year: '2024',
-      tags: ['graphrag', 'summarization']
-    },
-    {
-      type: 'material',
-      title: 'Microsoft GraphRAG Documentation',
-      url: 'https://microsoft.github.io/graphrag/',
-      description: 'Documentação oficial de indexação, configuração, consulta e arquitetura do GraphRAG.',
-      meta: 'Microsoft Research',
-      year: 'Atualizado',
-      tags: ['implementation', 'official']
-    },
-    {
-      type: 'book',
-      title: 'Knowledge Graphs',
-      url: 'https://arxiv.org/abs/2003.02320',
-      description: 'Visão abrangente de representação, aquisição, qualidade e aplicações de knowledge graphs.',
-      meta: 'Hogan et al.',
-      year: '2021',
-      tags: ['knowledge graphs', 'foundations']
-    }
-  ],
-  apis: [
-    {
-      type: 'paper',
-      title: 'Architectural Styles and the Design of Network-based Software Architectures',
-      url: 'https://ics.uci.edu/~fielding/pubs/dissertation/top.htm',
-      description: 'A dissertação que apresenta REST dentro de um contexto arquitetural mais amplo.',
-      meta: 'Roy Thomas Fielding',
-      year: '2000',
-      tags: ['rest', 'architecture']
-    },
-    {
-      type: 'material',
-      title: 'RFC 9110 - HTTP Semantics',
-      url: 'https://www.rfc-editor.org/rfc/rfc9110',
-      description: 'Especificação de referência para métodos, status, representações e semântica HTTP.',
-      meta: 'IETF · RFC Editor',
+      title: 'Machine Learning Operations (MLOps): Overview, Definition, and Architecture',
+      url: 'https://arxiv.org/abs/2205.02302',
+      description: 'Visão geral de princípios, componentes, papéis, arquitetura e workflows de MLOps.',
+      meta: 'Kreuzberger · Kühl · Hirschl',
       year: '2022',
-      tags: ['http', 'standard']
+      tags: ['mlops', 'architecture']
     },
     {
-      type: 'book',
-      title: 'API Design Patterns',
-      url: 'https://www.manning.com/books/api-design-patterns',
-      description: 'Padrões para recursos, operações, versionamento, paginação e evolução de APIs.',
-      meta: 'JJ Geewax · Manning',
-      year: '2021',
-      tags: ['api design', 'patterns']
+      type: 'material',
+      title: 'MLflow Tracking',
+      url: 'https://mlflow.org/docs/latest/ml/tracking/',
+      description: 'Documentação oficial para registrar runs, parâmetros, métricas, artefatos, datasets e modelos.',
+      meta: 'MLflow Documentation',
+      year: 'Atualizado',
+      tags: ['mlflow', 'tracking']
+    },
+    {
+      type: 'material',
+      title: 'MLflow Model Registry',
+      url: 'https://mlflow.org/docs/latest/ml/model-registry/',
+      description: 'Documentação oficial para registrar versões de modelos, aliases, carregamento e promoção.',
+      meta: 'MLflow Documentation',
+      year: 'Atualizado',
+      tags: ['mlflow', 'registry']
     }
   ]
 };

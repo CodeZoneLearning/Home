@@ -4,11 +4,9 @@ const subjectLabels = {
   python: 'Python',
   matematica: 'Matemática',
   'data-analytics': 'Data Analytics',
-  'engenharia-dados': 'Engenharia de Dados',
   'machine-learning': 'Machine Learning',
   genai: 'Generative AI',
-  graphrag: 'GraphRAG',
-  apis: 'APIs & Systems'
+  mlops: 'MLOps'
 };
 const typeLabels = { paper: 'Paper', material: 'Matéria', book: 'Livro' };
 

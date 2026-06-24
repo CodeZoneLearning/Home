@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula de prompts e saídas estruturadas para GenAI: dicas de ouro, exemplos, schemas e validação de respostas.">
+  <title>Prompts e saídas estruturadas | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="genai-lesson-page prompt-lesson-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Subjects</a><a href="../../../../research/">Research</a></nav><a class="button button-small header-cta" href="../../">Voltar ao subject <span>↖</span></a></div></header>
+
+  <main id="conteudo">
+    <section class="genai-hero"><div class="container"><nav class="genai-breadcrumb"><a href="../../../../subjects.html">Subjects</a><span>/</span><a href="../../">Generative AI</a><span>/</span><span>Bloco 01</span></nav><div class="genai-hero-grid">
+      <div><p class="genai-eyebrow">PROMPT_SYSTEMS · STRUCTURED_OUTPUT</p><h1>Prompt bom é<br><span>especificação.</span></h1><p class="genai-hero-lead">Um prompt de produto não é uma frase esperta. É um contrato operacional: tarefa, contexto, critérios, limites e formato de saída. Quanto mais a resposta precisa virar ação, mais estruturado o prompt deve ser.</p><div class="genai-actions"><a class="button" href="#mentalidade">Começar aula <span>↓</span></a><a class="genai-outline-action" href="#laboratorio">Abrir laboratório <span>↓</span></a></div></div>
+      <aside class="prompt-console" aria-label="Anatomia de um prompt estruturado"><div class="prompt-console-head"><span>PROMPT_STACK</span><strong>SPEC_FIRST</strong></div><div class="prompt-message system"><span>SYSTEM</span><p>Você é um analista técnico. Responda apenas com base no contexto.</p></div><div class="prompt-message user"><span>USER</span><p>Classifique o ticket, justifique em uma frase e devolva JSON válido.</p></div><div class="prompt-message schema"><span>OUTPUT</span><p>{ "categoria": "...", "prioridade": 1, "evidencia": "..." }</p></div></aside>
+    </div></div></section>
+
+    <div class="genai-map"><div class="container"><a href="#mentalidade">01 · Mentalidade</a><a href="#ouro">02 · Dicas</a><a href="#anatomia">03 · Anatomia</a><a href="#estrutura">04 · Saída</a><a href="#laboratorio">05 · Lab</a><a href="#checklist">06 · Checklist</a></div></div>
+
+    <section class="genai-section" id="mentalidade"><div class="container genai-layout"><aside class="genai-marker"><span>01</span><small>MENTALIDADE</small></aside><div class="genai-body"><p class="genai-eyebrow">// NÃO PEÇA MÁGICA; DEFINA TRABALHO</p><h2>O modelo responde melhor quando a tarefa é observável.</h2><p class="genai-intro">Prompts úteis reduzem ambiguidade. Eles explicam o papel do modelo, o objetivo da tarefa, o contexto permitido, o formato de resposta e os critérios que tornam a resposta boa ou ruim.</p>
+      <div class="prompt-principles"><article><span>01 · TAREFA</span><h3>O que precisa ser feito?</h3><p>Classificar, resumir, extrair, comparar, transformar, revisar ou gerar uma resposta. Verbo claro reduz saída genérica.</p></article><article><span>02 · EVIDÊNCIA</span><h3>Com base em quais dados?</h3><p>Inclua o contexto relevante e diga se o modelo pode inferir, perguntar ou recusar quando faltar informação.</p></article><article><span>03 · SAÍDA</span><h3>Como a resposta será usada?</h3><p>Texto para leitura humana pode ser flexível. Saída para código, filtro ou banco precisa de schema e validação.</p></article></div>
+      <aside class="genai-callout"><strong>REGRA CENTRAL</strong><p>Prompt é parte do sistema. Se a resposta alimenta outro processo, o prompt deve declarar formato, limites e tratamento de erro.</p></aside>
+    </div></div></section>
+
+    <section class="genai-section genai-section-soft" id="ouro"><div class="container genai-layout"><aside class="genai-marker"><span>02</span><small>DICAS</small></aside><div class="genai-body"><p class="genai-eyebrow">// DICAS DE OURO</p><h2>Seis hábitos que melhoram quase qualquer prompt.</h2><p class="genai-intro">Essas regras não são truques. Elas tornam o trabalho verificável, reduzem surpresa e facilitam comparar versões do prompt.</p>
+      <div class="gold-grid"><article><span>GOLD_01</span><h3>Comece pelo resultado</h3><p>Diga qual decisão a resposta deve apoiar. Um resumo para estudo é diferente de um resumo para aprovação executiva.</p></article><article><span>GOLD_02</span><h3>Dê contexto, não ruído</h3><p>Inclua dados necessários, definições e restrições. Remova texto que não muda a resposta.</p></article><article><span>GOLD_03</span><h3>Mostre o formato esperado</h3><p>Use bullets, tabela, JSON ou campos nomeados. O formato é parte da instrução.</p></article><article><span>GOLD_04</span><h3>Declare critérios de qualidade</h3><p>Explique o que conta como boa resposta: precisão, concisão, evidência, tom, risco ou completude.</p></article><article><span>GOLD_05</span><h3>Inclua exemplos curtos</h3><p>Um exemplo certo e um errado alinham estilo, granularidade e limites melhor que uma explicação longa.</p></article><article><span>GOLD_06</span><h3>Defina o que fazer quando faltar dado</h3><p>“Se não houver evidência, responda não encontrado” é melhor do que deixar o modelo completar lacunas.</p></article></div>
+    </div></div></section>
+
+    <section class="genai-section genai-section-dark" id="anatomia"><div class="container genai-layout"><aside class="genai-marker"><span>03</span><small>ANATOMIA</small></aside><div class="genai-body"><p class="genai-eyebrow">// DO FRACO AO OPERACIONAL</p><h2>Compare um pedido solto com uma especificação.</h2><p class="genai-intro">O mesmo objetivo pode produzir respostas muito diferentes. A diferença está na clareza de papel, contexto, formato e critérios.</p>
+      <div class="prompt-compare"><article><span>PROMPT FRACO</span><h3>“Resume esse texto.”</h3><p>O modelo não sabe tamanho, público, finalidade, tópicos obrigatórios, nível técnico ou o que ignorar.</p></article><article><span>PROMPT MELHOR</span><h3>“Resuma para decisão técnica.”</h3><p>Você é um analista. Use apenas o texto abaixo. Gere 5 bullets com: problema, causa, evidência, risco e próxima ação. Se faltar dado, escreva “não informado”.</p></article></div>
+      <div class="prompt-anatomy"><article><span>ROLE</span><p>Define a perspectiva: analista, tutor, revisor, classificador, extrator.</p></article><article><span>TASK</span><p>Define a operação: classificar, resumir, extrair, comparar ou transformar.</p></article><article><span>CONTEXT</span><p>Define a evidência que pode ser usada e o que deve ser ignorado.</p></article><article><span>CONSTRAINTS</span><p>Define limites de tom, tamanho, segurança, recusa e incerteza.</p></article><article><span>OUTPUT</span><p>Define campos, tipos, ordem, exemplos e formato final.</p></article></div>
+      <aside class="genai-dark-callout"><strong>TESTE PRÁTICO</strong><p>Se duas pessoas lerem seu prompt e imaginarem respostas completamente diferentes, ele ainda não é uma especificação.</p></aside>
+    </div></div></section>
+
+    <section class="genai-section" id="estrutura"><div class="container genai-layout"><aside class="genai-marker"><span>04</span><small>SAÍDA</small></aside><div class="genai-body"><p class="genai-eyebrow">// TEXTO LIVRE É DIFÍCIL DE INTEGRAR</p><h2>Saída estruturada transforma resposta em dado.</h2><p class="genai-intro">Quando a resposta será consumida por outro código, dashboard, filtro ou banco de dados, prefira um contrato explícito. Isso permite validar, rejeitar e monitorar respostas quebradas.</p>
+      <div class="schema-grid"><article><span>JSON SIMPLES</span><h3>Bom para protótipo</h3><pre><code>{
+  "categoria": "billing",
+  "prioridade": 2,
+  "confianca": 0.82
+}</code></pre></article><article><span>SCHEMA</span><h3>Bom para produto</h3><pre><code>{
+  "type": "object",
+  "required": ["categoria", "prioridade"],
+  "properties": {
+    "prioridade": { "type": "integer" }
+  }
+}</code></pre></article></div>
+      <div class="structure-rules"><article><span>01</span><h3>Campos previsíveis</h3><p>Use nomes estáveis. Evite sinônimos em cada resposta.</p></article><article><span>02</span><h3>Tipos claros</h3><p>Número, texto, booleano, lista e objeto precisam ter significado definido.</p></article><article><span>03</span><h3>Enumerações</h3><p>Quando possível, limite valores aceitos: `alta`, `media`, `baixa`.</p></article><article><span>04</span><h3>Fallback explícito</h3><p>Defina `null`, `unknown` ou erro quando faltar evidência.</p></article></div>
+      <aside class="genai-warning"><strong>NÃO CONFIE SEM VALIDAR</strong><p>Mesmo quando o prompt pede JSON, valide a resposta antes de usar. Prompt reduz erro, validação protege o sistema.</p></aside>
+    </div></div></section>
+
+    <section class="genai-section genai-section-code" id="laboratorio"><div class="container genai-layout"><aside class="genai-marker"><span>05</span><small>LAB</small></aside><div class="genai-body"><p class="genai-eyebrow">// ESCOLHA O CENÁRIO</p><h2>Um bom prompt muda conforme o uso.</h2><p class="genai-intro">Selecione um cenário para ver um prompt operacional, o formato esperado e o principal cuidado de validação.</p>
+      <div class="prompt-lab"><div><span>PROMPT_LAB</span><h3>Escolha a tarefa.</h3><div class="prompt-buttons" data-prompt-scenarios></div></div><div class="prompt-result"><span data-prompt-kind>CLASSIFICAÇÃO</span><h3 data-prompt-title>Classificar ticket de suporte</h3><pre data-prompt-text></pre><div class="prompt-schema-box"><strong>Schema esperado</strong><code data-prompt-schema></code></div><p data-prompt-risk></p></div></div>
+    </div></div></section>
+
+    <section class="genai-section" id="checklist"><div class="container genai-layout"><aside class="genai-marker"><span>06</span><small>CHECKLIST</small></aside><div class="genai-body"><p class="genai-eyebrow">// ANTES DE APROVAR</p><h2>Checklist para prompts de produção.</h2><p class="genai-intro">Use estes pontos antes de transformar uma ideia em componente de produto.</p>
+      <div class="prompt-checklist"><article><span>01</span><div><h3>A tarefa tem verbo claro?</h3><p>Evite “analise”. Prefira “classifique”, “extraia”, “compare” ou “gere”.</p></div></article><article><span>02</span><div><h3>O contexto permitido está explícito?</h3><p>O modelo sabe se pode inferir, perguntar, recusar ou usar conhecimento geral?</p></div></article><article><span>03</span><div><h3>Existe formato de saída validável?</h3><p>Se outro sistema consome a resposta, use JSON, schema e validação.</p></div></article><article><span>04</span><div><h3>Há exemplos e contraexemplos?</h3><p>Exemplos reduzem ambiguidade de estilo, granularidade e limites.</p></div></article><article><span>05</span><div><h3>O erro esperado está definido?</h3><p>Determine o que fazer quando faltam dados, há conflito ou a confiança é baixa.</p></div></article></div>
+    </div></div></section>
+
+    <section class="genai-finish"><div class="container genai-finish-grid"><div><span>CHECKPOINT_01</span><h2>Você sabe escrever prompts que viram contratos.</h2><p>O próximo bloco usa essa base para RAG: buscar evidência, montar contexto e exigir respostas rastreáveis.</p></div><div class="genai-finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Generative AI ↗</a></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>
