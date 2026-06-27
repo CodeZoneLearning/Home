@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula de funções matemáticas com def em Python: parâmetros, retorno, composição, validação e funções de custo.">
+  <title>Funções com def | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="math-lesson-page functions-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav><a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a></div></header>
+  <main id="conteudo">
+    <section class="math-hero"><div class="container"><nav class="math-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Matemática</a><span>/</span><span>Bloco 04</span></nav><div class="math-hero-grid">
+      <div><p class="math-eyebrow">FUNCTIONS_DEF · COST_MODEL</p><h1>Função é<br><span>máquina de regra.</span></h1><p class="math-hero-lead">Em matemática, uma função transforma entradas em uma saída. Em Python, `def` torna essa transformação explícita, testável e reutilizável.</p><div class="math-hero-actions"><a class="button" href="#modelo">Começar aula <span>↓</span></a><a class="math-outline-action" href="examples/funcoes_custo.py" download>Baixar laboratório `.py` <span>↓</span></a></div></div>
+      <aside class="function-machine" aria-label="Representação de função como entrada, regra e saída"><div><span>ENTRADA</span><strong>x = 12</strong></div><i>→</i><div><span>REGRA</span><strong>f(x) = 2x + 5</strong></div><i>→</i><div><span>SAÍDA</span><strong>29</strong></div></aside>
+    </div></div></section>
+
+    <div class="math-map"><div class="container"><a href="#modelo">01 · Modelo</a><a href="#def">02 · def</a><a href="#parametros">03 · Parâmetros</a><a href="#composicao">04 · Composição</a><a href="#custo">05 · Custo</a></div></div>
+
+    <section class="math-section" id="modelo"><div class="container math-layout"><aside class="math-marker"><span>01</span><small>MODELO</small></aside><div class="math-body"><p class="math-eyebrow">// ENTRADA → REGRA → SAÍDA</p><h2>Função separa cálculo de valor.</h2><p class="math-intro">Uma expressão calcula uma vez. Uma função nomeia uma regra para muitos valores. Isso permite comparar cenários, testar bordas e reaproveitar a mesma transformação.</p>
+      <div class="function-grid"><article><span>ENTRADA</span><h3>O que varia?</h3><p>Preço, quantidade, desconto, peso, erro, sensor ou qualquer número que muda entre cenários.</p></article><article><span>REGRA</span><h3>Qual relação existe?</h3><p>Multiplicar, somar taxa fixa, elevar ao quadrado, aplicar penalidade ou combinar pesos.</p></article><article><span>SAÍDA</span><h3>O que quero medir?</h3><p>Custo total, lucro, risco, erro médio, score ou valor previsto.</p></article></div>
+      <aside class="math-definition"><strong>FUNÇÃO MATEMÁTICA</strong><p>Uma função associa cada entrada válida a uma saída bem definida. Se a regra falha para certos valores, esse domínio precisa ser declarado.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-soft" id="def"><div class="container math-layout"><aside class="math-marker"><span>02</span><small>DEF</small></aside><div class="math-body"><p class="math-eyebrow">// UMA REGRA COM NOME</p><h2>`def` registra a transformação.</h2><p class="math-intro">O corpo da função deve fazer uma coisa clara. Entradas entram pelos parâmetros; a saída volta pelo `return`. Evite depender de variáveis soltas quando o valor pode ser argumento.</p>
+      <div class="code-pair"><article><span>EXPRESSÃO SOLTA</span><pre><code>subtotal = 12 * 34.90
+total = subtotal + 18.00</code></pre><p>Resolve um caso, mas esconde a regra.</p></article><article><span>FUNÇÃO</span><pre><code>def custo_total(qtd, preco, frete):
+    return qtd * preco + frete</code></pre><p>Explica a regra e aceita muitos casos.</p></article></div>
+      <aside class="math-warning"><strong>RETURN NÃO É PRINT</strong><p>`print` mostra algo na tela. `return` entrega um valor para outro cálculo. Funções matemáticas devem retornar valores.</p></aside>
+    </div></div></section>
+
+    <section class="math-section" id="parametros"><div class="container math-layout"><aside class="math-marker"><span>03</span><small>PARÂMETROS</small></aside><div class="math-body"><p class="math-eyebrow">// CONTROLE EXPLÍCITO DA REGRA</p><h2>Parâmetros tornam hipóteses editáveis.</h2><p class="math-intro">Uma função mais elaborada ainda deve ser legível. Use nomes descritivos, defaults para hipóteses comuns e validações quando valores inválidos mudam o sentido matemático.</p>
+      <div class="parameter-lab"><div class="parameter-controls"><span>COST_FUNCTION_LAB</span><label>Quantidade <output data-qty-output>120</output><input type="range" min="20" max="260" step="10" value="120" data-qty></label><label>Custo unitário <output data-unit-output>18,50</output><input type="range" min="5" max="40" step="0.5" value="18.5" data-unit></label><label>Custo fixo <output data-fixed-output>850</output><input type="range" min="0" max="2000" step="50" value="850" data-fixed></label></div><div class="parameter-result"><span>CUSTO TOTAL</span><strong data-total-cost>3.070,00</strong><code data-cost-formula>850 + 120 × 18,50</code></div></div>
+      <div class="math-code"><div class="math-code-head"><span>função com validação</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>def custo_total(quantidade, custo_unitario, custo_fixo=0):
+    if quantidade < 0 or custo_unitario < 0 or custo_fixo < 0:
+        raise ValueError("custos e quantidade não podem ser negativos")
+    return custo_fixo + quantidade * custo_unitario</code></pre></div>
+    </div></div></section>
+
+    <section class="math-section math-section-dark" id="composicao"><div class="container math-layout"><aside class="math-marker"><span>04</span><small>COMPOSIÇÃO</small></aside><div class="math-body"><p class="math-eyebrow">// FUNÇÕES PEQUENAS, SISTEMA MAIOR</p><h2>Composição evita uma função gigante.</h2><p class="math-intro">Quando uma regra tem etapas, crie funções pequenas e componha. Isso deixa cada parte testável: receita, custo, lucro, penalidade e score final.</p>
+      <div class="composition-flow"><article><span>receita(q, preço)</span><strong>q × preço</strong></article><i>−</i><article><span>custo(q)</span><strong>fixo + variável</strong></article><i>→</i><article><span>lucro(q)</span><strong>receita − custo</strong></article></div>
+      <div class="composition-grid"><article><span>FUNÇÃO PURA</span><h3>Mesma entrada, mesma saída</h3><p>Facilita teste, depuração e comparação de cenários.</p></article><article><span>DOCSTRING</span><h3>Declare unidade e hipótese</h3><p>Explique se o valor está em reais, porcentagem, horas ou escala normalizada.</p></article><article><span>TIPO DE RETORNO</span><h3>Retorne número ou estrutura</h3><p>Para várias métricas, retorne dicionário com nomes explícitos.</p></article></div>
+      <aside class="math-dark-callout"><strong>MATEMÁTICA + CÓDIGO</strong><p>Uma função `lucro(q)` é também uma função matemática de `q`. No próximo módulo, vamos escolher o `q` que maximiza ou minimiza uma função.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-code" id="custo"><div class="container math-layout"><aside class="math-marker"><span>05</span><small>CUSTO</small></aside><div class="math-body"><p class="math-eyebrow">// FUNÇÃO PARA COMPARAR DECISÕES</p><h2>Função de custo transforma erro em número.</h2><p class="math-intro">Otimização precisa de uma função objetivo. Em modelos, uma escolha comum é medir o erro quadrático médio: previsões muito erradas recebem penalidade maior.</p>
+      <div class="cost-demo"><article><span>ERRO ABSOLUTO</span><strong>|y − ŷ|</strong><p>Penaliza cada unidade de erro de forma linear.</p></article><article><span>ERRO QUADRÁTICO</span><strong>(y − ŷ)²</strong><p>Aumenta muito o custo de erros grandes.</p></article><article><span>CUSTO TOTAL</span><strong>média dos erros</strong><p>Resume muitos exemplos em um único número comparável.</p></article></div>
+      <div class="math-code"><div class="math-code-head"><span>funcoes_custo.py</span><button type="button" data-copy-code-secondary>Copiar código</button></div><pre><code>def mse(observado, previsto):
+    if len(observado) != len(previsto):
+        raise ValueError("listas devem ter o mesmo tamanho")
+    erros = [(y - y_hat) ** 2 for y, y_hat in zip(observado, previsto)]
+    return sum(erros) / len(erros)</code></pre></div>
+      <div class="download-grid"><a href="examples/funcoes_custo.py" download><span>PYTHON</span><strong>Baixar laboratório</strong><small>Funções, composição e custo</small></a></div>
+    </div></div></section>
+
+    <section class="math-finish"><div class="container math-finish-grid"><div><span>CHECKPOINT_04</span><h2>Você sabe transformar uma regra matemática em função reutilizável.</h2><p>Entradas, validações, retorno e composição preparam a base para otimizar uma função de custo ou uma decisão.</p></div><div class="math-finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Matemática ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>

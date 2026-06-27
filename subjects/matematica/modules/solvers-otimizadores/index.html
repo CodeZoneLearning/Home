@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula de solvers e otimizadores com Dijkstra, A*, algoritmo genético e contrato genérico de busca.">
+  <title>Solvers e otimizadores | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="math-lesson-page solver-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav><a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a></div></header>
+  <main id="conteudo">
+    <section class="math-hero"><div class="container"><nav class="math-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Matemática</a><span>/</span><span>Bloco 07</span></nav><div class="math-hero-grid">
+      <div><p class="math-eyebrow">SOLVERS · GRAPH_SEARCH · METAHEURISTICS</p><h1>Procure soluções<br><span>com método.</span></h1><p class="math-hero-lead">Um solver transforma uma pergunta em estados, custos, vizinhos e critério de parada. Dijkstra resolve menor caminho com custos positivos, A* usa heurística para guiar a busca e algoritmos genéticos exploram soluções quando não há derivada ou caminho óbvio.</p><div class="math-hero-actions"><a class="button" href="#contrato">Começar aula <span>↓</span></a><a class="math-outline-action" href="examples/solvers_otimizadores.py" download>Baixar laboratório `.py` <span>↓</span></a></div></div>
+      <aside class="solver-board" aria-label="Rede de caminhos e busca"><span>SEARCH_SPACE</span><div class="solver-nodes"><i>A</i><i>B</i><i>C</i><i>D</i><i>G</i></div><strong>minimize custo</strong><p>escolher o próximo estado define o comportamento do solver.</p></aside>
+    </div></div></section>
+
+    <div class="math-map"><div class="container"><a href="#contrato">01 · Solver</a><a href="#dijkstra">02 · Dijkstra</a><a href="#astar">03 · A*</a><a href="#genetico">04 · Genético</a><a href="#codigo">05 · Código</a></div></div>
+
+    <section class="math-section" id="contrato"><div class="container math-layout"><aside class="math-marker"><span>01</span><small>SOLVER</small></aside><div class="math-body"><p class="math-eyebrow">// CONTRATO ANTES DO MÉTODO</p><h2>Todo solver precisa saber o que procurar.</h2><p class="math-intro">Antes de escolher o algoritmo, defina a representação do problema. O solver não “entende” o mundo: ele só compara estados, custos e regras de avanço.</p>
+      <div class="solver-contract"><article><span>ESTADO</span><h3>Onde estou?</h3><p>Nó de um grafo, configuração de uma rota, vetor de parâmetros ou solução candidata.</p></article><article><span>VIZINHOS</span><h3>Para onde posso ir?</h3><p>Transições permitidas, movimentos válidos, mutações ou novas soluções geradas.</p></article><article><span>CUSTO</span><h3>Quanto isso custa?</h3><p>Distância, tempo, risco, perda, energia, dinheiro ou penalidade combinada.</p></article><article><span>OBJETIVO</span><h3>Quando paro?</h3><p>Chegar ao destino, minimizar erro, bater limite de orçamento ou esgotar iterações.</p></article></div>
+      <aside class="math-definition"><strong>IDEIA GERAL</strong><p>Um solver busca `argmin custo(solucao)`. Em grafos, ele expande caminhos. Em otimização, ele melhora candidatos. O formato muda, mas a pergunta é a mesma: qual solução tem menor custo aceitável?</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-soft" id="dijkstra"><div class="container math-layout"><aside class="math-marker"><span>02</span><small>DIJKSTRA</small></aside><div class="math-body"><p class="math-eyebrow">// MENOR CAMINHO COM CUSTOS POSITIVOS</p><h2>Dijkstra sempre expande o menor custo acumulado.</h2><p class="math-intro">Dijkstra é uma escolha robusta quando todas as arestas têm custo não negativo e não existe uma boa heurística. Ele mantém uma fronteira de candidatos e sempre processa o caminho com menor custo conhecido até agora.</p>
+      <div class="path-lab"><div class="path-controls"><span>PATH_SOLVER_LAB</span><label>Custo B → D <output data-bd-output>2</output><input type="range" min="1" max="9" step="1" value="2" data-bd></label><label>Custo D → E <output data-de-output>2</output><input type="range" min="1" max="9" step="1" value="2" data-de></label><label>Peso da heurística A* <output data-h-output>1.0</output><input type="range" min="0" max="1" step="0.1" value="1" data-heuristic></label></div><div class="path-results"><article><span>DIJKSTRA</span><strong data-dijkstra-path>A → B → D → F → G</strong><p data-dijkstra-cost>Custo 8 · 7 expansões</p></article><article><span>A*</span><strong data-astar-path>A → B → D → F → G</strong><p data-astar-cost>Custo 8 · 5 expansões</p></article></div></div>
+      <div class="solver-contract three"><article><span>VANTAGEM</span><p>Garante menor caminho com custos não negativos.</p></article><article><span>CUSTO</span><p>Pode explorar muito espaço quando o destino está longe.</p></article><article><span>USO</span><p>Rotas, redes, dependências, logística e planejamento sem heurística confiável.</p></article></div>
+    </div></div></section>
+
+    <section class="math-section" id="astar"><div class="container math-layout"><aside class="math-marker"><span>03</span><small>A*</small></aside><div class="math-body"><p class="math-eyebrow">// CUSTO ACUMULADO + ESTIMATIVA</p><h2>A* usa uma heurística para mirar o destino.</h2><p class="math-intro">A* escolhe o próximo estado pelo menor `f(n) = g(n) + h(n)`. `g(n)` é o custo real até o nó. `h(n)` é uma estimativa do custo restante. Se a heurística não superestima o custo real, A* preserva a garantia de caminho ótimo.</p>
+      <div class="formula-strip"><article><span>g(n)</span><strong>custo já pago</strong><p>Distância acumulada da origem até o nó atual.</p></article><i>+</i><article><span>h(n)</span><strong>estimativa restante</strong><p>Distância em linha reta, Manhattan ou outra regra admissível.</p></article><i>=</i><article><span>f(n)</span><strong>prioridade</strong><p>Valor usado para ordenar a fronteira de busca.</p></article></div>
+      <div class="math-code"><div class="math-code-head"><span>prioridade A*</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>prioridade = custo_acumulado + heuristica(no, destino)
+fronteira.push(prioridade, no)</code></pre></div>
+    </div></div></section>
+
+    <section class="math-section math-section-dark" id="genetico"><div class="container math-layout"><aside class="math-marker"><span>04</span><small>GENÉTICO</small></aside><div class="math-body"><p class="math-eyebrow">// QUANDO NÃO HÁ CAMINHO DIRETO</p><h2>Algoritmo genético melhora uma população de soluções.</h2><p class="math-intro">Em vez de expandir um grafo, o algoritmo genético mantém candidatos, mede fitness, seleciona os melhores, mistura características e aplica mutações. Ele não garante ótimo global, mas é útil em problemas grandes, discretos, ruidosos ou sem derivada confiável.</p>
+      <div class="genetic-lab"><div class="genetic-controls"><span>GENETIC_LAB</span><label>Taxa de mutação <output data-mutation-output>0,20</output><input type="range" min="0" max="0.5" step="0.05" value="0.2" data-mutation></label><label>Gerações <output data-generation-output>40</output><input type="range" min="5" max="80" step="5" value="40" data-generations></label><label>Alvo escondido <output data-target-output>73</output><input type="range" min="10" max="90" step="1" value="73" data-target></label></div><div class="genetic-result"><span>MELHOR CANDIDATO</span><strong data-genetic-best>73</strong><p data-genetic-score>fitness 0 · erro 0</p></div></div>
+      <div class="solver-contract three dark"><article><span>SELEÇÃO</span><p>Priorize candidatos com menor custo ou maior fitness.</p></article><article><span>CRUZAMENTO</span><p>Combine partes de duas soluções para criar novas candidatas.</p></article><article><span>MUTAÇÃO</span><p>Altere candidatos para escapar de regiões ruins do espaço.</p></article></div>
+      <aside class="math-dark-callout"><strong>GENÉTICO NÃO É MÁGICA</strong><p>Ele depende de representação, fitness, diversidade e orçamento de iteração. Use quando métodos exatos ou gradiente forem caros demais ou inadequados.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-code" id="codigo"><div class="container math-layout"><aside class="math-marker"><span>05</span><small>CÓDIGO</small></aside><div class="math-body"><p class="math-eyebrow">// ESCOLHA PELO PROBLEMA</p><h2>O solver certo depende da estrutura disponível.</h2><p class="math-intro">Se há grafo com pesos positivos, Dijkstra é baseline. Se há destino e boa estimativa de distância, A* reduz expansões. Se a solução é uma configuração difícil de navegar diretamente, algoritmo genético pode explorar alternativas.</p>
+      <div class="comparison-table"><article><span>SOLVER</span><strong>Dijkstra</strong><p>Ótimo com custos não negativos, sem precisar de heurística.</p></article><article><span>SOLVER</span><strong>A*</strong><p>Ótimo com heurística admissível e geralmente expande menos nós.</p></article><article><span>SOLVER</span><strong>Genético</strong><p>Busca aproximada para espaços grandes, discretos ou sem derivada.</p></article></div>
+      <div class="math-code"><div class="math-code-head"><span>solvers_otimizadores.py</span><button type="button" data-copy-code-secondary>Copiar código</button></div><pre><code>def prioridade_astar(custo_acumulado, estimativa_restante):
+    return custo_acumulado + estimativa_restante
+
+def solver_generico(estado_inicial, objetivo, vizinhos, custo):
+    fronteira = [estado_inicial]
+    while fronteira:
+        estado = escolher_melhor(fronteira, custo)
+        if objetivo(estado):
+            return estado
+        fronteira.extend(vizinhos(estado))</code></pre></div>
+      <div class="download-grid"><a href="examples/solvers_otimizadores.py" download><span>PYTHON</span><strong>Baixar laboratório</strong><small>Dijkstra, A* e genético</small></a></div>
+    </div></div></section>
+
+    <section class="math-finish"><div class="container math-finish-grid"><div><span>CHECKPOINT_07</span><h2>Você sabe escolher um solver pelo formato do problema.</h2><p>O contrato vem antes do algoritmo: estado, vizinhos, custo e parada. Depois disso, Dijkstra, A* e genético são estratégias diferentes para procurar boas soluções.</p></div><div class="math-finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Matemática ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula de otimização de funções: objetivo, custo, busca em grade, busca ternária e descida do gradiente.">
+  <title>Otimização de funções | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="math-lesson-page optimization-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav><a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a></div></header>
+  <main id="conteudo">
+    <section class="math-hero"><div class="container"><nav class="math-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Matemática</a><span>/</span><span>Bloco 05</span></nav><div class="math-hero-grid">
+      <div><p class="math-eyebrow">OPTIMIZATION · COST_FUNCTIONS</p><h1>Escolha melhor<br><span>com critério.</span></h1><p class="math-hero-lead">Otimizar é procurar a entrada que minimiza um custo ou maximiza um resultado. A regra só faz sentido quando a função objetivo representa a decisão real.</p><div class="math-hero-actions"><a class="button" href="#objetivo">Começar aula <span>↓</span></a><a class="math-outline-action" href="examples/otimizacao_custos.py" download>Baixar laboratório `.py` <span>↓</span></a></div></div>
+      <aside class="optimization-board" aria-label="Curva de custo com ponto mínimo"><span>MINIMIZE</span><svg viewBox="0 0 420 230" role="img" aria-label="Curva convexa com mínimo"><path d="M32 48 C122 212 290 212 388 42" /><circle cx="211" cy="175" r="7" /><line x1="211" y1="175" x2="211" y2="207" /><text x="185" y="223">mínimo</text></svg><strong>argmin f(x)</strong></aside>
+    </div></div></section>
+
+    <div class="math-map"><div class="container"><a href="#objetivo">01 · Objetivo</a><a href="#grade">02 · Grade</a><a href="#ternaria">03 · Ternária</a><a href="#gradiente">04 · Gradiente</a><a href="#comparar">05 · Comparar</a></div></div>
+
+    <section class="math-section" id="objetivo"><div class="container math-layout"><aside class="math-marker"><span>01</span><small>OBJETIVO</small></aside><div class="math-body"><p class="math-eyebrow">// O QUE ESTAMOS PROCURANDO?</p><h2>Otimização começa definindo a função.</h2><p class="math-intro">A pergunta não é “qual método usar?”, mas “qual número mede uma decisão melhor?”. Pode ser custo financeiro, erro de previsão, tempo, risco ou uma penalidade combinada.</p>
+      <div class="objective-grid"><article><span>VARIÁVEL DE DECISÃO</span><h3>O que posso escolher?</h3><p>Quantidade produzida, preço, limiar de alerta, parâmetro de modelo ou tamanho de lote.</p></article><article><span>FUNÇÃO OBJETIVO</span><h3>O que quero minimizar?</h3><p>Custo total, erro quadrático, atraso, energia, risco ou perda operacional.</p></article><article><span>RESTRIÇÕES</span><h3>O que não pode violar?</h3><p>Capacidade, orçamento, prazo, limite físico, qualidade mínima ou domínio matemático.</p></article></div>
+      <div class="optimization-lab"><div class="optimization-controls"><span>COST_CURVE_LAB</span><label>Custo fixo <output data-fixed-output>900</output><input type="range" min="200" max="1800" step="100" value="900" data-fixed></label><label>Demanda alvo <output data-target-output>140</output><input type="range" min="60" max="240" step="10" value="140" data-target></label><label>Penalidade de desvio <output data-penalty-output>0,08</output><input type="range" min="0.02" max="0.20" step="0.01" value="0.08" data-penalty></label></div><div class="optimization-result"><span>MELHOR QUANTIDADE</span><strong data-best-q>140</strong><p data-best-cost>Custo estimado: 3.350,00</p></div></div>
+      <aside class="math-definition"><strong>ARGMIN</strong><p>`argmin f(x)` é o valor de `x` que torna `f(x)` mínima. O mínimo é o custo; o argmin é a decisão que gera esse custo.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-soft" id="grade"><div class="container math-layout"><aside class="math-marker"><span>02</span><small>GRADE</small></aside><div class="math-body"><p class="math-eyebrow">// TESTE MUITAS POSSIBILIDADES</p><h2>Busca em grade é simples e confiável para começar.</h2><p class="math-intro">Escolha um intervalo, crie candidatos e calcule a função objetivo em cada um. É fácil de entender, mas pode ser caro quando há muitas variáveis ou quando a grade precisa ser muito fina.</p>
+      <div class="method-card-grid"><article><span>COMO FUNCIONA</span><p>Gera valores como `0, 10, 20...` e guarda o menor custo observado.</p></article><article><span>VANTAGEM</span><p>Não precisa de derivada e funciona mesmo quando a função tem quebras ou regras condicionais.</p></article><article><span>CUIDADO</span><p>O melhor valor pode estar entre dois pontos da grade. Refine perto dos melhores candidatos.</p></article></div>
+      <div class="math-code"><div class="math-code-head"><span>busca em grade</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>def busca_em_grade(funcao, inicio, fim, passo):
+    melhor_x = inicio
+    melhor_custo = funcao(inicio)
+    x = inicio
+    while x <= fim:
+        custo = funcao(x)
+        if custo < melhor_custo:
+            melhor_x, melhor_custo = x, custo
+        x += passo
+    return melhor_x, melhor_custo</code></pre></div>
+    </div></div></section>
+
+    <section class="math-section" id="ternaria"><div class="container math-layout"><aside class="math-marker"><span>03</span><small>TERNÁRIA</small></aside><div class="math-body"><p class="math-eyebrow">// QUANDO A CURVA TEM UM VALE</p><h2>Busca ternária reduz o intervalo pelo formato da função.</h2><p class="math-intro">Se a função é unimodal no intervalo, isto é, desce até um ponto e depois sobe, compare dois pontos internos e descarte o lado pior. É útil para uma variável contínua sem derivada.</p>
+      <div class="ternary-diagram"><div><span>ESQUERDA</span><strong>l</strong></div><div><span>MEIO 1</span><strong>m1</strong></div><div><span>MEIO 2</span><strong>m2</strong></div><div><span>DIREITA</span><strong>r</strong></div></div>
+      <div class="method-card-grid"><article><span>HIPÓTESE</span><p>A função deve ter um único vale relevante no intervalo analisado.</p></article><article><span>USO</span><p>Boa escolha para ajustar um número quando o custo é suave, mas a derivada não está disponível.</p></article><article><span>PARADA</span><p>Pare quando o intervalo ficar pequeno o suficiente para a precisão desejada.</p></article></div>
+    </div></div></section>
+
+    <section class="math-section math-section-dark" id="gradiente"><div class="container math-layout"><aside class="math-marker"><span>04</span><small>GRADIENTE</small></aside><div class="math-body"><p class="math-eyebrow">// MOVA-SE NA DIREÇÃO QUE REDUZ CUSTO</p><h2>Descida do gradiente usa a inclinação.</h2><p class="math-intro">A derivada indica como o custo muda quando `x` muda um pouco. Para minimizar, andamos contra essa inclinação: `x_novo = x_atual - taxa × gradiente`.</p>
+      <div class="gradient-grid"><article><span>GRADIENTE POSITIVO</span><h3>Custo sobe se x aumenta</h3><p>Diminua `x` para tentar reduzir o custo.</p></article><article><span>GRADIENTE NEGATIVO</span><h3>Custo cai se x aumenta</h3><p>Aumente `x` para tentar reduzir o custo.</p></article><article><span>TAXA DE APRENDIZADO</span><h3>Tamanho do passo</h3><p>Grande demais oscila; pequena demais demora.</p></article></div>
+      <div class="gradient-lab"><div class="gradient-controls"><span>GRADIENT_DESCENT_LAB</span><label>Taxa de aprendizado <output data-rate-output>0,08</output><input type="range" min="0.01" max="0.20" step="0.01" value="0.08" data-rate></label><label>Ponto inicial <output data-start-output>20</output><input type="range" min="0" max="260" step="10" value="20" data-start></label></div><div class="gradient-result"><span>APÓS 20 PASSOS</span><strong data-gradient-x>134,8</strong><p data-gradient-cost>Custo estimado: 3.350,32</p></div></div>
+      <aside class="math-dark-callout"><strong>NÃO É MÁGICA</strong><p>Gradiente funciona melhor quando a função é suave e a taxa é bem escolhida. Em funções com muitos vales, ele pode parar em um mínimo local.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-code" id="comparar"><div class="container math-layout"><aside class="math-marker"><span>05</span><small>COMPARAR</small></aside><div class="math-body"><p class="math-eyebrow">// MÉTODO DEPENDE DA FUNÇÃO</p><h2>Escolha o método pelo custo da busca e pelas hipóteses.</h2><p class="math-intro">Use busca em grade como baseline, busca ternária quando há uma variável e um vale claro, e gradiente quando você tem derivada ou aproximação confiável.</p>
+      <div class="comparison-table"><article><span>MÉTODO</span><strong>Busca em grade</strong><p>Robusta, simples e lenta quando o espaço cresce.</p></article><article><span>MÉTODO</span><strong>Busca ternária</strong><p>Eficiente para função unimodal de uma variável.</p></article><article><span>MÉTODO</span><strong>Descida do gradiente</strong><p>Escala melhor, mas depende de taxa, derivada e superfície.</p></article></div>
+      <div class="math-code"><div class="math-code-head"><span>otimizacao_custos.py</span><button type="button" data-copy-code-secondary>Copiar código</button></div><pre><code>def custo(q):
+    return 900 + 17.5 * q + 0.08 * (q - 140) ** 2
+
+def gradiente(q):
+    return 17.5 + 0.16 * (q - 140)
+
+q = 20
+for _ in range(20):
+    q = q - 0.08 * gradiente(q)</code></pre></div>
+      <div class="download-grid"><a href="examples/otimizacao_custos.py" download><span>PYTHON</span><strong>Baixar laboratório</strong><small>Grade, ternária e gradiente</small></a></div>
+    </div></div></section>
+
+    <section class="math-finish"><div class="container math-finish-grid"><div><span>CHECKPOINT_05</span><h2>Você sabe escolher uma estratégia para minimizar custo.</h2><p>Otimizar é definir a função certa, respeitar restrições e comparar métodos com hipóteses claras.</p></div><div class="math-finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Matemática ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>

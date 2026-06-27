@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula de diferenças finitas em 1D e 2D, transformando derivadas em sistemas lineares A x = b.">
+  <title>Diferenças finitas | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="math-lesson-page finite-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav><a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a></div></header>
+  <main id="conteudo">
+    <section class="math-hero"><div class="container"><nav class="math-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Matemática</a><span>/</span><span>Bloco 06</span></nav><div class="math-hero-grid">
+      <div><p class="math-eyebrow">FINITE_DIFFERENCES · AX_EQUALS_B</p><h1>Transforme derivadas<br><span>em sistemas.</span></h1><p class="math-hero-lead">Diferenças finitas aproximam derivadas usando pontos vizinhos. O resultado prático é sempre uma equação linear: `A x = b`. Se houver apenas uma incógnita, `x = b / A`.</p><div class="math-hero-actions"><a class="button" href="#malha">Começar aula <span>↓</span></a><a class="math-outline-action" href="examples/diferencas_finitas.py" download>Baixar laboratório `.py` <span>↓</span></a></div></div>
+      <aside class="finite-board" aria-label="Malha de diferenças finitas"><span>GRID_TO_SYSTEM</span><div class="finite-line"><i></i><i></i><i class="is-unknown"></i><i></i><i></i></div><strong>A x = b</strong><p>vizinhos conhecidos entram em `b`; incógnitas entram em `x`.</p></aside>
+    </div></div></section>
+
+    <div class="math-map"><div class="container"><a href="#malha">01 · Malha</a><a href="#um-d">02 · 1D</a><a href="#sistema">03 · Sistema</a><a href="#dois-d">04 · 2D</a><a href="#codigo">05 · Código</a></div></div>
+
+    <section class="math-section" id="malha"><div class="container math-layout"><aside class="math-marker"><span>01</span><small>MALHA</small></aside><div class="math-body"><p class="math-eyebrow">// DERIVADA VIRA DIFERENÇA</p><h2>A ideia é trocar uma curva contínua por pontos.</h2><p class="math-intro">Quando uma equação usa derivadas, como temperatura, pressão, deslocamento ou concentração, podemos calcular valores apenas em pontos de uma malha. A derivada deixa de ser simbólica e vira uma relação entre vizinhos.</p>
+      <div class="finite-grid-cards"><article><span>PASSO H</span><h3>Distância entre pontos</h3><p>Quanto menor `h`, mais fina a malha. A aproximação costuma melhorar, mas o sistema fica maior.</p></article><article><span>INCÓGNITA</span><h3>O que queremos descobrir</h3><p>Cada ponto interno desconhecido vira uma posição no vetor `x`.</p></article><article><span>CONTORNO</span><h3>O que já sabemos</h3><p>Valores nas bordas são conhecidos e entram no lado direito `b`.</p></article></div>
+      <aside class="math-definition"><strong>REGRA CENTRAL</strong><p>Para a segunda derivada em 1D: `u''(x_i) ≈ (u_{i-1} - 2u_i + u_{i+1}) / h²`. Reorganizando, os coeficientes viram a linha da matriz `A`.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-soft" id="um-d"><div class="container math-layout"><aside class="math-marker"><span>02</span><small>1D</small></aside><div class="math-body"><p class="math-eyebrow">// UM PONTO INTERNO</p><h2>No caso mais simples, a conta cai direto em `x = b / A`.</h2><p class="math-intro">Imagine uma barra com as extremidades conhecidas e apenas o ponto do meio desconhecido. Para a equação `-u'' = f`, a aproximação fica `2u_1 - u_0 - u_2 = h² f_1`. Como `u_0` e `u_2` são conhecidos, eles vão para `b`.</p>
+      <div class="scalar-lab"><div class="scalar-controls"><span>SCALAR_LAB</span><label>Esquerda `u₀` <output data-left-output>20</output><input type="range" min="0" max="100" step="5" value="20" data-left></label><label>Direita `u₂` <output data-right-output>80</output><input type="range" min="0" max="100" step="5" value="80" data-right></label><label>Fonte `f₁` <output data-source-output>10</output><input type="range" min="-40" max="40" step="5" value="10" data-source></label></div><div class="scalar-result"><span>RESOLVENDO</span><strong data-scalar-x>55.00</strong><p data-scalar-equation>2.00 × x = 110.00</p></div></div>
+      <div class="math-code"><div class="math-code-head"><span>um ponto interno</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>h = 1
+A = 2 / h**2
+b = f1 + (u0 + u2) / h**2
+x = b / A</code></pre></div>
+    </div></div></section>
+
+    <section class="math-section" id="sistema"><div class="container math-layout"><aside class="math-marker"><span>03</span><small>SISTEMA</small></aside><div class="math-body"><p class="math-eyebrow">// VÁRIOS PONTOS INTERNOS</p><h2>Com mais incógnitas, `A` deixa de ser número e vira matriz.</h2><p class="math-intro">A lógica continua a mesma: coeficientes dos pontos desconhecidos ficam em `A`, valores conhecidos e fontes ficam em `b`, e os valores procurados ficam em `x`. Não fazemos divisão direta por matriz; resolvemos o sistema linear.</p>
+      <div class="matrix-demo"><div><span>A</span><code>[ 2 -1  0 ]<br>[-1  2 -1 ]<br>[ 0 -1  2 ]</code></div><i>×</i><div><span>x</span><code>[u₁]<br>[u₂]<br>[u₃]</code></div><i>=</i><div><span>b</span><code>[f₁h² + u₀]<br>[f₂h²]<br>[f₃h² + u₄]</code></div></div>
+      <div class="finite-grid-cards"><article><span>DIAGONAL</span><h3>O próprio ponto</h3><p>O coeficiente central costuma ser maior, como `2` em 1D ou `4` em 2D.</p></article><article><span>VIZINHOS</span><h3>Acoplamento local</h3><p>Pontos vizinhos aparecem com coeficientes negativos, como `-1`.</p></article><article><span>SOLVER</span><h3>Resolver `A x = b`</h3><p>Use eliminação, fatoração, método iterativo ou uma rotina numérica confiável.</p></article></div>
+    </div></div></section>
+
+    <section class="math-section math-section-dark" id="dois-d"><div class="container math-layout"><aside class="math-marker"><span>04</span><small>2D</small></aside><div class="math-body"><p class="math-eyebrow">// UMA PLACA EM VEZ DE UMA BARRA</p><h2>Em 2D, cada ponto conversa com quatro vizinhos.</h2><p class="math-intro">Para uma malha plana, a aproximação clássica de `-Δu = f` usa esquerda, direita, baixo e cima. Em um único ponto interno, a equação fica `4u_centro = h²f + u_esq + u_dir + u_baixo + u_cima`.</p>
+      <div class="plate-lab"><div class="plate-controls"><span>PLATE_CENTER_LAB</span><label>Esquerda <output data-west-output>20</output><input type="range" min="0" max="120" step="5" value="20" data-west></label><label>Direita <output data-east-output>80</output><input type="range" min="0" max="120" step="5" value="80" data-east></label><label>Baixo <output data-south-output>30</output><input type="range" min="0" max="120" step="5" value="30" data-south></label><label>Cima <output data-north-output>70</output><input type="range" min="0" max="120" step="5" value="70" data-north></label><label>Fonte `f` <output data-plate-source-output>0</output><input type="range" min="-80" max="80" step="10" value="0" data-plate-source></label></div><div class="plate-result"><span>PONTO CENTRAL</span><strong data-plate-x>50.00</strong><p data-plate-equation>4.00 × x = 200.00</p></div></div>
+      <div class="stencil"><div></div><div>cima</div><div></div><div>esq</div><div class="is-center">x</div><div>dir</div><div></div><div>baixo</div><div></div></div>
+      <aside class="math-dark-callout"><strong>MESMA FORMA</strong><p>Com muitos pontos internos em 2D, empilhamos as incógnitas em um vetor. A matriz `A` cresce, mas a regra continua sendo montar e resolver `A x = b`.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-code" id="codigo"><div class="container math-layout"><aside class="math-marker"><span>05</span><small>CÓDIGO</small></aside><div class="math-body"><p class="math-eyebrow">// MONTE ANTES DE RESOLVER</p><h2>O código separa três etapas: malha, matriz e solução.</h2><p class="math-intro">Primeiro defina o passo `h` e os pontos internos. Depois monte `A` e `b`. Só então resolva o sistema para encontrar `x`, que contém os valores aproximados da solução nos pontos internos.</p>
+      <div class="workflow"><article><span>01</span><strong>Definir malha</strong><p>Escolha quantidade de pontos e condições de contorno.</p></article><article><span>02</span><strong>Montar `A` e `b`</strong><p>Transforme cada ponto interno em uma linha do sistema.</p></article><article><span>03</span><strong>Resolver</strong><p>Calcule `x` e interprete os valores no domínio original.</p></article></div>
+      <div class="math-code"><div class="math-code-head"><span>diferencas_finitas.py</span><button type="button" data-copy-code-secondary>Copiar código</button></div><pre><code>def resolver_escalar(A, b):
+    return b / A
+
+def ponto_central_2d(oeste, leste, sul, norte, fonte, h=1):
+    A = 4 / h**2
+    b = fonte + (oeste + leste + sul + norte) / h**2
+    return resolver_escalar(A, b)</code></pre></div>
+      <div class="download-grid"><a href="examples/diferencas_finitas.py" download><span>PYTHON</span><strong>Baixar laboratório</strong><small>1D, 2D e `A x = b`</small></a></div>
+    </div></div></section>
+
+    <section class="math-finish"><div class="container math-finish-grid"><div><span>CHECKPOINT_06</span><h2>Você sabe transformar uma equação diferencial simples em sistema linear.</h2><p>A rotina mental é fixa: discretizar a malha, montar `A x = b` e resolver `x`. No caso escalar, isso vira `x = b / A`.</p></div><div class="math-finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Matemática ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>
