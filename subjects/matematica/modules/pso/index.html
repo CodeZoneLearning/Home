@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula de PSO, Particle Swarm Optimization, com equações de velocidade, posição, parâmetros e exemplo contínuo em Python.">
+  <title>PSO | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="../solver-topic.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="math-lesson-page pso-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav><a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a></div></header>
+  <main id="conteudo">
+    <section class="math-hero"><div class="container"><nav class="math-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Matemática</a><span>/</span><span>Bloco 10</span></nav><div class="math-hero-grid">
+      <div><p class="math-eyebrow">PARTICLE_SWARM · CONTINUOUS_OPTIMIZATION</p><h1>PSO<br><span>por enxame.</span></h1><p class="math-hero-lead">Particle Swarm Optimization procura mínimos em espaços contínuos usando partículas com posição, velocidade, memória individual e memória coletiva. É uma metaheurística simples de implementar e útil quando gradientes são caros ou indisponíveis.</p><div class="math-hero-actions"><a class="button" href="#modelo">Começar aula <span>↓</span></a><a class="math-outline-action" href="examples/pso.py" download>Baixar laboratório `.py` <span>↓</span></a></div></div>
+      <aside class="solver-topic-board pso-board" aria-label="Partículas em superfície de custo"><span>SWARM</span><div class="particle-field"><i></i><i></i><i></i><i></i><i></i><b></b></div><strong>x ← x + v</strong><p>cada partícula mistura inércia, memória própria e melhor ponto do grupo.</p></aside>
+    </div></div></section>
+
+    <div class="math-map"><div class="container"><a href="#modelo">01 · Modelo</a><a href="#equacoes">02 · Equações</a><a href="#parametros">03 · Parâmetros</a><a href="#laboratorio">04 · Laboratório</a><a href="#codigo">05 · Código</a></div></div>
+
+    <section class="math-section" id="modelo"><div class="container math-layout"><aside class="math-marker"><span>01</span><small>PARTÍCULA</small></aside><div class="math-body"><p class="math-eyebrow">// OTIMIZAÇÃO CONTÍNUA SEM GRADIENTE</p><h2>PSO move candidatos em um espaço de busca.</h2><p class="math-intro">Cada partícula `i` tem uma posição `x_i ∈ R^d` e uma velocidade `v_i ∈ R^d`. Ela avalia a função objetivo, lembra o melhor ponto que já encontrou e acompanha o melhor ponto conhecido pelo enxame.</p>
+      <div class="formula-panel"><span>OBJETIVO</span><div class="equation-line">min f(x), com x ∈ R<sup>d</sup></div><p>No laboratório, `x=(x,y)` e `f(x,y)=(x-3)^2+(y+2)^2`. O mínimo global conhecido está em `(3,-2)`, com custo `0`. Isso permite enxergar se o enxame está convergindo.</p></div>
+      <div class="concept-grid four"><article><span>xᵢ</span><h3>Posição</h3><p>Candidato atual da partícula no espaço de decisão.</p></article><article><span>vᵢ</span><h3>Velocidade</h3><p>Direção e tamanho do próximo deslocamento.</p></article><article><span>pᵢ</span><h3>Melhor pessoal</h3><p>Melhor posição já visitada pela partícula `i`.</p></article><article><span>g</span><h3>Melhor global</h3><p>Melhor posição conhecida por todo o enxame.</p></article></div>
+    </div></div></section>
+
+    <section class="math-section math-section-soft" id="equacoes"><div class="container math-layout"><aside class="math-marker"><span>02</span><small>UPDATE</small></aside><div class="math-body"><p class="math-eyebrow">// VELOCIDADE E POSIÇÃO</p><h2>A atualização combina três forças.</h2><p class="math-intro">O movimento do PSO tem um termo de inércia, um termo cognitivo e um termo social. Os fatores aleatórios `r1` e `r2` impedem que todas as partículas sigam exatamente a mesma trajetória.</p>
+      <div class="formula-panel"><span>VELOCIDADE</span><div class="equation-line">vᵢ(t+1)=ωvᵢ(t)+c₁r₁(pᵢ-xᵢ)+c₂r₂(g-xᵢ)</div><p>`ω` controla quanto a partícula mantém o movimento anterior. `c1` puxa para a melhor solução pessoal. `c2` puxa para a melhor solução global do grupo.</p></div>
+      <div class="formula-panel"><span>POSIÇÃO</span><div class="equation-line">xᵢ(t+1)=xᵢ(t)+vᵢ(t+1)</div><p>Depois de mover, a partícula é avaliada novamente. Se o novo custo for menor que o melhor pessoal, atualize `p_i`. Se for menor que o melhor global, atualize `g`.</p></div>
+      <div class="worked-table"><table><thead><tr><th>Termo</th><th>Expressão</th><th>Efeito</th></tr></thead><tbody><tr><td>Inércia</td><td>ωvᵢ</td><td>Explora mantendo direção anterior.</td></tr><tr><td>Cognitivo</td><td>c₁r₁(pᵢ-xᵢ)</td><td>Retorna ao que a própria partícula já aprendeu.</td></tr><tr><td>Social</td><td>c₂r₂(g-xᵢ)</td><td>Converge para o melhor ponto conhecido pelo grupo.</td></tr></tbody></table></div>
+    </div></div></section>
+
+    <section class="math-section math-section-dark" id="parametros"><div class="container math-layout"><aside class="math-marker"><span>03</span><small>GANHOS</small></aside><div class="math-body"><p class="math-eyebrow">// EXPLORAÇÃO VERSUS CONVERGÊNCIA</p><h2>Os parâmetros definem o comportamento do enxame.</h2><p class="math-intro">PSO pode convergir rápido demais, oscilar ou explorar pouco. Por isso, os coeficientes são parte do desenho do experimento, não detalhes decorativos.</p>
+      <div class="parameter-grid"><article><span>ω INÉRCIA</span><h3>Movimento anterior</h3><p>Maior `ω` amplia exploração, mas pode causar oscilação se as velocidades ficarem grandes.</p></article><article><span>c₁ COGNITIVO</span><h3>Autonomia</h3><p>Partículas confiam mais na própria experiência e exploram caminhos diferentes.</p></article><article><span>c₂ SOCIAL</span><h3>Convergência</h3><p>Partículas seguem o melhor global mais agressivamente; acelera, mas pode reduzir diversidade.</p></article></div>
+      <aside class="math-dark-callout"><strong>CONTROLE PRÁTICO</strong><p>Muitas implementações limitam velocidade ou prendem posições ao domínio permitido. Sem isso, uma partícula pode sair da região onde a função faz sentido.</p></aside>
+    </div></div></section>
+
+    <section class="math-section" id="laboratorio"><div class="container math-layout"><aside class="math-marker"><span>04</span><small>LAB</small></aside><div class="math-body"><p class="math-eyebrow">// MINIMIZE UMA FUNÇÃO 2D</p><h2>Veja o enxame aproximar o ponto ótimo.</h2><p class="math-intro">A simulação usa partículas em `[-8,8] × [-8,8]`. O resultado mostra o melhor ponto global encontrado depois do número de iterações escolhido.</p>
+      <div class="solver-lab"><div class="lab-controls"><span>PSO_LAB</span><label>Inércia ω <output data-inertia-output>0,65</output><input type="range" min="0.1" max="0.95" step="0.05" value="0.65" data-inertia></label><label>Cognitivo c₁ <output data-cognitive-output>1,40</output><input type="range" min="0" max="3" step="0.1" value="1.4" data-cognitive></label><label>Social c₂ <output data-social-output>1,60</output><input type="range" min="0" max="3" step="0.1" value="1.6" data-social></label><label>Iterações <output data-iterations-output>45</output><input type="range" min="5" max="100" step="5" value="45" data-iterations></label></div><div class="lab-result"><span>MELHOR GLOBAL</span><strong data-best-position>(3,00; -2,00)</strong><p data-best-cost>f(x,y)=0,000 · distância até ótimo 0,000</p><div class="solution-tags" data-pso-stats></div></div></div>
+      <aside class="math-definition"><strong>INTERPRETAÇÃO</strong><p>Em uma função convexa simples, PSO deve chegar perto do ótimo. Em funções rugosas ou com muitos mínimos locais, compare várias sementes, monitore dispersão e valide contra baselines.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-code" id="codigo"><div class="container math-layout"><aside class="math-marker"><span>05</span><small>CÓDIGO</small></aside><div class="math-body"><p class="math-eyebrow">// IMPLEMENTAÇÃO ESSENCIAL</p><h2>A atualização cabe em poucas linhas.</h2><p class="math-intro">O algoritmo mantém `positions`, `velocities`, `personal_best` e `global_best`. A função objetivo é a única parte específica do problema.</p>
+      <div class="math-code"><div class="math-code-head"><span>pso.py</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>v = omega * v
+v += c1 * r1 * (personal_best - x)
+v += c2 * r2 * (global_best - x)
+x = x + v
+
+if f(x) < f(personal_best):
+    personal_best = x</code></pre></div>
+      <div class="comparison-table"><article><span>FORTE</span><strong>Contínuo sem derivada</strong><p>Bom quando avaliar `f(x)` é possível, mas derivar é difícil ou instável.</p></article><article><span>FRÁGIL</span><strong>Parâmetros sensíveis</strong><p>Inércia e coeficientes mal ajustados podem gerar estagnação ou oscilação.</p></article><article><span>VALIDAÇÃO</span><strong>Use múltiplas sementes</strong><p>Como é estocástico, avalie distribuição de resultados, não apenas uma execução.</p></article></div>
+      <div class="download-grid"><a href="examples/pso.py" download><span>PYTHON</span><strong>Baixar laboratório</strong><small>Particle Swarm Optimization em duas variáveis</small></a></div>
+      <div class="module-next-grid"><a href="../algoritmo-genetico/"><span>ANTERIOR</span><strong>Algoritmo genético</strong></a><a href="../dijkstra/"><span>VOLTAR AO INÍCIO</span><strong>Dijkstra</strong></a></div>
+    </div></div></section>
+
+    <section class="math-finish"><div class="container math-finish-grid"><div><span>CHECKPOINT_10</span><h2>Você sabe ler PSO como movimento matemático no espaço de busca.</h2><p>A partícula carrega posição, velocidade, memória pessoal e memória global. O equilíbrio entre essas forças define exploração, convergência e estabilidade.</p></div><div class="math-finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Matemática ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>

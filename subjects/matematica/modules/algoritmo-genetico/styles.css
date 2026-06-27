@@ -1,0 +1,19 @@
+.genetic-board .chromosomes {
+  display: grid;
+  gap: 10px;
+  margin: 24px 0;
+}
+.genetic-board .chromosomes i {
+  padding: 12px 14px;
+  border: 1px solid rgba(0,200,255,.22);
+  border-radius: 8px;
+  background: rgba(0,200,255,.08);
+  color: #dce2ec;
+  font: 15px monospace;
+  letter-spacing: .16em;
+}
+.genetic-board .chromosomes i:nth-child(4) {
+  border-color: rgba(216,241,59,.55);
+  background: rgba(216,241,59,.13);
+  color: #efffc1;
+}

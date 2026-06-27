@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula de Dijkstra com formulação matemática, relaxamento de arestas, exemplo numérico, complexidade e laboratório Python.">
+  <title>Dijkstra | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="../solver-topic.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="math-lesson-page dijkstra-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav><a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a></div></header>
+  <main id="conteudo">
+    <section class="math-hero"><div class="container"><nav class="math-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Matemática</a><span>/</span><span>Bloco 07</span></nav><div class="math-hero-grid">
+      <div><p class="math-eyebrow">GRAPH_SEARCH · SHORTEST_PATH</p><h1>Dijkstra<br><span>sem chute.</span></h1><p class="math-hero-lead">Dijkstra resolve menor caminho quando os custos das arestas são não negativos. A ideia central é simples e poderosa: sempre finalize o nó com menor distância acumulada conhecida.</p><div class="math-hero-actions"><a class="button" href="#modelo">Começar aula <span>↓</span></a><a class="math-outline-action" href="examples/dijkstra.py" download>Baixar laboratório `.py` <span>↓</span></a></div></div>
+      <aside class="solver-topic-board dijkstra-board" aria-label="Grafo com caminho mínimo"><span>WEIGHTED_GRAPH</span><div class="graph-strip"><i>A</i><i>B</i><i>D</i><i>F</i><i>G</i></div><strong>argmin Σ w(e)</strong><p>o melhor caminho é a sequência de arestas com menor soma de pesos.</p></aside>
+    </div></div></section>
+
+    <div class="math-map"><div class="container"><a href="#modelo">01 · Modelo</a><a href="#relaxamento">02 · Relaxamento</a><a href="#exemplo">03 · Exemplo</a><a href="#complexidade">04 · Complexidade</a><a href="#codigo">05 · Código</a></div></div>
+
+    <section class="math-section" id="modelo"><div class="container math-layout"><aside class="math-marker"><span>01</span><small>MODELO</small></aside><div class="math-body"><p class="math-eyebrow">// GRAFO PONDERADO</p><h2>Transforme o problema em nós, arestas e pesos.</h2><p class="math-intro">Dijkstra trabalha sobre um grafo `G = (V, E)` com uma função de peso `w(u,v) >= 0`. Um caminho `P = (v0, v1, ..., vk)` tem custo igual à soma dos pesos percorridos.</p>
+      <div class="formula-panel"><span>FUNÇÃO OBJETIVO</span><div class="equation-line"><i>dist(s,t)</i> = min<sub>P:s→t</sub> Σ w(v<sub>i</sub>, v<sub>i+1</sub>)</div><p>O algoritmo não procura o caminho com menos arestas. Ele procura a menor soma de custos. Se uma rota tem três trechos baratos, ela pode vencer uma rota com um único trecho caro.</p></div>
+      <div class="concept-grid four"><article><span>NÓ</span><h3>Estado discreto</h3><p>Cidade, etapa de processo, página, célula de mapa ou qualquer posição alcançável.</p></article><article><span>ARESTA</span><h3>Transição permitida</h3><p>Conexão entre estados. Pode representar deslocamento, dependência ou troca de estado.</p></article><article><span>PESO</span><h3>Custo local</h3><p>Distância, tempo, risco, energia, dinheiro ou penalidade operacional.</p></article><article><span>RESTRIÇÃO</span><h3>Sem pesos negativos</h3><p>Com custo negativo, um caminho ainda não finalizado pode ficar melhor depois e quebra a garantia.</p></article></div>
+    </div></div></section>
+
+    <section class="math-section math-section-soft" id="relaxamento"><div class="container math-layout"><aside class="math-marker"><span>02</span><small>RELAXAR</small></aside><div class="math-body"><p class="math-eyebrow">// ATUALIZE O MELHOR CUSTO CONHECIDO</p><h2>A operação fundamental é relaxar uma aresta.</h2><p class="math-intro">Para cada vizinho `v` do nó atual `u`, teste se passar por `u` melhora o custo conhecido de `v`. A fila de prioridade guarda os candidatos ordenados por menor distância acumulada.</p>
+      <div class="formula-panel"><span>REGRA DE RELAXAMENTO</span><div class="equation-line">d[v] ← min(d[v], d[u] + w(u,v))</div><p>Quando `u` sai da fila com a menor prioridade, `d[u]` vira definitivo. Essa afirmação depende de `w(u,v) >= 0`: nenhum caminho futuro consegue voltar e diminuir `d[u]` sem antes passar por um custo não negativo.</p></div>
+      <div class="solver-lab"><div class="lab-controls"><span>DIJKSTRA_LAB</span><label>Custo B → D <output data-bd-output>2</output><input type="range" min="1" max="9" step="1" value="2" data-bd></label><label>Custo D → E <output data-de-output>2</output><input type="range" min="1" max="9" step="1" value="2" data-de></label><label>Custo C → F <output data-cf-output>8</output><input type="range" min="2" max="12" step="1" value="8" data-cf></label></div><div class="lab-result"><span>MENOR CAMINHO A → G</span><strong data-path>A → B → D → F → G</strong><p data-cost>Custo 8 · 7 nós finalizados</p><div class="solution-tags" data-distances></div></div></div>
+    </div></div></section>
+
+    <section class="math-section" id="exemplo"><div class="container math-layout"><aside class="math-marker"><span>03</span><small>EXEMPLO</small></aside><div class="math-body"><p class="math-eyebrow">// PASSO A PASSO</p><h2>Observe a fronteira encolher até o destino.</h2><p class="math-intro">No grafo padrão do laboratório, a origem é `A` e o destino é `G`. A cada iteração, o algoritmo retira da fila o nó com menor `d` e relaxa seus vizinhos.</p>
+      <div class="worked-table"><table><thead><tr><th>Passo</th><th>Nó finalizado</th><th>Atualizações relevantes</th><th>Interpretação</th></tr></thead><tbody><tr><td>1</td><td>A, d=0</td><td>d[B]=2, d[C]=5</td><td>B entra na frente porque custa menos que C.</td></tr><tr><td>2</td><td>B, d=2</td><td>d[D]=4, d[E]=8</td><td>O melhor caminho parcial para D passa por B.</td></tr><tr><td>3</td><td>D, d=4</td><td>d[E]=6, d[F]=7</td><td>D melhora E e cria uma rota barata para F.</td></tr><tr><td>4</td><td>C, d=5</td><td>sem melhoria</td><td>C é visitado, mas não reduz nenhum custo conhecido.</td></tr><tr><td>5-7</td><td>E, F, G</td><td>d[G]=8 via F</td><td>Quando G é finalizado, o caminho ótimo está provado.</td></tr></tbody></table></div>
+      <aside class="math-definition"><strong>INVARIANTE</strong><p>Antes de cada extração, todo nó já finalizado tem distância ótima. A prova usa contradição: se existisse caminho melhor para `u`, ele teria que passar por algum nó ainda não finalizado com distância menor, que teria saído da fila antes.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-dark" id="complexidade"><div class="container math-layout"><aside class="math-marker"><span>04</span><small>CUSTO</small></aside><div class="math-body"><p class="math-eyebrow">// QUANTO O ALGORITMO CUSTA?</p><h2>A estrutura da fila muda a complexidade.</h2><p class="math-intro">O resultado é exato, mas o custo computacional depende da implementação e da densidade do grafo.</p>
+      <div class="concept-grid"><article><span>LISTA + BUSCA LINEAR</span><h3>O(|V|²)</h3><p>Simples de implementar. Pode ser aceitável em grafos pequenos ou muito densos.</p></article><article><span>HEAP BINÁRIO</span><h3>O((|V| + |E|) log |V|)</h3><p>Boa escolha prática para grafos esparsos, como mapas e redes.</p></article><article><span>MEMÓRIA</span><h3>O(|V| + |E|)</h3><p>Armazena grafo, distâncias, predecessores, visitados e itens da fronteira.</p></article></div>
+      <aside class="math-dark-callout"><strong>QUANDO USAR</strong><p>Use Dijkstra quando você precisa de ótimo garantido, tem pesos não negativos e não possui uma heurística confiável para guiar a busca até o destino.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-code" id="codigo"><div class="container math-layout"><aside class="math-marker"><span>05</span><small>CÓDIGO</small></aside><div class="math-body"><p class="math-eyebrow">// IMPLEMENTAÇÃO ESSENCIAL</p><h2>O código segue diretamente a matemática.</h2><p class="math-intro">`distancias` guarda `d[v]`, `anterior` reconstrói o caminho e a heap escolhe sempre o menor custo acumulado.</p>
+      <div class="math-code"><div class="math-code-head"><span>dijkstra.py</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>def dijkstra(grafo, origem, destino):
+    fila = [(0, origem)]
+    distancias = {origem: 0}
+    anterior = {}
+
+    while fila:
+        custo, no = heappop(fila)
+        if no == destino:
+            return reconstruir(anterior, origem, destino), custo
+
+        for vizinho, peso in grafo[no]:
+            novo = custo + peso
+            if novo < distancias.get(vizinho, float("inf")):
+                distancias[vizinho] = novo
+                anterior[vizinho] = no
+                heappush(fila, (novo, vizinho))</code></pre></div>
+      <div class="comparison-table"><article><span>ENTRADA</span><strong>grafo ponderado</strong><p>Lista de adjacência com pesos não negativos.</p></article><article><span>SAÍDA</span><strong>caminho ótimo</strong><p>Sequência de nós e custo total mínimo.</p></article><article><span>LIMITE</span><strong>sem heurística</strong><p>Explora por custo acumulado, sem noção espacial do destino.</p></article></div>
+      <div class="download-grid"><a href="examples/dijkstra.py" download><span>PYTHON</span><strong>Baixar laboratório</strong><small>Menor caminho com heap e tabela de distâncias</small></a></div>
+      <div class="module-next-grid"><a href="../a-star/"><span>PRÓXIMO</span><strong>A*</strong></a><a href="../algoritmo-genetico/"><span>OUTRO OTIMIZADOR</span><strong>Algoritmo genético</strong></a></div>
+    </div></div></section>
+
+    <section class="math-finish"><div class="container math-finish-grid"><div><span>CHECKPOINT_07</span><h2>Você sabe quando Dijkstra garante o menor caminho.</h2><p>Modele o grafo, confira pesos não negativos, acompanhe relaxamentos e interprete o custo como soma de arestas.</p></div><div class="math-finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Matemática ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>

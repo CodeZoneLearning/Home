@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula de algoritmo genético com cromossomos, fitness, seleção, cruzamento, mutação e exemplo de mochila binária.">
+  <title>Algoritmo genético | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="../solver-topic.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="math-lesson-page genetic-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav><a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a></div></header>
+  <main id="conteudo">
+    <section class="math-hero"><div class="container"><nav class="math-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Matemática</a><span>/</span><span>Bloco 09</span></nav><div class="math-hero-grid">
+      <div><p class="math-eyebrow">METAHEURISTICS · POPULATION_SEARCH</p><h1>Algoritmo<br><span>genético.</span></h1><p class="math-hero-lead">Algoritmos genéticos buscam boas soluções mantendo uma população de candidatos. Eles não garantem ótimo global, mas são úteis quando o espaço é grande, discreto, cheio de restrições ou sem derivada confiável.</p><div class="math-hero-actions"><a class="button" href="#representacao">Começar aula <span>↓</span></a><a class="math-outline-action" href="examples/algoritmo_genetico.py" download>Baixar laboratório `.py` <span>↓</span></a></div></div>
+      <aside class="solver-topic-board genetic-board" aria-label="Cromossomos binários em evolução"><span>POPULATION</span><div class="chromosomes"><i>101101</i><i>100111</i><i>111001</i><i>101111</i></div><strong>selecionar · cruzar · mutar</strong><p>cada geração tenta preservar boas características sem eliminar diversidade.</p></aside>
+    </div></div></section>
+
+    <div class="math-map"><div class="container"><a href="#representacao">01 · Representação</a><a href="#fitness">02 · Fitness</a><a href="#operadores">03 · Operadores</a><a href="#laboratorio">04 · Laboratório</a><a href="#codigo">05 · Código</a></div></div>
+
+    <section class="math-section" id="representacao"><div class="container math-layout"><aside class="math-marker"><span>01</span><small>GENES</small></aside><div class="math-body"><p class="math-eyebrow">// COMO UMA SOLUÇÃO VIRA CROMOSSOMO?</p><h2>O primeiro projeto é a representação.</h2><p class="math-intro">Um algoritmo genético manipula candidatos. Para um problema de seleção de itens, uma solução pode ser um vetor binário `x`, em que `x_i=1` significa escolher o item `i` e `x_i=0` significa deixar de fora.</p>
+      <div class="formula-panel"><span>CROMOSSOMO BINÁRIO</span><div class="equation-line">x ∈ {0,1}<sup>n</sup></div><p>Se `x = [1,0,1,1]`, o candidato escolhe os itens 1, 3 e 4. Essa codificação é simples, mas nem sempre é suficiente: rotas, ordens e agendas podem exigir cromossomos por permutação.</p></div>
+      <div class="concept-grid"><article><span>GENE</span><h3>Uma decisão local</h3><p>Escolher item, ativar parâmetro, usar recurso ou definir uma parte da solução.</p></article><article><span>CROMOSSOMO</span><h3>Solução completa</h3><p>Vetor, lista, permutação ou árvore que representa uma candidata possível.</p></article><article><span>POPULAÇÃO</span><h3>Várias hipóteses</h3><p>Conjunto de candidatos avaliados e transformados a cada geração.</p></article></div>
+      <aside class="math-warning"><strong>CUIDADO</strong><p>Uma representação ruim cria candidatos inválidos demais ou impede soluções boas de aparecer. Antes de ajustar taxa de mutação, confira se o cromossomo expressa o problema corretamente.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-soft" id="fitness"><div class="container math-layout"><aside class="math-marker"><span>02</span><small>FITNESS</small></aside><div class="math-body"><p class="math-eyebrow">// O QUE SIGNIFICA SER MELHOR?</p><h2>Fitness transforma solução em pontuação.</h2><p class="math-intro">Em otimização, normalmente queremos minimizar custo ou maximizar valor. Para restrições, uma prática comum é penalizar soluções inválidas em vez de descartá-las imediatamente.</p>
+      <div class="formula-panel"><span>MOCHILA BINÁRIA</span><div class="equation-line">max Σ v<sub>i</sub>x<sub>i</sub> sujeito a Σ c<sub>i</sub>x<sub>i</sub> ≤ B</div><p>`v_i` é valor, `c_i` é custo e `B` é orçamento. O vetor binário define quais itens entram na mochila.</p></div>
+      <div class="formula-panel"><span>FITNESS COM PENALIDADE</span><div class="equation-line">F(x)=Σ v<sub>i</sub>x<sub>i</sub> - λ max(0, Σ c<sub>i</sub>x<sub>i</sub> - B)<sup>2</sup></div><p>A penalidade quadrática pune violações grandes com mais força. O parâmetro `λ` controla o quanto a restrição pesa contra o valor bruto.</p></div>
+      <div class="concept-grid"><article><span>MAXIMIZAR</span><h3>Maior fitness vence</h3><p>Valor, lucro, cobertura, acurácia ou utilidade podem virar pontuação positiva.</p></article><article><span>MINIMIZAR</span><h3>Use sinal ou inverso</h3><p>Para custo, erro ou distância, pode usar `F=-custo` ou uma transformação equivalente.</p></article><article><span>RESTRIÇÕES</span><h3>Penalize violações</h3><p>Orçamento, capacidade, prazo e regras de negócio precisam aparecer no fitness.</p></article></div>
+    </div></div></section>
+
+    <section class="math-section math-section-dark" id="operadores"><div class="container math-layout"><aside class="math-marker"><span>03</span><small>EVOLUIR</small></aside><div class="math-body"><p class="math-eyebrow">// COMO A POPULAÇÃO MUDA?</p><h2>Seleção explora bons candidatos; mutação preserva diversidade.</h2><p class="math-intro">O ciclo típico é avaliar, selecionar pais, cruzar genes e mutar alguns pontos. Elitismo preserva os melhores candidatos para evitar perder progresso por acaso.</p>
+      <div class="parameter-grid"><article><span>SELEÇÃO</span><h3>Torneio</h3><p>Sorteie alguns candidatos e escolha o melhor entre eles. É simples, robusto e controla pressão seletiva pelo tamanho do torneio.</p></article><article><span>CRUZAMENTO</span><h3>Um ponto</h3><p>Escolha um corte `k` e combine prefixo de um pai com sufixo do outro: `filho = paiA[:k] + paiB[k:]`.</p></article><article><span>MUTAÇÃO</span><h3>Bernoulli por gene</h3><p>Cada gene tem probabilidade `p_m` de inverter. Em binário: `0` vira `1`, `1` vira `0`.</p></article></div>
+      <div class="formula-panel dark"><span>PROBABILIDADE DE MUTAÇÃO</span><div class="equation-line">P(x'<sub>j</sub> ≠ x<sub>j</sub>) = p<sub>m</sub></div><p>Mutação baixa demais pode estagnar; alta demais transforma a busca em ruído. O valor útil depende do tamanho do cromossomo e do custo de avaliar candidatos.</p></div>
+      <aside class="math-dark-callout"><strong>SEM GARANTIA GLOBAL</strong><p>Algoritmo genético é metaheurística. Ele entrega uma boa solução encontrada dentro de um orçamento de gerações, não uma prova matemática de ótimo.</p></aside>
+    </div></div></section>
+
+    <section class="math-section" id="laboratorio"><div class="container math-layout"><aside class="math-marker"><span>04</span><small>LAB</small></aside><div class="math-body"><p class="math-eyebrow">// MOCHILA DE PROJETOS</p><h2>Escolha itens sob orçamento e maximize valor.</h2><p class="math-intro">A simulação usa população fixa e semente determinística para mostrar como orçamento, mutação e número de gerações mudam a solução encontrada.</p>
+      <div class="solver-lab"><div class="lab-controls"><span>GENETIC_LAB</span><label>Orçamento B <output data-budget-output>28</output><input type="range" min="16" max="40" step="1" value="28" data-budget></label><label>Taxa de mutação pₘ <output data-mutation-output>0,12</output><input type="range" min="0" max="0.4" step="0.02" value="0.12" data-mutation></label><label>Gerações <output data-generations-output>60</output><input type="range" min="10" max="120" step="10" value="60" data-generations></label></div><div class="lab-result"><span>MELHOR CANDIDATO</span><strong data-best-value>valor 74</strong><p data-best-cost>custo 28 · fitness 74 · viável</p><div class="solution-tags" data-items></div></div></div>
+      <div class="worked-table"><table><thead><tr><th>Item</th><th>Custo</th><th>Valor</th><th>Leitura</th></tr></thead><tbody><tr><td>Sensor extra</td><td>6</td><td>13</td><td>Barato, bom para completar orçamento.</td></tr><tr><td>Pipeline de dados</td><td>9</td><td>22</td><td>Alta razão valor/custo.</td></tr><tr><td>Monitoramento</td><td>7</td><td>18</td><td>Útil em várias combinações.</td></tr><tr><td>Treinamento</td><td>11</td><td>25</td><td>Valioso, mas consome orçamento.</td></tr></tbody></table></div>
+    </div></div></section>
+
+    <section class="math-section math-section-code" id="codigo"><div class="container math-layout"><aside class="math-marker"><span>05</span><small>CÓDIGO</small></aside><div class="math-body"><p class="math-eyebrow">// IMPLEMENTAÇÃO ESSENCIAL</p><h2>O loop evolutivo é curto, mas as escolhas importam.</h2><p class="math-intro">A maior parte da qualidade vem de representação, fitness e parâmetros. O esqueleto abaixo mostra o ciclo básico.</p>
+      <div class="math-code"><div class="math-code-head"><span>algoritmo_genetico.py</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>for geracao in range(geracoes):
+    populacao.sort(key=fitness, reverse=True)
+    elite = populacao[:2]
+    nova = elite[:]
+    while len(nova) < tamanho_populacao:
+        pai_a = torneio(populacao)
+        pai_b = torneio(populacao)
+        filho = cruzar(pai_a, pai_b)
+        nova.append(mutar(filho, taxa_mutacao))
+    populacao = nova</code></pre></div>
+      <div class="comparison-table"><article><span>FORTE</span><strong>Espaços discretos</strong><p>Funciona bem quando busca exata é cara e gradiente não existe.</p></article><article><span>FRÁGIL</span><strong>Fitness ruim</strong><p>Se a pontuação não representa o problema, a evolução otimiza o número errado.</p></article><article><span>PARÂMETROS</span><strong>Orçamento manda</strong><p>População, gerações e mutação controlam custo e diversidade.</p></article></div>
+      <div class="download-grid"><a href="examples/algoritmo_genetico.py" download><span>PYTHON</span><strong>Baixar laboratório</strong><small>Mochila binária com seleção, cruzamento e mutação</small></a></div>
+      <div class="module-next-grid"><a href="../a-star/"><span>ANTERIOR</span><strong>A*</strong></a><a href="../pso/"><span>PRÓXIMO</span><strong>PSO</strong></a></div>
+    </div></div></section>
+
+    <section class="math-finish"><div class="container math-finish-grid"><div><span>CHECKPOINT_09</span><h2>Você sabe montar uma busca evolutiva com fitness explícito.</h2><p>Algoritmo genético é útil quando a solução pode ser codificada, avaliada e recombinada dentro de um orçamento de busca.</p></div><div class="math-finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Matemática ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>

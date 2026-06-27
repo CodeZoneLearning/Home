@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula de A* com f(n)=g(n)+h(n), heurística admissível, consistência, exemplo em grade e laboratório Python.">
+  <title>A* | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="../solver-topic.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body class="math-lesson-page astar-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell"><a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button><nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav><a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a></div></header>
+  <main id="conteudo">
+    <section class="math-hero"><div class="container"><nav class="math-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Matemática</a><span>/</span><span>Bloco 08</span></nav><div class="math-hero-grid">
+      <div><p class="math-eyebrow">GRAPH_SEARCH · HEURISTIC_SEARCH</p><h1>A*<br><span>com direção.</span></h1><p class="math-hero-lead">A* combina o custo já pago com uma estimativa do custo restante. Quando a heurística é bem escolhida, ele encontra o mesmo ótimo de Dijkstra expandindo menos nós.</p><div class="math-hero-actions"><a class="button" href="#prioridade">Começar aula <span>↓</span></a><a class="math-outline-action" href="examples/a_star.py" download>Baixar laboratório `.py` <span>↓</span></a></div></div>
+      <aside class="solver-topic-board astar-board" aria-label="Grade de busca A estrela"><span>HEURISTIC_GRID</span><div class="grid-sketch"><i>S</i><i></i><i></i><i></i><i>G</i><i></i><i class="wall"></i><i class="wall"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><strong>f = g + h</strong><p>g mede o caminho percorrido; h aponta para o que ainda falta.</p></aside>
+    </div></div></section>
+
+    <div class="math-map"><div class="container"><a href="#prioridade">01 · Prioridade</a><a href="#heuristica">02 · Heurística</a><a href="#laboratorio">03 · Laboratório</a><a href="#grade">04 · Grade</a><a href="#codigo">05 · Código</a></div></div>
+
+    <section class="math-section" id="prioridade"><div class="container math-layout"><aside class="math-marker"><span>01</span><small>FILA</small></aside><div class="math-body"><p class="math-eyebrow">// CUSTO REAL + ESTIMATIVA</p><h2>A* escolhe o próximo nó pelo menor valor de f.</h2><p class="math-intro">Dijkstra ordena a fronteira por `g(n)`, o custo real desde a origem. A* adiciona `h(n)`, uma estimativa do custo que falta até o destino.</p>
+      <div class="formula-panel"><span>FUNÇÃO DE PRIORIDADE</span><div class="equation-line">f(n) = g(n) + h(n)</div><p>`g(n)` nunca é chute: é a soma dos pesos já percorridos. `h(n)` é conhecimento externo sobre o problema, como distância em linha reta, distância Manhattan ou tempo mínimo fisicamente possível.</p></div>
+      <div class="concept-grid"><article><span>g(n)</span><h3>Custo acumulado</h3><p>Quanto custou sair da origem e chegar ao nó atual.</p></article><article><span>h(n)</span><h3>Estimativa restante</h3><p>Um limite inferior ou aproximação do custo até o objetivo.</p></article><article><span>f(n)</span><h3>Prioridade</h3><p>Menor `f` sai primeiro da fila e tende a puxar a busca na direção do destino.</p></article></div>
+      <aside class="math-definition"><strong>CASO-LIMITE</strong><p>Se `h(n)=0` para todos os nós, A* vira Dijkstra. Se `h` é informativa e segura, a busca visita menos nós sem sacrificar o menor caminho.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-soft" id="heuristica"><div class="container math-layout"><aside class="math-marker"><span>02</span><small>H(N)</small></aside><div class="math-body"><p class="math-eyebrow">// O QUE TORNA UMA HEURÍSTICA SEGURA?</p><h2>Admissibilidade preserva a garantia de ótimo.</h2><p class="math-intro">Uma heurística é admissível quando nunca superestima o custo real restante. Ela pode ser otimista, mas não pode prometer um caminho mais caro como se fosse mais barato do que realmente é.</p>
+      <div class="formula-panel"><span>ADMISSÍVEL</span><div class="equation-line">0 ≤ h(n) ≤ h*(n)</div><p>`h*(n)` é o custo real do menor caminho de `n` até o objetivo. Em mapas com movimentos horizontais e verticais de custo 1, a distância Manhattan é admissível quando não há atalhos diagonais mais baratos.</p></div>
+      <div class="formula-panel"><span>CONSISTENTE</span><div class="equation-line">h(u) ≤ w(u,v) + h(v)</div><p>A consistência é uma desigualdade triangular. Se ela vale para toda aresta, quando um nó é retirado da fila seu melhor custo já está fechado, como em Dijkstra.</p></div>
+      <div class="concept-grid"><article><span>BOA HEURÍSTICA</span><h3>Perto do custo real</h3><p>Quanto mais `h(n)` se aproxima de `h*(n)` sem passar dele, menos nós A* tende a expandir.</p></article><article><span>HEURÍSTICA FRACA</span><h3>Quase zero</h3><p>Continua correta, mas perde poder de direção e se comporta como Dijkstra.</p></article><article><span>HEURÍSTICA AGRESSIVA</span><h3>Pode superestimar</h3><p>Pode ficar mais rápida, mas deixa de garantir o caminho ótimo.</p></article></div>
+    </div></div></section>
+
+    <section class="math-section" id="laboratorio"><div class="container math-layout"><aside class="math-marker"><span>03</span><small>LAB</small></aside><div class="math-body"><p class="math-eyebrow">// COMPARE EXPANSÕES E CUSTO</p><h2>O peso da heurística muda o comportamento.</h2><p class="math-intro">Use `α` para multiplicar a heurística: `f(n)=g(n)+αh(n)`. Com `α=0`, você tem Dijkstra. Com `α=1` e uma heurística admissível, A* mantém a garantia. Valores maiores podem acelerar, mas devem ser tratados como aproximação.</p>
+      <div class="solver-lab"><div class="lab-controls"><span>A_STAR_LAB</span><label>Peso da heurística α <output data-alpha-output>1,0</output><input type="range" min="0" max="2" step="0.1" value="1" data-alpha></label><label>Custo B → D <output data-bd-output>2</output><input type="range" min="1" max="9" step="1" value="2" data-bd></label><label>Custo D → E <output data-de-output>2</output><input type="range" min="1" max="9" step="1" value="2" data-de></label></div><div class="lab-result"><span>RESULTADO A → G</span><strong data-path>A → B → D → F → G</strong><p data-cost>Custo 8 · 5 expansões · ótimo preservado</p><div class="solution-tags" data-frontier></div></div></div>
+      <aside class="math-warning"><strong>LEITURA</strong><p>O número de expansões não é a única métrica. Em busca exata, o caminho precisa continuar ótimo. Em busca aproximada, você pode aceitar trocar garantia por velocidade, mas isso deve ser uma decisão explícita.</p></aside>
+    </div></div></section>
+
+    <section class="math-section math-section-dark" id="grade"><div class="container math-layout"><aside class="math-marker"><span>04</span><small>GRID</small></aside><div class="math-body"><p class="math-eyebrow">// EXEMPLO DE HEURÍSTICA MANHATTAN</p><h2>Em uma grade, a distância Manhattan é uma escolha natural.</h2><p class="math-intro">Se você só pode mover para cima, baixo, esquerda e direita com custo 1, sair de `(x,y)` para `(xg,yg)` exige pelo menos `|x-xg| + |y-yg|` movimentos. Obstáculos podem aumentar o custo real, mas não reduzem esse limite.</p>
+      <div class="formula-panel dark"><span>MANHATTAN</span><div class="equation-line">h(n) = |x - x<sub>g</sub>| + |y - y<sub>g</sub>|</div><p>Para movimentos diagonais permitidos com custo euclidiano, a distância em linha reta costuma ser admissível. A heurística deve respeitar a geometria e o custo dos movimentos.</p></div>
+      <div class="concept-grid"><article><span>EXEMPLO</span><h3>n=(2,3), g=(7,1)</h3><p>`h(n)=|2-7|+|3-1|=7`. Sem diagonais, qualquer caminho precisa de ao menos sete passos.</p></article><article><span>OBSTÁCULO</span><h3>Não quebra</h3><p>Uma parede pode obrigar desvio e tornar `h*` maior, então `h <= h*` continua verdadeiro.</p></article><article><span>ATALHO</span><h3>Pode quebrar</h3><p>Se existir teleporte ou diagonal barata, Manhattan pode superestimar e deixar de ser admissível.</p></article></div>
+    </div></div></section>
+
+    <section class="math-section math-section-code" id="codigo"><div class="container math-layout"><aside class="math-marker"><span>05</span><small>CÓDIGO</small></aside><div class="math-body"><p class="math-eyebrow">// IMPLEMENTAÇÃO ESSENCIAL</p><h2>A diferença para Dijkstra aparece na prioridade.</h2><p class="math-intro">A atualização de custo continua sendo relaxamento. O que muda é a chave usada na fila: custo real acumulado mais estimativa restante.</p>
+      <div class="math-code"><div class="math-code-head"><span>a_star.py</span><button type="button" data-copy-code>Copiar código</button></div><pre><code>prioridade = novo_custo + heuristica(vizinho, destino)
+heappush(fila, (prioridade, vizinho))
+
+# se heuristica(n, destino) == 0, o algoritmo se comporta como Dijkstra</code></pre></div>
+      <div class="comparison-table"><article><span>ÓTIMO</span><strong>h admissível</strong><p>Não superestima o custo real restante.</p></article><article><span>EFICIENTE</span><strong>h informativa</strong><p>Aproxima bem `h*` e reduz expansões.</p></article><article><span>RISCO</span><strong>h agressiva</strong><p>Pode encontrar caminho rápido, mas não necessariamente ótimo.</p></article></div>
+      <div class="download-grid"><a href="examples/a_star.py" download><span>PYTHON</span><strong>Baixar laboratório</strong><small>A* com heurística euclidiana e comparação com Dijkstra</small></a></div>
+      <div class="module-next-grid"><a href="../dijkstra/"><span>ANTERIOR</span><strong>Dijkstra</strong></a><a href="../algoritmo-genetico/"><span>PRÓXIMO</span><strong>Algoritmo genético</strong></a></div>
+    </div></div></section>
+
+    <section class="math-finish"><div class="container math-finish-grid"><div><span>CHECKPOINT_08</span><h2>Você sabe avaliar se uma heurística ajuda sem quebrar a busca.</h2><p>A* é Dijkstra com direção: `g` paga o caminho real, `h` estima o restante e a garantia depende da qualidade matemática dessa estimativa.</p></div><div class="math-finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Matemática ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script><script src="../../../../script.js"></script><script src="script.js"></script>
+</body>
+</html>

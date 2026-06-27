@@ -1,0 +1,32 @@
+.dijkstra-board .graph-strip {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin: 30px 0;
+}
+.dijkstra-board .graph-strip::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--math-cyan), var(--math-lime));
+}
+.dijkstra-board .graph-strip i {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px solid rgba(0,200,255,.35);
+  border-radius: 50%;
+  background: #111521;
+  color: #fff;
+  font: 15px var(--font-heading);
+}
+.dijkstra-board .graph-strip i:last-child {
+  border-color: rgba(216,241,59,.72);
+  background: rgba(216,241,59,.16);
+}
