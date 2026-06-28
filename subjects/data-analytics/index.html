@@ -75,7 +75,7 @@
         <section class="subject-section" id="trilha">
           <p class="subject-section-label">// ROTEIRO</p>
           <h2>Da tabela ao produto analítico.</h2>
-          <p class="section-intro">Os materiais ficam dentro de cada módulo. O primeiro já está completo e usa testes fictícios de saúde de equipamentos.</p>
+          <p class="section-intro">Os materiais ficam dentro de cada módulo. A trilha agora cobre manipulação tabular, gráficos, dashboards com Plotly e data apps com Streamlit.</p>
           <div class="module-list">
             <article class="module-card module-card-featured">
               <span class="module-index">01</span>
@@ -83,26 +83,41 @@
                 <div class="module-heading"><h3>Manipulação de dados tabulares</h3><span class="module-state is-ready">Disponível</span></div>
                 <p>CSV realista, Pandas, `describe`, valores únicos, `groupby` e inferência sobre a consistência dos testes.</p>
                 <div class="module-assets"><span>CSV</span><span>PY</span><span>5 OUTPUTS</span></div>
-                <a class="module-open" href="modules/manipulacao-dados-tabulares/" data-module-open>Abrir aula completa <span>↗</span></a>
+                <a class="module-open" href="modules/manipulacao-dados-tabulares/" data-module-open="01">Abrir aula completa <span>↗</span></a>
               </div>
               <label class="module-check"><input type="checkbox" data-module="01"><span>✓</span></label>
             </article>
 
-            <article class="module-card">
+            <article class="module-card module-card-featured">
               <span class="module-index">02</span>
-              <div class="module-content"><div class="module-heading"><h3>Criação de gráficos</h3><span class="module-state">Planejado</span></div><p>Distribuição, comparação, relação e séries temporais com Matplotlib e Seaborn.</p></div>
+              <div class="module-content">
+                <div class="module-heading"><h3>Criação de gráficos</h3><span class="module-state is-ready">Disponível</span></div>
+                <p>Escolha visual pela pergunta, gráficos estáticos com Matplotlib e Seaborn, exploração interativa com Plotly e saídas reproduzíveis.</p>
+                <div class="module-assets"><span>CSV</span><span>PY</span><span>4 PNG</span><span>HTML</span></div>
+                <a class="module-open" href="modules/criacao-graficos/" data-module-open="02">Abrir aula completa <span>↗</span></a>
+              </div>
               <label class="module-check"><input type="checkbox" data-module="02"><span>✓</span></label>
             </article>
 
-            <article class="module-card">
+            <article class="module-card module-card-featured">
               <span class="module-index">03</span>
-              <div class="module-content"><div class="module-heading"><h3>Dashboards com Plotly</h3><span class="module-state">Planejado</span></div><p>KPIs, filtros e visualizações interativas organizadas para exploração.</p></div>
+              <div class="module-content">
+                <div class="module-heading"><h3>Dashboards com Plotly</h3><span class="module-state is-ready">Disponível</span></div>
+                <p>KPIs, `make_subplots`, barras, linhas, dispersão, heatmap, dropdown, hover e exportação para HTML interativo.</p>
+                <div class="module-assets"><span>CSV</span><span>PY</span><span>HTML</span><span>3 OUTPUTS</span></div>
+                <a class="module-open" href="modules/dashboards-plotly/" data-module-open="03">Abrir aula completa <span>↗</span></a>
+              </div>
               <label class="module-check"><input type="checkbox" data-module="03"><span>✓</span></label>
             </article>
 
-            <article class="module-card">
+            <article class="module-card module-card-featured">
               <span class="module-index">04</span>
-              <div class="module-content"><div class="module-heading"><h3>Data apps com Streamlit</h3><span class="module-state">Planejado</span></div><p>Aplicação publicada com upload, cache, estado, filtros e narrativa analítica.</p></div>
+              <div class="module-content">
+                <div class="module-heading"><h3>Data apps com Streamlit</h3><span class="module-state is-ready">Disponível</span></div>
+                <p>Aplicação navegável com upload de CSV, cache, validação de schema, filtros, métricas, gráficos Plotly, tabela e download.</p>
+                <div class="module-assets"><span>CSV</span><span>APP.PY</span><span>README</span></div>
+                <a class="module-open" href="modules/data-apps-streamlit/" data-module-open="04">Abrir aula completa <span>↗</span></a>
+              </div>
               <label class="module-check"><input type="checkbox" data-module="04"><span>✓</span></label>
             </article>
           </div>
@@ -114,8 +129,8 @@
           <p class="section-intro">A organização separa fonte, lógica e resultado. Assim você pode trocar o CSV, executar novamente e comparar o que mudou.</p>
           <div class="material-map">
             <article><span>01 · RAW</span><h3>`data/`</h3><p>CSV original e dicionário de dados. A análise nunca sobrescreve essa camada.</p></article>
-            <article><span>02 · CODE</span><h3>`scripts/`</h3><p>Gerador reproduzível e análise Pandas executada pela linha de comando.</p></article>
-            <article><span>03 · RESULT</span><h3>`outputs/`</h3><p>Resumos por equipamento, contagens, estatísticas e intervalos de confiança.</p></article>
+            <article><span>02 · CODE</span><h3>`scripts/` ou `app.py`</h3><p>Geradores, análises Pandas e aplicações Streamlit executáveis.</p></article>
+            <article><span>03 · RESULT</span><h3>`outputs/`</h3><p>Relatórios, tabelas derivadas, gráficos exportados e artefatos interativos.</p></article>
             <article><span>04 · GUIDE</span><h3>`README.md`</h3><p>Contrato da base, instalação, critérios e limites da interpretação.</p></article>
           </div>
         </section>

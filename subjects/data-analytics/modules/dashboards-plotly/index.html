@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula pratica de dashboards com Plotly, KPIs, make_subplots, hover, dropdown, legenda e HTML standalone.">
+  <title>Dashboards com Plotly | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="plotly-lesson-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button>
+      <nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav>
+      <a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="plotly-hero">
+      <div class="container">
+        <nav class="lesson-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Data Analytics</a><span>/</span><span>Bloco 03</span></nav>
+        <div class="plotly-hero-grid">
+          <div>
+            <p class="eyebrow">PLOTLY · DASHBOARD</p>
+            <h1>Dashboards<br><span>com Plotly.</span></h1>
+            <p class="lesson-lead">Organize KPIs, gráficos e filtros em uma entrega interativa que apoia leitura executiva e investigação detalhada.</p>
+            <div class="lesson-actions">
+              <a class="button" href="outputs/learning_analytics_dashboard.html">Abrir dashboard <span>↗</span></a>
+              <a class="button button-outline" href="scripts/generate_dashboard.py" download>Baixar script <span>↓</span></a>
+              <a class="button button-outline" href="data/learning_activity.csv" download>Baixar CSV <span>↓</span></a>
+            </div>
+          </div>
+          <aside class="plotly-terminal" aria-label="Resumo do dashboard">
+            <div class="terminal-head"><span></span><span></span><span></span><code>plotly.dashboard</code></div>
+            <div class="terminal-body">
+              <p><span>rows</span><strong data-metric="rows">192</strong></p>
+              <p><span>tracks</span><strong data-metric="tracks">4</strong></p>
+              <p><span>kpis</span><strong>4</strong></p>
+              <p><span>views</span><strong>4</strong></p>
+              <div class="terminal-status"><i></i> html generated</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="lesson-progress">
+      <div class="container">
+        <span>01 · Desenho</span>
+        <span>02 · Subplots</span>
+        <span>03 · Interação</span>
+        <span>04 · Entrega</span>
+      </div>
+    </div>
+
+    <section class="lesson-section" id="desenho">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>01</span><small>DESENHO</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// ANTES DO CÓDIGO</p>
+          <h2>Dashboard não é coleção de gráficos.</h2>
+          <p class="section-lead">Um dashboard precisa de hierarquia: primeiro os indicadores que orientam a leitura, depois os gráficos que explicam diferenças, tendências e relações.</p>
+
+          <div class="design-grid">
+            <article><span>Usuário</span><h3>Quem vai olhar?</h3><p>Uma pessoa que acompanha evolução das trilhas e quer saber onde investigar.</p></article>
+            <article><span>Decisão</span><h3>O que muda depois da leitura?</h3><p>Priorizar suporte, revisar trilhas e acompanhar desempenho semanal.</p></article>
+            <article><span>Camadas</span><h3>O que vem primeiro?</h3><p>KPIs no topo, comparação e tendência no meio, exploração e correlação abaixo.</p></article>
+            <article><span>Interação</span><h3>O que deve ser filtrável?</h3><p>Trilhas podem ser isoladas por dropdown e legenda sem recriar o dashboard.</p></article>
+          </div>
+
+          <div class="data-preview">
+            <div class="panel-head">
+              <div><span>DATASET</span><h3>learning_activity.csv</h3></div>
+              <a href="data/learning_activity.csv" download>DOWNLOAD ↓</a>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>week</th><th>learner</th><th>track</th><th>hours</th><th>tasks</th><th>completion</th><th>score</th><th>satisfaction</th></tr></thead>
+                <tbody data-preview-body><tr><td colspan="8">Carregando amostra do CSV...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section lesson-section-alt" id="subplots">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>02</span><small>SUBPLOTS</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// FIGURA COMPOSTA</p>
+          <h2>`make_subplots` organiza o painel.</h2>
+          <p class="section-lead">Plotly permite montar uma figura com diferentes tipos de visualização. O dashboard desta aula usa quatro indicadores, barras, linhas, dispersão e heatmap em uma única figura.</p>
+
+          <div class="layout-map">
+            <article><span>KPI 01</span><strong>Participantes</strong></article>
+            <article><span>KPI 02</span><strong>Conclusão</strong></article>
+            <article><span>KPI 03</span><strong>Pontuação</strong></article>
+            <article><span>KPI 04</span><strong>Suporte</strong></article>
+            <article class="wide"><span>Barras</span><strong>Conclusão por trilha</strong></article>
+            <article class="wide"><span>Linha</span><strong>Pontuação semanal</strong></article>
+            <article class="wide"><span>Dispersão</span><strong>Horas x desempenho</strong></article>
+            <article class="wide"><span>Heatmap</span><strong>Correlação</strong></article>
+          </div>
+
+          <div class="code-card">
+            <div class="code-card-head"><span>dashboard_layout.py</span><button type="button" data-copy-code>Copiar</button></div>
+            <pre><code>from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
+fig = make_subplots(
+    rows=3,
+    cols=4,
+    specs=[
+        [{"type": "indicator"}, {"type": "indicator"}, {"type": "indicator"}, {"type": "indicator"}],
+        [{"type": "bar", "colspan": 2}, None, {"type": "scatter", "colspan": 2}, None],
+        [{"type": "scatter", "colspan": 2}, None, {"type": "heatmap", "colspan": 2}, None],
+    ],
+)
+
+fig.add_trace(go.Indicator(mode="number", value=192, title={"text": "participantes"}), row=1, col=1)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="interacao">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>03</span><small>INTERAÇÃO</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// HOVER, LEGENDA E FILTRO</p>
+          <h2>Interatividade precisa ter propósito.</h2>
+          <p class="section-lead">Hover revela detalhes sem poluir o gráfico. Legenda permite esconder séries. Dropdown troca o foco da leitura. Tudo isso deve reduzir esforço, não esconder a mensagem principal.</p>
+
+          <div class="interaction-grid">
+            <article><span>Hover</span><h3>Detalhe sob demanda</h3><p>Semana, tarefas, conclusão e satisfação aparecem apenas quando o usuário investiga um ponto.</p></article>
+            <article><span>Legenda</span><h3>Comparar ou isolar</h3><p>Clicar na legenda ajuda a reduzir ruído visual em gráficos com múltiplas trilhas.</p></article>
+            <article><span>Dropdown</span><h3>Foco por trilha</h3><p>O dashboard pode mostrar todas as trilhas ou destacar uma sem recalcular os dados.</p></article>
+          </div>
+
+          <div class="code-card">
+            <div class="code-card-head"><span>plotly_interaction.py</span><button type="button" data-copy-code>Copiar</button></div>
+            <pre><code>buttons = [
+    {"label": "Todas as trilhas", "method": "update", "args": [{"visible": [True] * len(fig.data)}]},
+    {"label": "Python", "method": "update", "args": [{"visible": python_visibility}]},
+]
+
+fig.update_layout(
+    updatemenus=[{"type": "dropdown", "buttons": buttons}],
+    hovermode="closest",
+)</code></pre>
+          </div>
+
+          <div class="summary-panel">
+            <div class="panel-head">
+              <div><span>SUMMARY</span><h3>Resumo por trilha</h3></div>
+              <a href="outputs/dashboard_summary.csv" download>CSV ↓</a>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>track</th><th>learners</th><th>hours</th><th>completion</th><th>score</th><th>support</th></tr></thead>
+                <tbody data-summary-body><tr><td colspan="6">Carregando resumo...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section lesson-section-dark" id="dashboard">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>04</span><small>ENTREGA</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow">// HTML STANDALONE</p>
+          <h2>Plotly entrega um artefato interativo.</h2>
+          <p class="section-lead">O dashboard pode ser salvo como HTML para revisão, compartilhamento e versionamento. Isso não substitui um data app, mas resolve bem relatórios exploratórios e entregas leves.</p>
+
+          <div class="dashboard-frame">
+            <iframe src="outputs/learning_analytics_dashboard.html" title="Dashboard Plotly de atividade de aprendizagem"></iframe>
+          </div>
+
+          <div class="delivery-grid">
+            <article><span>Arquivo</span><h3>`learning_analytics_dashboard.html`</h3><p>Dashboard completo com Plotly carregado via CDN.</p></article>
+            <article><span>Reprodução</span><h3>`generate_dashboard.py`</h3><p>Script único para recriar o HTML e os resumos.</p></article>
+            <article><span>Limite</span><h3>HTML não é aplicação</h3><p>Para upload, autenticação e estado, use Streamlit ou outra camada de app.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="pratica">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>05</span><small>PRÁTICA</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// EXERCÍCIOS</p>
+          <h2>Troque a pergunta, não só a cor.</h2>
+          <p class="section-lead">A prática é reorganizar o dashboard quando o objetivo muda. Se a decisão muda, a hierarquia visual também deve mudar.</p>
+
+          <div class="practice-grid">
+            <article><span>A</span><h3>Foco em suporte</h3><p>Coloque pedidos de suporte como KPI principal e crie uma visão por semana.</p></article>
+            <article><span>B</span><h3>Foco em satisfação</h3><p>Substitua o heatmap por boxplot de satisfação por trilha.</p></article>
+            <article><span>C</span><h3>Foco executivo</h3><p>Remova a dispersão e deixe apenas KPIs, barras e linha temporal.</p></article>
+            <article><span>D</span><h3>Foco exploratório</h3><p>Adicione mais informações no hover e justifique o que deve aparecer.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-finish">
+      <div class="container finish-grid">
+        <div><span>CHECKPOINT_03</span><h2>Você criou um dashboard interativo reproduzível.</h2><p>Agora a trilha de Data Analytics tem manipulação, visualização, dashboard e data app completos.</p></div>
+        <div class="finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Data Analytics ↗</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script>
+  <script src="../../../../script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

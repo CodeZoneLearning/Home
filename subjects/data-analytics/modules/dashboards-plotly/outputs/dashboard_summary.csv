@@ -1,0 +1,5 @@
+track,learners,mean_study_hours,mean_completion_rate,mean_challenge_score,mean_satisfaction,total_support_requests
+Dados,48,5.741,0.942,88.198,4.725,75
+Machine Learning,48,6.511,0.928,88.275,4.725,71
+Python,48,5.195,0.91,83.927,4.596,87
+GenAI,48,4.888,0.883,81.435,4.601,91

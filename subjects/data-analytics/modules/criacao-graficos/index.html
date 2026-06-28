@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula pratica de criacao de graficos com Matplotlib, Seaborn, Plotly e pandas para analise de dados.">
+  <title>Criação de gráficos | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="chart-lesson-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button>
+      <nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav>
+      <a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="chart-hero">
+      <div class="container">
+        <nav class="lesson-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Data Analytics</a><span>/</span><span>Bloco 02</span></nav>
+        <div class="chart-hero-grid">
+          <div>
+            <p class="eyebrow">DATA_VIS · CHART_SELECTION</p>
+            <h1>Criação de<br><span>gráficos.</span></h1>
+            <p class="lesson-lead">Aprenda a escolher, construir e interpretar visualizações com Matplotlib, Seaborn, Plotly e pandas a partir de uma pergunta analítica clara.</p>
+            <div class="lesson-actions">
+              <a class="button" href="data/learning_activity.csv" download>Baixar CSV <span>↓</span></a>
+              <a class="button button-outline" href="scripts/generate_visualizations.py" download>Baixar script <span>↓</span></a>
+              <a class="button button-outline" href="outputs/plotly_learning_dashboard.html">Abrir Plotly <span>↗</span></a>
+            </div>
+          </div>
+          <aside class="chart-terminal" aria-label="Resumo do conjunto de dados">
+            <div class="terminal-head"><span></span><span></span><span></span><code>visualization.profile</code></div>
+            <div class="terminal-body">
+              <p><span>rows</span><strong data-metric="rows">192</strong></p>
+              <p><span>tracks</span><strong data-metric="tracks">4</strong></p>
+              <p><span>weeks</span><strong data-metric="weeks">8</strong></p>
+              <p><span>outputs</span><strong data-metric="outputs">5</strong></p>
+              <div class="terminal-status"><i></i> charts generated</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="lesson-progress">
+      <div class="container">
+        <span>01 · Pergunta</span>
+        <span>02 · Matplotlib</span>
+        <span>03 · Seaborn</span>
+        <span>04 · Interativo</span>
+      </div>
+    </div>
+
+    <section class="lesson-section" id="pergunta">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>01</span><small>PERGUNTA</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// ANTES DO GRAFICO</p>
+          <h2>Todo gráfico começa com uma pergunta.</h2>
+          <p class="section-lead">O erro mais comum em visualização é escolher a biblioteca antes de decidir o que precisa ser comparado, explicado ou investigado. Nesta aula, a base mostra atividade de aprendizagem em quatro trilhas Code Zone.</p>
+
+          <div class="question-grid">
+            <article><span>Comparar</span><h3>Qual trilha tem maior conclusão média?</h3><p>Use barras quando categorias precisam ser comparadas lado a lado.</p></article>
+            <article><span>Evoluir</span><h3>A pontuação melhora ao longo das semanas?</h3><p>Use linhas quando a ordem temporal é parte da pergunta.</p></article>
+            <article><span>Relacionar</span><h3>Horas de estudo se conectam ao desempenho?</h3><p>Use dispersão quando duas variáveis numéricas variam juntas.</p></article>
+            <article><span>Investigar</span><h3>Quais métricas caminham juntas?</h3><p>Use heatmap quando várias relações precisam ser vistas ao mesmo tempo.</p></article>
+          </div>
+
+          <div class="data-preview">
+            <div class="panel-head">
+              <div><span>DATASET</span><h3>learning_activity.csv</h3></div>
+              <a href="data/learning_activity.csv" download>DOWNLOAD ↓</a>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>week</th><th>learner</th><th>track</th><th>hours</th><th>tasks</th><th>completion</th><th>score</th><th>satisfaction</th></tr></thead>
+                <tbody data-preview-body><tr><td colspan="8">Carregando amostra do CSV...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+
+          <aside class="concept-note"><strong>Regra prática</strong><p>Escolha o gráfico pelo tipo de pergunta: comparação, distribuição, relação, composição ou evolução temporal. A biblioteca vem depois.</p></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section lesson-section-alt" id="matplotlib">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>02</span><small>MATPLOTLIB</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// FIGURA, EIXO E CAMADAS</p>
+          <h2>Matplotlib oferece controle fino.</h2>
+          <p class="section-lead">Matplotlib é a base histórica de visualização em Python. Ele exige mais decisões explícitas, mas dá controle sobre figura, eixo, escala, rótulo, grade, legenda e exportação.</p>
+
+          <div class="code-card">
+            <div class="code-card-head"><span>matplotlib_bar.py</span><button type="button" data-copy-code>Copiar</button></div>
+            <pre><code>summary = df.groupby("track", as_index=False)["completion_rate"].mean()
+
+fig, ax = plt.subplots(figsize=(9, 5))
+ax.barh(summary["track"], summary["completion_rate"] * 100)
+ax.set_title("Taxa media de conclusao por trilha", loc="left")
+ax.set_xlabel("Conclusao media (%)")
+ax.set_xlim(0, 100)
+fig.tight_layout()
+fig.savefig("outputs/matplotlib_completion_by_track.png", dpi=180)</code></pre>
+          </div>
+
+          <div class="chart-showcase two-columns">
+            <figure>
+              <img src="outputs/matplotlib_completion_by_track.png" alt="Grafico de barras horizontais com taxa media de conclusao por trilha.">
+              <figcaption>Barras comparam categorias. Aqui, cada trilha é uma categoria.</figcaption>
+            </figure>
+            <figure>
+              <img src="outputs/matplotlib_weekly_score.png" alt="Grafico de linhas com pontuacao media semanal por trilha.">
+              <figcaption>Linhas mostram evolução. O eixo x tem ordem temporal.</figcaption>
+            </figure>
+          </div>
+
+          <div class="interpretation-strip">
+            <div><span>Quando usar</span><p>Relatórios, exportação estática, composição cuidadosa e ajustes finos.</p></div>
+            <div><span>Cuidado</span><p>Um gráfico pode estar tecnicamente correto e ainda assim responder uma pergunta mal formulada.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="seaborn">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>03</span><small>SEABORN</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// ESTATISTICA VISUAL</p>
+          <h2>Seaborn reduz código para gráficos estatísticos.</h2>
+          <p class="section-lead">Seaborn trabalha muito bem com DataFrames e facilita gráficos de relação, distribuição, comparação e matrizes de correlação. Ele é especialmente útil na fase exploratória.</p>
+
+          <div class="code-card">
+            <div class="code-card-head"><span>seaborn_scatter.py</span><button type="button" data-copy-code>Copiar</button></div>
+            <pre><code>sns.scatterplot(
+    data=df,
+    x="study_hours",
+    y="challenge_score",
+    hue="track",
+    size="completion_rate",
+    alpha=0.78,
+    ax=ax,
+)
+
+sns.regplot(
+    data=df,
+    x="study_hours",
+    y="challenge_score",
+    scatter=False,
+    color="#0d0f1a",
+    ax=ax,
+)</code></pre>
+          </div>
+
+          <div class="chart-showcase two-columns">
+            <figure>
+              <img src="outputs/seaborn_hours_vs_score.png" alt="Grafico de dispersao entre horas de estudo e pontuacao do desafio.">
+              <figcaption>Dispersão mostra relação entre duas variáveis numéricas.</figcaption>
+            </figure>
+            <figure>
+              <img src="outputs/seaborn_correlation_heatmap.png" alt="Mapa de calor com correlacoes entre variaveis numericas.">
+              <figcaption>Heatmap resume várias correlações em uma matriz.</figcaption>
+            </figure>
+          </div>
+
+          <div class="summary-panel">
+            <div class="panel-head">
+              <div><span>GROUPED_RESULT</span><h3>Resumo por trilha</h3></div>
+              <a href="outputs/chart_summary.csv" download>CSV ↓</a>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>track</th><th>learners</th><th>hours</th><th>completion</th><th>score</th><th>satisfaction</th></tr></thead>
+                <tbody data-summary-body><tr><td colspan="6">Carregando resumo...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section lesson-section-dark" id="bibliotecas">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>04</span><small>ESCOLHA</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow">// OUTRAS FERRAMENTAS</p>
+          <h2>A biblioteca depende da entrega.</h2>
+          <p class="section-lead">A mesma pergunta pode virar gráfico estático, exploração interativa ou protótipo rápido. O importante é separar análise, comunicação e produto.</p>
+
+          <div class="library-grid">
+            <article><span>pandas.plot</span><h3>Exploração rápida</h3><p>Bom quando o DataFrame já está pronto e você precisa validar uma ideia sem composição visual elaborada.</p><code>df.groupby("track")["challenge_score"].mean().plot.bar()</code></article>
+            <article><span>Plotly</span><h3>Interação</h3><p>Bom para hover, zoom, filtros visuais e exploração com stakeholders.</p><a href="outputs/plotly_learning_dashboard.html">Abrir dashboard HTML ↗</a></article>
+            <article><span>Altair</span><h3>Gramática declarativa</h3><p>Boa opção para especificar visualizações por mapeamentos como eixo, cor e faceta.</p><code>alt.Chart(df).mark_point()</code></article>
+            <article><span>Dashboards</span><h3>Produto analítico</h3><p>Depois dos gráficos, ferramentas como Streamlit e Dash organizam filtros, estado e publicação.</p><code>st.plotly_chart(fig)</code></article>
+          </div>
+
+          <div class="decision-table">
+            <h3>Mapa de escolha</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Necessidade</th><th>Visual</th><th>Biblioteca sugerida</th><th>Motivo</th></tr></thead>
+                <tbody>
+                  <tr><td>Comparar categorias</td><td>Barras</td><td>Matplotlib ou Seaborn</td><td>Leitura direta de diferenças.</td></tr>
+                  <tr><td>Ver tendência</td><td>Linha</td><td>Matplotlib</td><td>Controle claro de eixo temporal.</td></tr>
+                  <tr><td>Investigar relação</td><td>Dispersão</td><td>Seaborn</td><td>Combina cor, tamanho e regressão.</td></tr>
+                  <tr><td>Explorar pontos</td><td>Interativo</td><td>Plotly</td><td>Hover revela detalhes sem poluir o gráfico.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="pratica">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>05</span><small>PRATICA</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// EXERCICIOS</p>
+          <h2>Agora troque a pergunta.</h2>
+          <p class="section-lead">A prática mais importante é mudar a pergunta e escolher outro gráfico, não apenas repetir o código.</p>
+
+          <div class="practice-grid">
+            <article><span>A</span><h3>Distribuição</h3><p>Mostre a distribuição de `challenge_score` por trilha. Compare histograma, KDE e boxplot.</p></article>
+            <article><span>B</span><h3>Composição</h3><p>Calcule a participação de cada trilha no total de chamados de suporte.</p></article>
+            <article><span>C</span><h3>Sensibilidade</h3><p>Remova uma trilha e veja se a correlação entre horas e pontuação muda.</p></article>
+            <article><span>D</span><h3>Comunicação</h3><p>Escreva uma conclusão de duas frases baseada em um gráfico e declare uma limitação.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-finish">
+      <div class="container finish-grid">
+        <div><span>CHECKPOINT_02</span><h2>Você sabe escolher um gráfico pela pergunta.</h2><p>O próximo bloco transforma gráficos em dashboards com filtros, navegação e componentes interativos.</p></div>
+        <div class="finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Data Analytics ↗</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script>
+  <script src="../../../../script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

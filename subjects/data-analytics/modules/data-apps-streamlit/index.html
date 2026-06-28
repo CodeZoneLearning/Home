@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aula pratica de Data Apps com Streamlit, filtros, cache, upload, metricas e graficos interativos.">
+  <title>Data Apps com Streamlit | Code Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="streamlit-lesson-page">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="../../../../"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Code Zone</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span class="sr-only">Abrir menu</span></button>
+      <nav class="main-nav" id="main-nav"><a href="../../../../">Início</a><a class="active" href="../../../../subjects.html">Módulos</a><a href="../../../../research/">Pesquisa</a></nav>
+      <a class="button button-small header-cta" href="../../">Voltar ao módulo <span>↖</span></a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="streamlit-hero">
+      <div class="container">
+        <nav class="lesson-breadcrumb"><a href="../../../../subjects.html">Módulos</a><span>/</span><a href="../../">Data Analytics</a><span>/</span><span>Bloco 04</span></nav>
+        <div class="streamlit-hero-grid">
+          <div>
+            <p class="eyebrow">DATA_APP · STREAMLIT</p>
+            <h1>Data Apps com<br><span>Streamlit.</span></h1>
+            <p class="lesson-lead">Transforme uma análise em uma aplicação navegável com upload de CSV, filtros, métricas, gráficos interativos, cache e download de resultados.</p>
+            <div class="lesson-actions">
+              <a class="button" href="app.py" download>Baixar app.py <span>↓</span></a>
+              <a class="button button-outline" href="data/learning_activity.csv" download>Baixar CSV <span>↓</span></a>
+              <a class="button button-outline" href="README.md">Abrir guia <span>↗</span></a>
+            </div>
+          </div>
+          <aside class="app-terminal" aria-label="Comando para executar o app">
+            <div class="terminal-head"><span></span><span></span><span></span><code>streamlit.run</code></div>
+            <div class="terminal-body">
+              <pre><code>pip install -r requirements.txt
+streamlit run app.py</code></pre>
+              <p><span>rows</span><strong data-metric="rows">192</strong></p>
+              <p><span>tracks</span><strong data-metric="tracks">4</strong></p>
+              <p><span>widgets</span><strong>5</strong></p>
+              <div class="terminal-status"><i></i> app ready</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="lesson-progress">
+      <div class="container">
+        <span>01 · Produto</span>
+        <span>02 · Arquitetura</span>
+        <span>03 · Interface</span>
+        <span>04 · Publicação</span>
+      </div>
+    </div>
+
+    <section class="lesson-section" id="produto">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>01</span><small>PRODUTO</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// DO NOTEBOOK AO APP</p>
+          <h2>Um data app permite que outra pessoa explore a análise.</h2>
+          <p class="section-lead">Notebook é excelente para investigação. Data app é melhor quando alguém precisa mudar filtros, comparar resultados e baixar dados sem editar código.</p>
+
+          <div class="comparison-grid">
+            <article><span>Notebook</span><h3>Explorar e registrar raciocínio</h3><p>Bom para desenvolvimento, testes e explicação passo a passo.</p></article>
+            <article><span>Dashboard</span><h3>Acompanhar indicadores</h3><p>Bom para leitura recorrente de métricas e gráficos organizados.</p></article>
+            <article><span>Data app</span><h3>Interagir com regras e dados</h3><p>Bom para filtros, upload, validação, simulação e download de resultados.</p></article>
+          </div>
+
+          <div class="data-preview">
+            <div class="panel-head">
+              <div><span>DATASET</span><h3>learning_activity.csv</h3></div>
+              <a href="data/learning_activity.csv" download>DOWNLOAD ↓</a>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>week</th><th>learner</th><th>track</th><th>hours</th><th>tasks</th><th>completion</th><th>score</th><th>satisfaction</th></tr></thead>
+                <tbody data-preview-body><tr><td colspan="8">Carregando amostra do CSV...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section lesson-section-alt" id="arquitetura">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>02</span><small>ARQUITETURA</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// ESTRUTURA MINIMA</p>
+          <h2>Um app pequeno ainda precisa de separação de responsabilidades.</h2>
+          <p class="section-lead">O objetivo é evitar um arquivo que mistura leitura de dados, filtros, gráficos e texto sem fronteiras. Mesmo em Streamlit, funções pequenas deixam o app mais fácil de testar e alterar.</p>
+
+          <div class="architecture-flow">
+            <article><span>01</span><strong>Entrada</strong><p>CSV padrão ou upload do usuário.</p></article>
+            <i>→</i>
+            <article><span>02</span><strong>Validação</strong><p>Checagem de colunas obrigatórias.</p></article>
+            <i>→</i>
+            <article><span>03</span><strong>Filtros</strong><p>Sidebar controla trilhas, semanas e pontuação.</p></article>
+            <i>→</i>
+            <article><span>04</span><strong>Saída</strong><p>Métricas, gráficos, tabela e download.</p></article>
+          </div>
+
+          <div class="code-card">
+            <div class="code-card-head"><span>streamlit_minimal.py</span><button type="button" data-copy-code>Copiar</button></div>
+            <pre><code>import pandas as pd
+import streamlit as st
+
+st.title("Learning Analytics App")
+
+df = pd.read_csv("data/learning_activity.csv")
+track = st.sidebar.multiselect(
+    "Trilhas",
+    sorted(df["track"].unique()),
+    default=sorted(df["track"].unique()),
+)
+
+filtered = df[df["track"].isin(track)]
+st.metric("Conclusão média", f"{filtered['completion_rate'].mean():.1%}")
+st.dataframe(filtered)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="cache">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>03</span><small>CACHE</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// PERFORMANCE E CONFIANÇA</p>
+          <h2>Cache acelera. Validação protege.</h2>
+          <p class="section-lead">Streamlit reexecuta o script a cada interação. Isso é simples e produtivo, mas leitura de arquivos e agregações podem ficar caras. `@st.cache_data` guarda resultados enquanto a entrada não muda.</p>
+
+          <div class="code-card">
+            <div class="code-card-head"><span>cache_and_schema.py</span><button type="button" data-copy-code>Copiar</button></div>
+            <pre><code>REQUIRED_COLUMNS = {"week", "learner_id", "track", "completion_rate"}
+
+@st.cache_data(show_spinner=False)
+def load_default_data(path: str) -> pd.DataFrame:
+    return pd.read_csv(path)
+
+def validate_schema(data: pd.DataFrame) -> None:
+    missing = REQUIRED_COLUMNS.difference(data.columns)
+    if missing:
+        raise ValueError(f"Colunas ausentes: {sorted(missing)}")</code></pre>
+          </div>
+
+          <div class="concept-grid">
+            <article><span>Cache</span><h3>Evita trabalho repetido</h3><p>Use para leitura de CSV, consultas e agregações que retornam dados.</p></article>
+            <article><span>Upload</span><h3>Troca a entrada sem editar código</h3><p>Permite testar outro CSV mantendo a mesma interface.</p></article>
+            <article><span>Schema</span><h3>Falha cedo e com mensagem clara</h3><p>Evita gráficos quebrados por colunas faltantes ou nomes incorretos.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section lesson-section-dark" id="interface">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>04</span><small>INTERFACE</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow">// COMPONENTES DO APP</p>
+          <h2>A interface organiza uma conversa com os dados.</h2>
+          <p class="section-lead">O app desta aula usa sidebar para filtros, métricas para resumo, abas para organizar tarefas, Plotly para exploração e botão de download para devolver dados filtrados.</p>
+
+          <div class="component-grid">
+            <article><span>st.sidebar</span><h3>Controles globais</h3><p>Filtros que afetam toda a página sem competir com os gráficos.</p><code>st.sidebar.slider(...)</code></article>
+            <article><span>st.metric</span><h3>Indicadores de leitura rápida</h3><p>Mostram volume, conclusão média, pontuação e suporte.</p><code>st.metric("Pontuação", "83.9")</code></article>
+            <article><span>st.tabs</span><h3>Separação por tarefa</h3><p>Visão geral, exploração, dados e guia ficam em áreas distintas.</p><code>st.tabs([...])</code></article>
+            <article><span>st.download_button</span><h3>Entrega reproduzível</h3><p>O usuário baixa exatamente os dados filtrados que viu na tela.</p><code>st.download_button(...)</code></article>
+          </div>
+
+          <div class="app-summary">
+            <div><span>APP_OUTPUT</span><h3>Resumo esperado</h3></div>
+            <div class="summary-metrics">
+              <p><strong data-summary="learners">192</strong><span>participantes</span></p>
+              <p><strong data-summary="completion">91.6%</strong><span>conclusão média</span></p>
+              <p><strong data-summary="score">85.5</strong><span>pontuação média</span></p>
+              <p><strong data-summary="support">324</strong><span>pedidos de suporte</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="publicacao">
+      <div class="container lesson-grid">
+        <div class="lesson-index"><span>05</span><small>PUBLICAR</small></div>
+        <div class="lesson-content">
+          <p class="eyebrow dark">// PROXIMO PASSO</p>
+          <h2>Publicar exige empacotar o app corretamente.</h2>
+          <p class="section-lead">Para sair da máquina local, o projeto precisa declarar dependências, entrada da aplicação, dados de exemplo e instruções claras. O código também deve tratar erros sem expor detalhes desnecessários ao usuário final.</p>
+
+          <div class="publish-grid">
+            <article><span>requirements.txt</span><h3>Dependências</h3><p>`streamlit`, `pandas` e `plotly` precisam estar declarados.</p></article>
+            <article><span>app.py</span><h3>Ponto de entrada</h3><p>Arquivo executado por `streamlit run app.py`.</p></article>
+            <article><span>data/</span><h3>Exemplo reproduzível</h3><p>CSV padrão permite abrir o app sem upload inicial.</p></article>
+            <article><span>README.md</span><h3>Contrato de uso</h3><p>Explica execução, schema esperado, limites e próximos passos.</p></article>
+          </div>
+
+          <div class="practice-panel">
+            <h3>Prática guiada</h3>
+            <ol>
+              <li>Execute `streamlit run app.py`.</li>
+              <li>Filtre apenas duas trilhas e observe as métricas.</li>
+              <li>Aumente a pontuação mínima e interprete o que mudou.</li>
+              <li>Envie outro CSV com uma coluna ausente e observe a validação.</li>
+              <li>Baixe os dados filtrados e compare com a tabela da tela.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-finish">
+      <div class="container finish-grid">
+        <div><span>CHECKPOINT_04</span><h2>Você criou uma aplicação analítica navegável.</h2><p>Agora a análise deixa de ser apenas código local e passa a ter interface, filtros, validação e entrega para o usuário.</p></div>
+        <div class="finish-actions"><button class="button" type="button" data-complete-lesson>Marcar bloco como concluído <span>✓</span></button><a href="../../">Voltar para Data Analytics ↗</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> CODE ZONE</span><a href="README.md">ABRIR GUIA TÉCNICO ↗</a></div></footer>
+  <script src="../../../../i18n.js"></script>
+  <script src="../../../../script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
