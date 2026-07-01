@@ -65,6 +65,15 @@
     'Rede conectando programação, dados e inteligência artificial': 'Network connecting programming, data, and artificial intelligence',
     'Ambiente Code Zone com materiais da marca': 'Code Zone environment with brand materials',
     'Personagens da Code Zone': 'Code Zone characters',
+    'Chaveiros dos personagens da Code Zone em uma mesa com ambiente de programação.': 'Code Zone character keychains on a desk with a programming setup.',
+    'Buguizinho, avatar azul da Code Zone': 'Buggy, blue Code Zone avatar',
+    'Loopinho, avatar circular da Code Zone': 'Loopy, circular Code Zone avatar',
+    'Patchinho, avatar amarelo da Code Zone': 'Patchy, yellow Code Zone avatar',
+    'CÓDIGO, IA': 'CODE, AI',
+    'VIBE CODANDO +': 'VIBING CODE +',
+    'APRENDER_01': 'LEARN_01',
+    'CONSTRUIR_02': 'BUILD_02',
+    'PUBLICAR_03': 'SHIP_03',
     'módulos conectados': 'connected modules',
     'projetos práticos': 'hands-on projects',
     'aulas e módulos': 'lessons and modules',
@@ -78,6 +87,8 @@
     'Prática': 'Practice',
     'Repertório': 'Repertoire',
     'Vídeo com ambientação visual da Code Zone': 'Video with Code Zone visual atmosphere',
+    'REGISTRO_STUDIO': 'STUDIO_LOG',
+    'PARE DE FALAR, COMECE A CODAR.': 'STOP TALKING, START CODING.',
     '// NOSSO MÉTODO': '// OUR METHOD',
     'Aprender é': 'Learning means',
     'construir.': 'building.',
@@ -94,6 +105,15 @@
     '// PERSONALIDADE': '// PERSONALITY',
     'Visual próprio, estudo sério.': 'Distinct visuals, serious learning.',
     'Os personagens deixam a experiência mais próxima e memorável, mas o centro continua o mesmo: aprender, construir e explicar o que foi feito.': 'The characters make the experience more approachable and memorable, but the center stays the same: learn, build, and explain what was done.',
+    'Caixa da Code Zone em português sobre uma mesa de estudo.': 'Code Zone box in Portuguese on a study desk.',
+    'Caixa da Code Zone em inglês sobre uma mesa de estudo.': 'Code Zone box in English on a study desk.',
+    'Nomes dos personagens da Code Zone': 'Code Zone character names',
+    'Buguizinho': 'Buggy',
+    'Loopinho': 'Loopy',
+    'Patchinho': 'Patchy',
+    'debuga o caos': 'debugs the chaos',
+    'repete até ficar claro': 'loops until clear',
+    'corrige e manda ver': 'patches and ships',
     '// MÓDULOS': '// MODULES',
     'Escolha seu': 'Choose your',
     'próximo bloco.': 'next block.',
@@ -2085,7 +2105,7 @@
   };
 
   const translateAttributes = (element, language, refreshOriginal = false) => {
-    const attributes = ['aria-label', 'placeholder', 'title'];
+    const attributes = ['aria-label', 'placeholder', 'title', 'alt'];
     if (!originalAttributes.has(element)) originalAttributes.set(element, {});
     const originals = originalAttributes.get(element);
 

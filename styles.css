@@ -991,11 +991,28 @@ p {
   background: var(--white);
 }
 
-.method-lookbook img {
+.method-lookbook-media {
+  height: 100%;
+  margin: 0;
+}
+
+.method-lookbook-media img {
   width: 100%;
   height: 100%;
   min-height: 320px;
   object-fit: cover;
+}
+
+.lang-image-en {
+  display: none;
+}
+
+html[lang="en"] .lang-image-pt {
+  display: none;
+}
+
+html[lang="en"] .lang-image-en {
+  display: block;
 }
 
 .method-lookbook > div {
@@ -1013,9 +1030,51 @@ p {
 
 .method-lookbook p:not(.eyebrow) {
   max-width: 430px;
+  margin-bottom: 24px;
   color: #6b7280;
   font-size: 14px;
   line-height: 1.7;
+}
+
+.character-roster {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.character-roster span {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #e1e4ec;
+  border-radius: 8px;
+  background: #f8f9fc;
+}
+
+.character-roster img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.character-roster strong,
+.character-roster small {
+  display: block;
+}
+
+.character-roster strong {
+  color: var(--ink);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.character-roster small {
+  color: #737987;
+  font-size: 10px;
+  line-height: 1.35;
 }
 
 .subjects-preview {
@@ -2090,7 +2149,7 @@ p {
     padding: 34px;
   }
 
-  .method-lookbook img {
+  .method-lookbook-media img {
     min-height: 360px;
   }
 
@@ -2276,7 +2335,7 @@ p {
     border-radius: 12px;
   }
 
-  .method-lookbook img {
+  .method-lookbook-media img {
     min-height: 260px;
   }
 
@@ -2286,6 +2345,10 @@ p {
 
   .method-lookbook h3 {
     font-size: 31px;
+  }
+
+  .character-roster {
+    grid-template-columns: 1fr;
   }
 
   .subject-tile,
